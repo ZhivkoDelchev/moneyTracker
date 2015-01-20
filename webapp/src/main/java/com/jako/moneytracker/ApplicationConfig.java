@@ -1,5 +1,6 @@
 package com.jako.moneytracker;
 
+import com.jako.moneytracker.rest.ListUsers;
 import com.jako.moneytracker.rest.RestExample;
 
 import javax.ws.rs.ApplicationPath;
@@ -16,6 +17,6 @@ public class ApplicationConfig extends Application {
 
     @Override
     public Set<Class<?>> getClasses() {
-        return new HashSet<Class<?>>(Arrays.asList(RestExample.class));
+        return new HashSet<Class<?>>(Arrays.asList(RestExample.class, ListUsers.class));
     }
 }
