@@ -3,8 +3,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 							http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-    <display-name>Bar</display-name>
-    <!-- Auto scan REST service -->
+    <display-name>tracker</display-name>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
@@ -12,7 +11,7 @@
 
     <login-config>
         <auth-method>FORM</auth-method>
-        <realm-name>other</realm-name>
+        <realm-name>tracker</realm-name>
         <form-login-config>
             <form-login-page>/auth/login.jsp</form-login-page>
             <form-error-page>/auth/error.jsp</form-error-page>
@@ -22,4 +21,24 @@
         <error-code>404</error-code>
         <location>/err/404.html</location>
     </error-page>
+
+    <security-constraint>
+        <web-resource-collection>
+            <!-- whitelist -->
+            <web-resource-name />
+            <url-pattern>/auth/*</url-pattern>
+            <url-pattern>/err/*</url-pattern>
+        </web-resource-collection>
+    </security-constraint>
+
+    <security-constraint>
+        <display-name>bar</display-name>
+        <web-resource-collection>
+            <web-resource-name>MANAGERSecuredArea</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
 </web-app>

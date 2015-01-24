@@ -1,0 +1,170 @@
+/* GENERAL STUFF */
+body{
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    text-align: center;    
+    font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Helvetica,Arial,sans-serif;
+    color: #444;
+    font-size: 12px;
+    height:100%;
+}
+
+body.naked{
+    background: #eee;
+}
+
+/* LAYOUT */
+
+#logo{
+    margin: 20px;
+}
+
+#wrap{
+    margin: 0 auto;    
+}
+
+#login, #register, #forgot{
+    width: 480px;
+    margin: 20px auto 0;
+    text-align: left;
+    background: #eee;
+    padding: 20px 30px 30px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+#header_form{
+    width: 70%;
+    margin: 20px auto 0;
+    text-align: left;
+    background: #eee;
+    padding: 20px 30px 30px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    background-color: #ffffff;
+}
+
+#step, #login, #register, #forgot, #header_form {
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+        -moz-border-radius:4px;
+}
+
+
+h1{
+    font-size: 24px;
+    font-weight: normal;
+    border-bottom: 1px solid #ccc;
+    margin: 10px 0 10px;
+}
+
+h1 span#stepid{
+    color: #999;
+}
+
+/* FORM */
+label span{
+    color: #a00;
+}
+
+fieldset{
+    border: none;
+}
+
+legend{
+    display: none;
+}
+
+label{
+    display: block;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+input.button{
+    background: #090;
+    color: #fff;
+    border: 1px groove #090;
+    padding: 7px 21px;
+    font-size: 14px;
+    margin-top: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: hand;
+    cursor: pointer;
+    
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    
+    -moz-box-shadow: 1px 1px 5px #ccc;
+    -webkit-box-shadow: 1px 1px 5px #ccc;
+    box-shadow: 1px 1px 5px #aaa;  
+}
+
+input.disabled{
+    background: #999;
+    border: 1px groove #aaa;
+    cursor: default;
+}
+
+input.disabled:hover{
+    background: #199;
+}
+
+input.textInput{
+    width: 97%;
+    padding: 7px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+#nav_top {
+	display: block;
+	border-bottom: 0px solid #fff;
+	position: relative;
+	background: gray;
+}
+
+div, ul, li, a {
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+#nav_top > ul {
+	display: inline-block;
+	margin: 0px;
+}
+
+#nav_top li {
+	float: left;
+	list-style: none;
+	position: relative;
+	display: block;
+	width: 100px;
+	line-height:40px
+}
+
+#nav_top li:hover {
+	background: black;
+}
+
+#nav_top a {
+	text-decoration: none;
+	color: whitesmoke;
+	vertical-align: middle;
+	height: 100%;
+	font-weight: bold;
+	display: inline-block;
+}
+
+#nav_top a:hover {
+	background: black;
+}
+
