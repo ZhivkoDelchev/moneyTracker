@@ -7,17 +7,19 @@ import java.util.Date;
  * Created by Jako on 17.1.2015 г..
  */
 @Entity
-@Table(name = "users")
+@Table(name = "principles")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-
+    @Column(name = "created_date")
     @Temporal(TemporalType.DATE)
     private Date createdDate;
-
+    @Column(name = "principal_id")
     private String email;
+    @Column(name = "password")
     private String password;
 
     public String getEmail() {
