@@ -1,6 +1,6 @@
 package com.jako.moneytracker.rest;
 
-import com.jako.moneytracker.db.User;
+import com.jako.moneytracker.db.UserEntity;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -28,11 +28,11 @@ public class ListUsers {
         EntityManager em = factory.createEntityManager();
 
         // read the existing entries and write to console
-        Query q = em.createQuery("select u from User u");
-        List<User> todoList = q.getResultList();
+        Query q = em.createQuery("select u from UserEntity u");
+        List<UserEntity> todoList = q.getResultList();
         StringBuilder stringBuilder = new StringBuilder("Size: " + todoList.size());
-        for (User user : todoList) {
-            stringBuilder.append("\r\n" + user);
+        for (UserEntity userEntity : todoList) {
+            stringBuilder.append("\r\n" + userEntity);
         }
 
         em.close();
@@ -47,14 +47,14 @@ public class ListUsers {
 
         // create new user
         em.getTransaction().begin();
-        User user = new User();
-        user.setEmail("This is a mail");
-        user.setPassword("This is a password");
-        em.persist(user);
+        UserEntity userEntity = new UserEntity();
+        userEntity.setEmail("This is a mail");
+        userEntity.setPassword("This is a password");
+        em.persist(userEntity);
         em.getTransaction().commit();
 
         em.close();
 
-        return user.getId().toString();
+        return userEntity.getId().toString();
     }
 }

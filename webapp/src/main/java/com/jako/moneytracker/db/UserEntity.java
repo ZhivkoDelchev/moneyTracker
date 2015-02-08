@@ -1,5 +1,7 @@
 package com.jako.moneytracker.db;
 
+import com.jako.moneytracker.domain.User;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,36 +10,31 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "principles")
-public class User {
+public class UserEntity extends User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-    @Column(name = "created_date")
-    @Temporal(TemporalType.DATE)
     private Date createdDate;
-    @Column(name = "principal_id")
-    private String email;
-    @Column(name = "password")
-    private String password;
 
+    @Column(name = "principal_id")
     public String getEmail() {
-        return email;
+        return super.getEmail();
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        super.setEmail(email);
     }
 
+    @Column(name = "password")
     public String getPassword() {
-        return password;
+        return super.getPassword();
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        super.setPassword(password);
     }
 
+    @Column(name = "created_date")
+    @Temporal(TemporalType.DATE)
     public Date getCreatedDate() {
         return createdDate;
     }
@@ -46,14 +43,14 @@ public class User {
         this.createdDate = createdDate;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public Long getId() {
         return id;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "email='" + email + '\'' +
-                '}';
+    public void setId(Long id) {
+        this.id = id;
     }
 }
