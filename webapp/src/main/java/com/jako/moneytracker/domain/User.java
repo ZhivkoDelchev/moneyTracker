@@ -1,8 +1,5 @@
 package com.jako.moneytracker.domain;
 
-import javax.persistence.*;
-import java.util.Date;
-
 /**
  * Created by Jako on 8.2.2015 г..
  */

@@ -1,7 +1,6 @@
 package com.jako.moneytracker.rest;
 
 import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Default;
 import java.util.Date;
 
 /**
