@@ -23,7 +23,7 @@ public class ListUsers {
 
     @GET
     public String get() {
-        Session session = hibernateUtils.getSessionFactory().openSession();
+        Session session = hibernateUtils.getSessionFactory().getCurrentSession();
 
         session.beginTransaction();
 
@@ -34,13 +34,12 @@ public class ListUsers {
             stringBuilder.append("\r\n").append(userEntity);
         }
 
-        session.close();
         return stringBuilder.toString();
     }
 
     @POST
     public String post() {
-        Session session = hibernateUtils.getSessionFactory().openSession();
+        Session session = hibernateUtils.getSessionFactory().getCurrentSession();
 
         session.beginTransaction();
 
@@ -50,8 +49,6 @@ public class ListUsers {
         userEntity.setPassword("This is a password");
         session.persist(userEntity);
         session.getTransaction().commit();
-
-        session.close();
 
         return userEntity.getId().toString();
     }
