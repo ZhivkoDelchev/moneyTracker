@@ -27,7 +27,7 @@ public class ListUsers {
 
         session.beginTransaction();
 
-        List<UserEntity> result = session.createQuery("select u from UserEntity u").list();
+        List<UserEntity> result = session.createCriteria(UserEntity.class).list();
         session.getTransaction().commit();
         StringBuilder stringBuilder = new StringBuilder("Size: " + result.size());
         for (UserEntity userEntity : result) {
