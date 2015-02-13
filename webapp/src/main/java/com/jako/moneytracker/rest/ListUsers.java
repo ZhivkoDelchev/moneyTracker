@@ -1,12 +1,11 @@
 package com.jako.moneytracker.rest;
 
 import com.jako.moneytracker.db.UserEntity;
+import com.jako.moneytracker.db.hibernate.HibernateUtils;
+import org.hibernate.Session;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -19,41 +18,37 @@ import java.util.List;
 @Path("/users")
 public class ListUsers {
 
-    private static final String PERSISTENCE_UNIT_NAME = "tracker";
-    private static EntityManagerFactory factory;
+    @Inject
+    private HibernateUtils hibernateUtils;
 
     @GET
     public String get() {
-        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-        EntityManager em = factory.createEntityManager();
+        Session session = hibernateUtils.getSessionFactory().getCurrentSession();
 
-        // read the existing entries and write to console
-        Query q = em.createQuery("select u from UserEntity u");
-        List<UserEntity> todoList = q.getResultList();
-        StringBuilder stringBuilder = new StringBuilder("Size: " + todoList.size());
-        for (UserEntity userEntity : todoList) {
-            stringBuilder.append("\r\n" + userEntity);
+        session.beginTransaction();
+
+        List<UserEntity> result = session.createCriteria(UserEntity.class).list();
+        session.getTransaction().commit();
+        StringBuilder stringBuilder = new StringBuilder("Size: " + result.size());
+        for (UserEntity userEntity : result) {
+            stringBuilder.append("\r\n").append(userEntity);
         }
-
-        em.close();
 
         return stringBuilder.toString();
     }
 
     @POST
     public String post() {
-        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-        EntityManager em = factory.createEntityManager();
+        Session session = hibernateUtils.getSessionFactory().getCurrentSession();
+
+        session.beginTransaction();
 
         // create new user
-        em.getTransaction().begin();
         UserEntity userEntity = new UserEntity();
         userEntity.setEmail("This is a mail");
         userEntity.setPassword("This is a password");
-        em.persist(userEntity);
-        em.getTransaction().commit();
-
-        em.close();
+        session.persist(userEntity);
+        session.getTransaction().commit();
 
         return userEntity.getId().toString();
     }
