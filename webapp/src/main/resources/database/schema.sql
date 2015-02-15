@@ -27,3 +27,13 @@ CREATE TABLE IF NOT EXISTS `roles` (
 
 INSERT INTO `roles` (`user_role`, `principal_id`) VALUES
 	('admin', 'jako');
+
+CREATE TABLE `categories` (
+	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`created_date` DATE NULL DEFAULT NULL,
+	`name` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_bin',
+	`user_id` BIGINT(20) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	INDEX `FK_f5hobmotrjyyffipi045ga93k` (`user_id`),
+	CONSTRAINT `FK_f5hobmotrjyyffipi045ga93k` FOREIGN KEY (`user_id`) REFERENCES `principles` (`id`)
+) COLLATE='utf8_bin' ENGINE=InnoDB AUTO_INCREMENT=1;
