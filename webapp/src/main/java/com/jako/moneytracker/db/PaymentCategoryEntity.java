@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
  * Created by Jako on 15.2.2015 г..
  */
 @Entity(name = "categories")
-public class PaymentCategory extends BaseEntity {
+public class PaymentCategoryEntity extends BaseEntity {
 
     @Column(name = "name")
     private String name;

@@ -10,6 +10,7 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <mapping class="com.jako.moneytracker.db.UserEntity"/>
-        <mapping class="com.jako.moneytracker.db.PaymentCategory"/>
+        <mapping class="com.jako.moneytracker.db.PaymentCategoryEntity"/>
+        <mapping class="com.jako.moneytracker.db.PaymentEntity"/>
     </session-factory>
 </hibernate-configuration>

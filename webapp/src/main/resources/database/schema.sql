@@ -37,3 +37,14 @@ CREATE TABLE `categories` (
 	INDEX `FK_f5hobmotrjyyffipi045ga93k` (`user_id`),
 	CONSTRAINT `FK_f5hobmotrjyyffipi045ga93k` FOREIGN KEY (`user_id`) REFERENCES `principles` (`id`)
 ) COLLATE='utf8_bin' ENGINE=InnoDB AUTO_INCREMENT=1;
+
+CREATE TABLE `paymententity` (
+	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`created_date` DATE NULL DEFAULT NULL,
+	`amount` DECIMAL(12,2) NULL DEFAULT NULL,
+	`type` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_bin',
+	`category_id` BIGINT(20) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	INDEX `FK_kuswhyirhf3ohrqjcp6clpovm` (`category_id`),
+	CONSTRAINT `FK_kuswhyirhf3ohrqjcp6clpovm` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+) COLLATE='utf8_bin' ENGINE=InnoDB;
