@@ -1,56 +1,43 @@
 package com.jako.moneytracker.db;
 
-import com.jako.moneytracker.domain.User;
-
-import javax.persistence.*;
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by Jako on 17.1.2015 г..
  */
 @Entity
 @Table(name = "principles")
-public class UserEntity extends User {
-
-    private Long id;
-    private Date createdDate;
+public class UserEntity extends BaseEntity {
 
     @Column(name = "principal_id")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
     public String getEmail() {
-        return super.getEmail();
+        return email;
     }
 
     public void setEmail(String email) {
-        super.setEmail(email);
+        this.email = email;
     }
 
-    @Column(name = "password")
     public String getPassword() {
-        return super.getPassword();
+        return password;
     }
 
     public void setPassword(String password) {
-        super.setPassword(password);
+        this.password = password;
     }
 
-    @Column(name = "created_date")
-    @Temporal(TemporalType.DATE)
-    public Date getCreatedDate() {
-        return createdDate;
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                '}';
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

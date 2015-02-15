@@ -7,6 +7,7 @@
         <property name="connection.datasource">jdbc-mysql</property>
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.hbm2ddl.auto">verify</property>
 
         <mapping class="com.jako.moneytracker.db.UserEntity"/>
     </session-factory>
