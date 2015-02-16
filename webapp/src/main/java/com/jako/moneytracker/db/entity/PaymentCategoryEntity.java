@@ -1,4 +1,4 @@
-package com.jako.moneytracker.db;
+package com.jako.moneytracker.db.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

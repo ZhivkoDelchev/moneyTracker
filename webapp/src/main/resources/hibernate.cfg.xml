@@ -9,8 +9,8 @@
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.hbm2ddl.auto">verify</property>
 
-        <mapping class="com.jako.moneytracker.db.UserEntity"/>
-        <mapping class="com.jako.moneytracker.db.PaymentCategoryEntity"/>
-        <mapping class="com.jako.moneytracker.db.PaymentEntity"/>
+        <mapping class="com.jako.moneytracker.db.entity.UserEntity"/>
+        <mapping class="com.jako.moneytracker.db.entity.PaymentCategoryEntity"/>
+        <mapping class="com.jako.moneytracker.db.entity.PaymentEntity"/>
     </session-factory>
 </hibernate-configuration>

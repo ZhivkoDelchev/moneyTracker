@@ -1,6 +1,6 @@
 package com.jako.moneytracker.rest;
 
-import com.jako.moneytracker.db.UserEntity;
+import com.jako.moneytracker.db.entity.UserEntity;
 import com.jako.moneytracker.db.hibernate.HibernateUtils;
 import org.hibernate.Session;
 
