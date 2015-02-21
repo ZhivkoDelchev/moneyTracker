@@ -1,6 +1,8 @@
 package com.jako.moneytracker.db.hibernate;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -32,5 +34,17 @@ public class HibernateUtils {
 
     public SessionFactory getSessionFactory() {
         return sessionFactory;
+    }
+
+    public Session getCurrentSession() {
+        return this.getSessionFactory().getCurrentSession();
+    }
+
+    public Transaction beginTransactionInCurrentSession() {
+        return this.getCurrentSession().beginTransaction();
+    }
+
+    public Transaction beginTransaction(Session session) {
+        return session.beginTransaction();
     }
 }
