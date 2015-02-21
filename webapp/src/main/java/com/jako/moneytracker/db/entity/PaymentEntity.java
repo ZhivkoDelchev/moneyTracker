@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 /**
  * Created by Jako on 15.2.2015 г..
  */
-@Entity
+@Entity(name = "payments")
 public class PaymentEntity extends BaseEntity{
 
     @Column( scale = 2, precision = 12)
@@ -17,6 +17,9 @@ public class PaymentEntity extends BaseEntity{
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
+    @ManyToOne
+    @JoinColumn(name = "creator")
+    private UserEntity creator;
 
     public BigDecimal getAmount() {
         return amount;
@@ -40,5 +43,22 @@ public class PaymentEntity extends BaseEntity{
 
     public void setPaymentType(PaymentType paymentType) {
         this.paymentType = paymentType;
+    }
+
+    public UserEntity getCreator() {
+        return creator;
+    }
+
+    public void setCreator(UserEntity creator) {
+        this.creator = creator;
+    }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "paymentType=" + paymentType +
+                ", category=" + category +
+                ", amount=" + amount +
+                '}';
     }
 }

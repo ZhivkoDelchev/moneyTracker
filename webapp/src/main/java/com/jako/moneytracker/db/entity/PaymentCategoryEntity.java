@@ -15,8 +15,8 @@ public class PaymentCategoryEntity extends BaseEntity {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    @JoinColumn(name = "creator")
+    private UserEntity creator;
 
     public String getName() {
         return name;
@@ -26,11 +26,18 @@ public class PaymentCategoryEntity extends BaseEntity {
         this.name = name;
     }
 
-    public UserEntity getUser() {
-        return user;
+    public UserEntity getCreator() {
+        return creator;
     }
 
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public void setCreator(UserEntity creator) {
+        this.creator = creator;
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentCategory{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }
