@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  * Created by Jako on 15.2.2015 г..
  */
 @Entity(name = "payments")
-public class PaymentEntity extends BaseEntity{
+public class PaymentEntity extends BaseEntity {
 
     @Column( scale = 2, precision = 12)
     private BigDecimal amount;
