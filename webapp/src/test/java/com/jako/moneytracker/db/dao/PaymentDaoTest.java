@@ -36,6 +36,7 @@ public class PaymentDaoTest {
     @Test
     public void testCreateCriteriaForListingAllPaymentsForAGivenUser() throws Exception {
         UserEntity user = mock(UserEntity.class);
+        when(user.getEmail()).thenReturn("email");
         Transaction transaction = mock(Transaction.class);
         List payments = mock(List.class);
 
@@ -43,12 +44,12 @@ public class PaymentDaoTest {
         when(criteria.list()).thenReturn(payments);
 
         Session session = mock(Session.class);
-        when(session.createCriteria(PaymentEntity.class)).thenReturn(criteria);
+        when(session.createCriteria(PaymentEntity.class, "payment")).thenReturn(criteria);
 
         when(hibernateUtils.getCurrentSession()).thenReturn(session);
         when(hibernateUtils.beginTransaction(session)).thenReturn(transaction);
 
-        List<PaymentEntity> result = sut.getUserPayments(user);
+        List<PaymentEntity> result = sut.getUserPayments(user.getEmail());
 
         assertEquals(payments, result);
     }
