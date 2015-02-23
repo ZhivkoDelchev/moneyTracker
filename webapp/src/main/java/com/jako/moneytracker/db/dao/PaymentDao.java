@@ -1,14 +1,12 @@
 package com.jako.moneytracker.db.dao;
 
 import com.jako.moneytracker.db.entity.PaymentEntity;
-import com.jako.moneytracker.db.hibernate.HibernateUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
@@ -17,24 +15,15 @@ import java.util.List;
 @Dependent
 public class PaymentDao {
 
-    @Inject
-    private HibernateUtils hibernateUtils;
-
-    public List<PaymentEntity> getUserPayments(String email) {
-        Session session = hibernateUtils.getCurrentSession();
-        Transaction transaction = hibernateUtils.beginTransaction(session);
+    public List<PaymentEntity> getUserPayments(String email, EntityManager entityManager) {
+        Session session = entityManager.unwrap(Session.class);
 
         Criteria paymentsCriteria = session.createCriteria(PaymentEntity.class, "payment");
         paymentsCriteria.createAlias("payment.creator", "creator");
         paymentsCriteria.add(Restrictions.eq("creator.email", email));
 
         List<PaymentEntity> payments = paymentsCriteria.list();
-        transaction.commit();
 
         return payments;
-    }
-
-    void setHibernateUtils(HibernateUtils hibernateUtils) {
-        this.hibernateUtils = hibernateUtils;
     }
 }

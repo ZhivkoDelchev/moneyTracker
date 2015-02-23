@@ -6,6 +6,8 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
@@ -23,8 +25,11 @@ public class PaymentsController {
     @Inject
     private PaymentDao paymentDao;
 
+    @PersistenceContext(unitName = "tracker")
+    private EntityManager entityManager;
+
     @GET
     public String get() {
-        return paymentDao.getUserPayments(userPrincipal.getName()).toString();
+        return paymentDao.getUserPayments(userPrincipal.getName(), entityManager).toString();
     }
 }
