@@ -1,0 +1,133 @@
+/* GENERAL STUFF */
+body{
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    text-align: center;    
+    font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Helvetica,Arial,sans-serif;
+    color: #444;
+    font-size: 12px;
+    height:100%;
+}
+
+/* LAYOUT */
+#login, #register, #forgot {
+	width: 500pt;
+    margin: 15pt auto 0;
+    text-align: left;
+    background: #eee;
+    padding: 15pt 25pt 25pt;
+    -moz-border-radius: 15pt;
+    border-radius: 15pt;
+}
+
+#step, #login, #register, #forgot, #header_form, #main {
+    -webkit-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
+	-moz-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
+	box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
+	-moz-border-radius:4pt;
+}
+
+h1{
+    font-size: 20pt;
+    font-weight: normal;
+}
+
+/* FORM */
+fieldset{
+    border: none;
+}
+
+legend{
+    display: none;
+}
+
+label{
+    font-weight: bold;
+	font-size: 15pt;
+}
+
+input.button{
+    color: #fff;
+    padding: 7pt 21pt;
+    font-size: 15pt;
+    margin-top: 10pt;
+    font-weight: bold;
+    
+    -moz-border-radius: 5pt;
+    border-radius: 5pt;
+    
+    -moz-box-shadow: 1pt 1pt 5pt #ccc;
+    -webkit-box-shadow: 1pt 1pt 5pt #ccc;
+    box-shadow: 1pt 1pt 5pt #aaa;
+}
+
+input.disabled{
+    background: #999;
+    border: 1pt groove #aaa;
+}
+
+input.disabled:hover{
+    background: #199;
+}
+
+input.textInput{
+    width: 97%;
+    padding: 7pt;
+    font-size: 15pt;
+    border: 1pt solid #ccc;
+    margin-bottom: 15pt;
+}
+
+/* Navigation */
+#nav_top {
+	position: relative;
+	background: gray;
+	min-width: 500pt;
+	
+	-webkit-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
+	-moz-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
+	box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
+	-moz-border-radius:4pt;
+	
+	-moz-border-radius: 5pt;
+    border-radius: 5pt;
+}
+
+div, ul, li, a {
+	font-size: 15pt;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+#nav_top > ul {
+	display: inline-block;
+	margin: 0pt;
+}
+
+#nav_top li {
+	float: left;
+	list-style: none;
+	position: relative;
+	display: block;
+	width: 50%;
+	line-height: 175%;
+}
+
+#nav_top a {
+	color: #fff;
+    padding: 1pt 5pt;
+    margin-top: 10pt;
+    font-weight: bold;
+    
+    -moz-border-radius: 5pt;
+    border-radius: 5pt;
+    
+	text-decoration: none;
+	height: 100%;
+	width: 150%;
+}
+
+#nav_top a:hover {
+	background: #199;
+}
