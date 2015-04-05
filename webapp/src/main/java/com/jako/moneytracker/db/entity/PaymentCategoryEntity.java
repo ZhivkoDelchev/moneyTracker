@@ -26,10 +26,6 @@ public class PaymentCategoryEntity extends BaseEntity {
         this.name = name;
     }
 
-    public UserEntity getCreator() {
-        return creator;
-    }
-
     public void setCreator(UserEntity creator) {
         this.creator = creator;
     }

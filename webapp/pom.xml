@@ -18,14 +18,8 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.8.Final</version>
+            <version>4.3.5.Final</version>
         </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.34</version>
-        </dependency>
-
         <!-- Test scope libraries!-->
         <dependency>
             <groupId>org.mockito</groupId>

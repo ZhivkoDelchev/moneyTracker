@@ -16,6 +16,9 @@ public class BaseEntity {
     @Column(name = "created_date")
     @Temporal(TemporalType.DATE)
     private Date createdDate;
+    @Column(name = "last_edit_date")
+    @Temporal(TemporalType.DATE)
+    private Date lastEditDate;
 
     public Date getCreatedDate() {
         return createdDate;
@@ -23,6 +26,14 @@ public class BaseEntity {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public Date getLastEditDate() {
+        return lastEditDate;
+    }
+
+    public void setLastEditDate(Date lastEditDate) {
+        this.lastEditDate = lastEditDate;
     }
 
     public Long getId() {

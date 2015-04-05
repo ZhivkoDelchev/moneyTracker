@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS `principles`;
 CREATE TABLE IF NOT EXISTS `principles` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `created_date` date DEFAULT NULL,
+  `last_edit_date` date DEFAULT NULL,
   `principal_id` varchar(255) COLLATE utf8_bin NOT NULL,
   `password` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
@@ -32,6 +33,7 @@ DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
 	`created_date` DATE NULL DEFAULT NULL,
+	`last_edit_date` date DEFAULT NULL,
 	`name` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_bin',
 	`creator` BIGINT(20) NULL DEFAULT NULL,
 	PRIMARY KEY (`id`),
@@ -43,6 +45,7 @@ DROP TABLE IF EXISTS `payments`;
 CREATE TABLE `payments` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
 	`created_date` DATE NULL DEFAULT NULL,
+	`last_edit_date` date DEFAULT NULL,
 	`amount` DECIMAL(12,2) NULL DEFAULT NULL,
 	`type` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_bin',
 	`category_id` BIGINT(20) NULL DEFAULT NULL,
