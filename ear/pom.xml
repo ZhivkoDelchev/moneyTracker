@@ -9,6 +9,12 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>ear</packaging>
 
+    <parent>
+        <groupId>com.jako.money</groupId>
+        <artifactId>tracker</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <dependencies>
         <dependency>
             <groupId>com.jako.money.tracker</groupId>
