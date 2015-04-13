@@ -6,8 +6,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -21,12 +19,10 @@ import static org.mockito.Mockito.when;
  */
 public class CategoryDaoTest {
 
-    @InjectMocks
     private CategoryDao sut;
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
         sut = new CategoryDao();
     }
 
