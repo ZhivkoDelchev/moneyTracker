@@ -46,4 +46,11 @@ public class CategoryDaoTest {
         assertEquals(payments, result);
     }
 
+    @Test
+    public void shouldCreateCategory() throws Exception {
+        UserEntity user = mock(UserEntity.class);
+        EntityManager entityManager = mock(EntityManager.class);
+
+        sut.createCategory("name", user, entityManager);
+    }
 }

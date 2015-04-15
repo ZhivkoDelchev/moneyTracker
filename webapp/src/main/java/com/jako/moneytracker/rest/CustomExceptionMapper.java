@@ -1,5 +1,7 @@
 package com.jako.moneytracker.rest;
 
+import com.jako.moneytracker.exception.MyException;
+
 import javax.enterprise.context.Dependent;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

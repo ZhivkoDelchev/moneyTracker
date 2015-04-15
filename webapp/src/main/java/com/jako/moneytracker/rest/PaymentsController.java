@@ -2,8 +2,10 @@ package com.jako.moneytracker.rest;
 
 import com.jako.moneytracker.db.dao.CategoryDao;
 import com.jako.moneytracker.db.dao.PaymentDao;
+import com.jako.moneytracker.db.dao.UserDao;
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.PaymentEntity;
+import com.jako.moneytracker.db.entity.UserEntity;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
@@ -11,9 +13,8 @@ import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
@@ -31,6 +32,8 @@ public class PaymentsController {
     private PaymentDao paymentDao;
     @Inject
     private CategoryDao categoryDao;
+    @Inject
+    private UserDao userDao;
 
     @PersistenceContext(unitName = "tracker")
     private EntityManager entityManager;
@@ -45,7 +48,15 @@ public class PaymentsController {
     @Path("/category")
     @Produces("application/json")
     public List<PaymentCategoryEntity> getCategory() {
-        List<PaymentCategoryEntity> categories = categoryDao.getCategories(userPrincipal.getName(), entityManager);
-        return categories;
+        return categoryDao.getCategories(userPrincipal.getName(), entityManager);
+    }
+
+    @POST
+    @Path("/category/{name}")
+    public Response createCategory(@PathParam("name") String name) {
+        UserEntity user = userDao.getUser(userPrincipal.getName(), entityManager);
+        categoryDao.createCategory(name, user, entityManager);
+
+        return Response.ok().build();
     }
 }

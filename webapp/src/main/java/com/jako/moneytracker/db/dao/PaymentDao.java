@@ -22,8 +22,6 @@ public class PaymentDao {
         paymentsCriteria.createAlias("payment.creator", "creator");
         paymentsCriteria.add(Restrictions.eq("creator.email", email));
 
-        List<PaymentEntity> payments = paymentsCriteria.list();
-
-        return payments;
+        return paymentsCriteria.list();
     }
 }

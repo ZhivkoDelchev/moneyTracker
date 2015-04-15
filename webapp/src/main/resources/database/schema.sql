@@ -34,11 +34,12 @@ CREATE TABLE `categories` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
 	`created_date` DATE NULL DEFAULT NULL,
 	`last_edit_date` date DEFAULT NULL,
-	`name` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_bin',
+	`name` VARCHAR(255) NOT NULL COLLATE 'utf8_bin',
 	`creator` BIGINT(20) NULL DEFAULT NULL,
 	PRIMARY KEY (`id`),
 	INDEX `FK_categories_users_id` (`creator`),
-	CONSTRAINT `FK_categories_users_id` FOREIGN KEY (`creator`) REFERENCES `principles` (`id`)
+	CONSTRAINT `FK_categories_users_id` FOREIGN KEY (`creator`) REFERENCES `principles` (`id`),
+	UNIQUE INDEX `payment_category_name` (`name`)
 ) COLLATE='utf8_bin' ENGINE=InnoDB AUTO_INCREMENT=1;
 
 DROP TABLE IF EXISTS `payments`;

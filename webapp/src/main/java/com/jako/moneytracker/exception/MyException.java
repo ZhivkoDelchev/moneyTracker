@@ -1,4 +1,4 @@
-package com.jako.moneytracker.rest;
+package com.jako.moneytracker.exception;
 
 /**
  * Created by Jako on 8.4.2015 ã..

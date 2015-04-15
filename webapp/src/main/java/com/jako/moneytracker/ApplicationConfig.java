@@ -16,7 +16,7 @@ public class ApplicationConfig extends Application {
 
     @Override
     public Set<Class<?>> getClasses() {
-        HashSet<Class<?>> classes = new HashSet<Class<?>>();
+        HashSet<Class<?>> classes = new HashSet<>();
         classes.add(PaymentsController.class);
 
         classes.add(CustomExceptionMapper.class);

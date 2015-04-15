@@ -9,7 +9,7 @@ public enum PaymentType {
     EXPENSE("Expense"),
     DEPOSIT("Deposit");
 
-    private String name;
+    private final String name;
 
     PaymentType(String name) {
         this.name = name;
