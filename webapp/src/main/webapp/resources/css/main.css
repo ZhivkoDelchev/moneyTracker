@@ -94,7 +94,7 @@ input.textInput{
     border-radius: 5pt;
 }
 
-div, ul, li, a {
+div {
 	font-size: 15pt;
 	vertical-align: baseline;
 	background: transparent;
@@ -110,7 +110,6 @@ div, ul, li, a {
 	list-style: none;
 	position: relative;
 	display: block;
-	width: 50%;
 	line-height: 175%;
 }
 
@@ -130,4 +129,5 @@ div, ul, li, a {
 
 #nav_top a:hover {
 	background: #199;
+	cursor: pointer;
 }

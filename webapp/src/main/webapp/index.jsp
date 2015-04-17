@@ -5,20 +5,22 @@
     <header>
         <link rel="stylesheet" type="text/css" media="all" href="<%=request.getContextPath() %>/resources/css/main.css">
         <style>#main{ background-color: #ffffff }</style>
+        <script src="<%=request.getContextPath() %>/resources/main.js"></script>
     </header>
 
     <body class=" ">
         <form id="header_form">
             <fieldset>
                 <div id="nav_top">
-                    <ul>
-                        <li><a>Wellcome!</a></li>
-                        <li><a>Categories</a></li>
+                    <ul id="header">
                     </ul>
                 </div>
                 <h1>Test</h1>
             </fieldset>
         </form>
+        <script>
+            initializeNavigation();
+        </script>
     </body>
 </html>
 
