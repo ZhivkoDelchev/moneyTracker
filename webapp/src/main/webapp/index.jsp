@@ -15,11 +15,12 @@
                     <ul id="header">
                     </ul>
                 </div>
-                <h1>Test</h1>
+                <div id="body"></div>
             </fieldset>
         </form>
         <script>
-            initializeNavigation();
+            initializeNavigation()
+			createHomeBody()
         </script>
     </body>
 </html>
