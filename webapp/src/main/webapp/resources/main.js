@@ -57,11 +57,38 @@ function initializeNavigation() {
 			return button
 		}
 		
-		function createCategoriesTable() {
-			var table = document.createElement('h1')
-			table.innerHTML = 'Categories are not yet implemented.'
+		function createCategoriesTable(categories) {
+			var headerLine = document.createElement('tr')
+			headerLine.innerHTML = '<th>Name</th><th>Delete</th>'
+			
+			var table = document.createElement('table')
+			table.appendChild(headerLine)
+			var testCategories = JSON.parse('[{"type":"paymentCategoryEntity","createdDate":"2015-04-04T00:00:00+03:00","id":1,"name":"Salary"},{"type":"paymentCategoryEntity","createdDate":"2015-04-15T00:00:00+03:00","id":2,"name":"firstRestCategory"}]')
+            testCategories.forEach(function(entry) {
+				var line = document.createElement('tr')
+				
+				var nameColumn = document.createElement('td')
+				nameColumn.innerHTML = entry.name
+				line.appendChild(nameColumn)
+				
+				var deleteColumn = document.createElement('td')
+				deleteColumn.appendChild(createDeleteButton(entry.id))
+				line.appendChild(deleteColumn)
+				
+				table.appendChild(line)
+            })
 			return table
 		}
+		
+			function createDeleteButton(categoryId) {
+				var button = document.createElement('div')
+				button.className = 'deleteButton'
+				button.textContent = '-'
+				button.addEventListener('click', function() {
+					alert('Delete : ' + categoryId)
+				})
+				return button
+			}
 
 		function setBodyContent(element) {
 			removeBodyContent()

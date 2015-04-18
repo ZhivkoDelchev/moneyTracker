@@ -140,7 +140,7 @@ div {
     height: 20pt;
     padding: 4pt;
 
-    background: #33CC33;
+    background: #199;
     color: #FFFFFF;
 
     font: 20pt Arial, sans-serif;
@@ -151,6 +151,46 @@ div {
 }
 
 .addButton:hover {
-	background: #199;
+	background: #33CC33;
 	cursor: pointer;
+}
+
+.deleteButton {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* IE8 support */
+
+    width: 20pt;
+    height: 20pt;
+	padding: 2pt;
+	
+	position: relative;
+	top: 25%;
+	left: 25%;
+
+    background: #A00000;
+    color: #FFFFFF ;
+
+    font: 20pt Arial, sans-serif;
+	text-align: center;
+}
+
+.deleteButton:hover {
+	background: #E80000;
+	cursor: pointer;
+}
+
+table {
+	margin-left:auto; 
+    margin-right:auto;
+}
+
+tr {
+	text-align: left;
+}
+
+tr:nth-child(even) {
+	background: #CCC
+}
+tr:nth-child(odd) {
+	background: #FFF
 }
