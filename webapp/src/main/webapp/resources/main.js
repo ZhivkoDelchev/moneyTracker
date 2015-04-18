@@ -57,26 +57,23 @@ function initializeNavigation() {
 			return button
 		}
 		
-		function createCategoriesTable(categories) {
+		function createCategoriesTable() {
 			var headerLine = document.createElement('tr')
 			headerLine.innerHTML = '<th>Name</th><th>Delete</th>'
 			
 			var table = document.createElement('table')
 			table.appendChild(headerLine)
-			var testCategories = JSON.parse('[{"type":"paymentCategoryEntity","createdDate":"2015-04-04T00:00:00+03:00","id":1,"name":"Salary"},{"type":"paymentCategoryEntity","createdDate":"2015-04-15T00:00:00+03:00","id":2,"name":"firstRestCategory"}]')
-            testCategories.forEach(function(entry) {
-				var line = document.createElement('tr')
-				
-				var nameColumn = document.createElement('td')
-				nameColumn.innerHTML = entry.name
-				line.appendChild(nameColumn)
-				
-				var deleteColumn = document.createElement('td')
-				deleteColumn.appendChild(createDeleteButton(entry.id))
-				line.appendChild(deleteColumn)
-				
-				table.appendChild(line)
-            })
+			
+			httpRequest = new XMLHttpRequest()
+			
+			httpRequest.onreadystatechange = function () {
+				if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+					addCategoriesToTable(JSON.parse(httpRequest.responseText), table)
+				}
+			}
+			httpRequest.open('get', 'rest/payments/category', true)
+			httpRequest.send()
+			
 			return table
 		}
 		
@@ -88,6 +85,22 @@ function initializeNavigation() {
 					alert('Delete : ' + categoryId)
 				})
 				return button
+			}
+
+			function addCategoriesToTable(categories, table) {
+				categories.forEach(function(entry) {
+					var line = document.createElement('tr')
+
+					var nameColumn = document.createElement('td')
+					nameColumn.innerHTML = entry.name
+					line.appendChild(nameColumn)
+
+					var deleteColumn = document.createElement('td')
+					deleteColumn.appendChild(createDeleteButton(entry.id))
+					line.appendChild(deleteColumn)
+
+					table.appendChild(line)
+				})
 			}
 
 		function setBodyContent(element) {
