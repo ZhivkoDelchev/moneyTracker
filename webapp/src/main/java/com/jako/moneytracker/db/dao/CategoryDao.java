@@ -21,11 +21,11 @@ public class CategoryDao {
     public List<PaymentCategoryEntity> getCategories(String email, EntityManager entityManager) {
         Session session = entityManager.unwrap(Session.class);
 
-        Criteria paymentsCriteria = session.createCriteria(PaymentCategoryEntity.class, "category");
-        paymentsCriteria.createAlias("category.creator", "creator");
-        paymentsCriteria.add(Restrictions.eq("creator.email", email));
+        Criteria categoryCriteria = session.createCriteria(PaymentCategoryEntity.class, "category");
+        categoryCriteria.createAlias("category.creator", "creator");
+        categoryCriteria.add(Restrictions.eq("creator.email", email));
 
-        return paymentsCriteria.list();
+        return categoryCriteria.list();
     }
 
     public void createCategory(String name, UserEntity user, EntityManager entityManager) {
@@ -35,5 +35,19 @@ public class CategoryDao {
         category.setCreator(user);
 
         entityManager.persist(category);
+    }
+
+    public void deleteCategory(long id, String email, EntityManager entityManager) {
+        Session session = entityManager.unwrap(Session.class);
+
+        Criteria categoryCriteria = session.createCriteria(PaymentCategoryEntity.class, "category");
+        categoryCriteria.add(Restrictions.eq("id", id));
+        categoryCriteria.createAlias("category.creator", "creator");
+        categoryCriteria.add(Restrictions.eq("creator.email", email));
+
+        PaymentCategoryEntity category = (PaymentCategoryEntity) categoryCriteria.uniqueResult();
+        if (category != null) {
+            session.delete(category);
+        }
     }
 }

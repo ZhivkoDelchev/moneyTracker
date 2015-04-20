@@ -24,4 +24,20 @@ public class PaymentDao {
 
         return paymentsCriteria.list();
     }
+
+    public void removePaymentsCategory(long categoryId, String email, EntityManager entityManager) {
+        Session session = entityManager.unwrap(Session.class);
+
+        Criteria paymentsCriteria = session.createCriteria(PaymentEntity.class, "payment");
+        paymentsCriteria.createAlias("payment.creator", "creator");
+        paymentsCriteria.add(Restrictions.eq("creator.email", email));
+        paymentsCriteria.createAlias("payment.category", "category");
+        paymentsCriteria.add(Restrictions.eq("category.id", categoryId));
+
+        List<PaymentEntity> payments = paymentsCriteria.list();
+        for (PaymentEntity payment: payments) {
+            payment.setCategory(null);
+            session.update(payment);
+        }
+    }
 }
