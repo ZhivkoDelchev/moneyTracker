@@ -52,10 +52,41 @@ function initializeNavigation() {
 			button.className = 'addButton'
 			button.innerHTML = '+'
 			button.addEventListener('click', function() {
-				alert('Add a category from here')
+				displayPopup()
+				fadeIn()
 			})
 			return button
 		}
+			
+			function fadeIn() {
+				$(".overlay").fadeIn(750)
+				$(".overlay").fadeTo(750, 0.3).css('display', 'block')
+			}
+			
+			function displayPopup() {
+				if (document.getElementById("popup")) {
+					$("#popup").show()
+				} else { 
+					popup = document.createElement('div')
+					popup.setAttribute('class', 'popup ')
+					popup.setAttribute('id', 'popup')
+					popup.innerHTML = "This is a test message <div class=\"cancel\" onclick=\"closePopup();\"></div>"
+					
+					var body = document.getElementById('body')
+					body.appendChild(popup)
+				}
+				$("#popup").draggable()
+			}
+			
+			function closePopup() {
+				$("#popup").hide()
+				fadeOut()
+			}
+			
+			function fadeOut() {
+				$(".overlay").fadeOut(300)
+				$(".overlay").fadeOut(300)
+			}
 		
 		function createCategoriesTable() {
 			var headerLine = document.createElement('tr')

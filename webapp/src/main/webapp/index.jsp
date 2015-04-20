@@ -6,9 +6,12 @@
         <link rel="stylesheet" type="text/css" media="all" href="<%=request.getContextPath() %>/resources/css/main.css">
         <style>#main{ background-color: #ffffff }</style>
         <script src="<%=request.getContextPath() %>/resources/main.js"></script>
+		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     </header>
 
     <body class=" ">
+		<div class="overlay"></div>
         <form id="header_form">
             <fieldset>
                 <div id="nav_top">
