@@ -18,7 +18,7 @@
 				<label>Password:</label>
 				<input type = "password"name = "j_password"  class="textInput"/>
 				
-				<input type="submit" id="loginButton" value="Login" class="button disabled"/>
+				<input type="submit" id="loginButton" value="Login" class="button"/>
 			</fieldset>
 		</form>
 	</body>

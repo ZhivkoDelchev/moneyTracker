@@ -76,14 +76,12 @@ input.button{
     -moz-box-shadow: 1pt 1pt 5pt #ccc;
     -webkit-box-shadow: 1pt 1pt 5pt #ccc;
     box-shadow: 1pt 1pt 5pt #aaa;
-}
-
-input.disabled{
-    background: #999;
+	
+	background: #999;
     border: 1pt groove #aaa;
 }
 
-input.disabled:hover{
+input.button:hover{
     background: #199;
 }
 
