@@ -70,11 +70,12 @@ function initializeNavigation() {
 					popup = document.createElement('div')
 					popup.setAttribute('class', 'popup ')
 					popup.setAttribute('id', 'popup')
-					popup.innerHTML = "This is a test message <div class=\"cancel\" onclick=\"closePopup();\"></div>"
+
 					
 					var body = document.getElementById('body')
 					body.appendChild(popup)
 				}
+				$("#popup").html("This is a test message <div class=\"cancel\" onclick=\"closePopup();\"></div>")
 				$("#popup").draggable()
 			}
 			
@@ -95,15 +96,17 @@ function initializeNavigation() {
 			var table = document.createElement('table')
 			table.appendChild(headerLine)
 			
-			httpRequest = new XMLHttpRequest()
-			
-			httpRequest.onreadystatechange = function () {
-				if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-					addCategoriesToTable(JSON.parse(httpRequest.responseText), table)
+			$.ajax({
+				dataType: 'json',
+				type: 'GET',
+				url: 'rest/payments/category',
+				success: function(data) {
+					addCategoriesToTable(data, table)
+				},
+				error: function() {
+					console.log('Error getting categories!')
 				}
-			}
-			httpRequest.open('get', 'rest/payments/category', true)
-			httpRequest.send()
+			})
 			
 			return table
 		}
