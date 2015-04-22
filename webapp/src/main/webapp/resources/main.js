@@ -49,8 +49,7 @@ function initializeNavigation() {
 
 		function createAddButton() {
 			var button = document.createElement('div')
-			button.className = 'addButton'
-			button.innerHTML = '+'
+			button.className = 'icon icon-plus'
 			button.addEventListener('click', function() {
 				displayPopup()
 				fadeIn()
@@ -128,8 +127,7 @@ function initializeNavigation() {
 		
 			function createDeleteButton(categoryId) {
 				var button = document.createElement('div')
-				button.className = 'deleteButton'
-				button.textContent = '-'
+				button.className = 'icon icon-minus'
 				button.addEventListener('click', function() {
 					alert('Delete : ' + categoryId)
 				})
