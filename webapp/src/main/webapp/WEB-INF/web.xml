@@ -6,7 +6,7 @@
     <display-name>tracker</display-name>
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
     <login-config>
@@ -28,7 +28,7 @@
             <web-resource-name />
             <url-pattern>/auth/*</url-pattern>
             <url-pattern>/err/*</url-pattern>
-            <url-pattern>/resources/*</url-pattern>
+            <url-pattern>/resources/css/*r</url-pattern>
         </web-resource-collection>
     </security-constraint>
 

@@ -75,8 +75,23 @@ function initializeNavigation() {
 					var body = document.getElementById('body')
 					body.appendChild(popup)
 				}
-				$("#popup").html("This is a test message <div class=\"cancel\" onclick=\"closePopup();\"></div>")
+				$("#popup").html('<label class=\"inputLabel\">Name:</label><div class=\"cancel\" onclick=\"closePopup();\"></div><input type=\"text\" id=\"createCategoryName\"  class=\"textInput\"/><input type=\"button\" value=\"Create\" class=\"button\" onClick=\"createNewCatetgory()\"/>')
 				$("#popup").draggable()
+			}
+			
+			function createNewCatetgory() {
+				$.ajax({
+					type: 'POST',
+					url: 'rest/payments/category/' + $("#createCategoryName").val(),
+					success: function(data) {
+						createCategoryBody()
+						closePopup()
+					},
+					error: function() {
+						closePopup()
+						console.log('Error creating category!')
+					}
+				})
 			}
 			
 			function closePopup() {

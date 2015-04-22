@@ -87,10 +87,14 @@ input.button:hover{
 
 input.textInput{
     width: 97%;
-    padding: 7pt;
+    padding: 7pt 0pt 7pt 0pt;
     font-size: 15pt;
     border: 1pt solid #ccc;
     margin-bottom: 15pt;
+}
+
+label.inputLabel {
+    text-align: left;
 }
 
 /* Navigation */
