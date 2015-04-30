@@ -28,7 +28,7 @@
             <web-resource-name />
             <url-pattern>/auth/*</url-pattern>
             <url-pattern>/err/*</url-pattern>
-            <url-pattern>/resources/css/*r</url-pattern>
+            <url-pattern>/resources/css/*</url-pattern>
         </web-resource-collection>
     </security-constraint>
 
