@@ -24,6 +24,7 @@ body{
     bottom: 0;
     right: 0;
 	z-index: 10;
+	height: 100%;
 }
 
 /* LAYOUT */
@@ -33,8 +34,8 @@ body{
     text-align: left;
     background: #eee;
     padding: 15pt 25pt 25pt;
-    -moz-border-radius: 15pt;
-    border-radius: 15pt;
+    -moz-border-radius: 5pt;
+    border-radius: 5pt;
 }
 
 #step, #login, #register, #forgot, #header_form, #main {
@@ -91,6 +92,8 @@ input.textInput{
     font-size: 15pt;
     border: 1pt solid #ccc;
     margin-bottom: 15pt;
+	-moz-border-radius: 5pt;
+    border-radius: 5pt;
 }
 
 label.inputLabel {
@@ -169,24 +172,41 @@ div {
     border-radius: 5pt;
 
     z-index:20;
-    }
+}
     
 .cancel{
+    width:15pt;
+    height:15pt;
+    position:absolute;
     display:relative;
     cursor:pointer;
-    margin:0;
-    float:right;
-    height:10px;
-    width:14px;
-    padding:0 0 5px 0;
-    background-color:red;
-    text-align:center;
-    font-weight:bold;
-    font-size:11px;
-    color:white;
-    border-radius:3px;
-    z-index:20;
-    }
+	top: 5%;
+	left: 92%;
+}
+
+.cancel:before,.cancel:after{
+    content:'';
+    position:absolute;
+    width:90%;
+    height:10%;
+    background-color:white;
+    border-radius:20%;
+    top:41%;
+    background: #999;
+}
+
+.cancel:before{
+    -webkit-transform:rotate(45deg);
+    -moz-transform:rotate(45deg);
+    transform:rotate(45deg);
+    left:5%;
+}
+.cancel:after{
+    -webkit-transform:rotate(-45deg);
+    -moz-transform:rotate(-45deg);
+    transform:rotate(-45deg);
+    right:5%;
+}
 
 table {
 	margin-left:auto; 
