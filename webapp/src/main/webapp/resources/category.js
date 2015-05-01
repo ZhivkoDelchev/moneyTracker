@@ -27,18 +27,23 @@ category = new function category() {
 	}
 	
 	this.createNewCatetgory = function() {
-		$.ajax({
-			type: 'POST',
-			url: 'rest/payments/category/' + $("#createCategoryName").val(),
-			success: function(data) {
-				this.createCategoryBody()
-				closePopup()
-			}.bind(this),
-			error: function() {
-				closePopup()
-				console.log('Error creating category!')
-			}.bind(this)
-		})
+		var categoryName = $("#createCategoryName").val()
+		if (categoryName == null || categoryName == "" || categoryName == undefined || categoryName.length > 20) {
+			$("#createCategoryName").css({'background-color' : '#FFF2ED'})
+		} else {
+			$.ajax({
+				type: 'POST',
+				url: 'rest/payments/category/' + categoryName,
+				success: function(data) {
+					this.createCategoryBody()
+					closePopup()
+				}.bind(this),
+				error: function() {
+					closePopup()
+					console.log('Error creating category!')
+				}.bind(this)
+			})
+		}
 	}
 	
 	function createCategoriesTable() {
@@ -83,9 +88,41 @@ category = new function category() {
 		var button = document.createElement('div')
 		button.className = 'icon icon-minus'
 		button.addEventListener('click', function() {
-			alert('Delete : ' + categoryId)
+			deleteCategoryConfirmPopup(categoryId)
+			fadeIn()
 		})
 		return button
+	}
+	
+	function deleteCategoryConfirmPopup(categoryId) {
+		if (document.getElementById("popup")) {
+			$("#popup").remove()
+		}
+		popup = document.createElement('div')
+		popup.setAttribute('class', 'popup ')
+		popup.setAttribute('id', 'popup')
+
+		
+		var body = document.getElementById('body')
+		body.appendChild(popup)
+		
+		$("#popup").html('<label>Deleting a category will remove category from all payments using it. Are you sure you want to delete it?</label></div><input type=\"button\" value=\"Yes\" class=\"button\" onClick=\"category.deleteCategory(' + categoryId + ')\"/></div><input type=\"button\" value=\"No\" class=\"button\" onClick=\"closePopup()\"/>')
+		$("#popup").draggable()
+	}
+	
+	this.deleteCategory = function(categoryId) {
+		$.ajax({
+			type: 'DELETE',
+			url: 'rest/payments/category/' + categoryId,
+			success: function(data) {
+				this.createCategoryBody()
+				closePopup()
+			}.bind(this),
+			error: function() {
+				closePopup()
+				console.log('Error creating category!')
+			}.bind(this)
+		})
 	}
 
 }
