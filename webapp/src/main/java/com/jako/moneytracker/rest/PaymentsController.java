@@ -54,7 +54,7 @@ public class PaymentsController {
     @POST
     @Path("/category/{name}")
     public Response createCategory(@PathParam("name") String name) {
-        UserEntity user = userDao.getUser(userPrincipal.getName(), entityManager);
+        UserEntity user = userDao.getUser();
         categoryDao.createCategory(name, user, entityManager);
 
         return Response.ok().build();

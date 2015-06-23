@@ -1,41 +1,36 @@
 package com.jako.moneytracker.db.dao;
 
 import com.jako.moneytracker.db.entity.UserEntity;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
+import com.jako.moneytracker.db.manager.TrackerEntityManager;
+import org.hibernate.criterion.Criterion;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import javax.persistence.EntityManager;
-
-import static org.mockito.Mockito.mock;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
- * Created by Jako on 13.4.2015 ã..
+ * Created by Jako on 13.4.2015 ï¿½..
  */
 public class UserDaoTest {
 
     private UserDao sut;
+    @Mock private TrackerEntityManager trackerEntityManager;
 
     @Before
     public void setUp() throws Exception {
-        sut = new UserDao();
+        MockitoAnnotations.initMocks(this);
+        sut = new UserDao(trackerEntityManager);
     }
 
     @Test
     public void testQueryUserByEmailAndReturnSingleUniqueResult() throws Exception {
-        Criteria criteria = mock(Criteria.class);
+        sut.getUser();
 
-        Session session = mock(Session.class);
-        when(session.createCriteria(UserEntity.class, "user")).thenReturn(criteria);
-
-        EntityManager entityManager = mock(EntityManager.class);
-        when(entityManager.unwrap(Session.class)).thenReturn(session);
-
-        sut.getUser("mail", entityManager);
-
-        verify(criteria).uniqueResult();
+        verify(trackerEntityManager).getUserEmail();
+        verify(trackerEntityManager).getUniqueResult(eq(UserEntity.class), eq("user"), any(Criterion.class));
     }
 }

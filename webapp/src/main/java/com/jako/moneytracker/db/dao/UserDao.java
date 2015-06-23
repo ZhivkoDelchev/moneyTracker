@@ -1,25 +1,27 @@
 package com.jako.moneytracker.db.dao;
 
 import com.jako.moneytracker.db.entity.UserEntity;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
+import com.jako.moneytracker.db.manager.TrackerEntityManager;
 import org.hibernate.criterion.Restrictions;
 
 import javax.enterprise.context.Dependent;
-import javax.persistence.EntityManager;
+import javax.inject.Inject;
 
 /**
- * Created by Jako on 13.4.2015 ã..
+ * Created by Jako on 13.4.2015 ï¿½..
  */
 @Dependent
 public class UserDao {
 
-    public UserEntity getUser(String email, EntityManager entityManager) {
-        Session session = entityManager.unwrap(Session.class);
+    private final TrackerEntityManager trackerEntityManager;
 
-        Criteria criteria = session.createCriteria(UserEntity.class, "user");
-        criteria.add(Restrictions.eq("user.email", email));
+    @Inject
+    public UserDao(TrackerEntityManager trackerEntityManager) {
+        this.trackerEntityManager = trackerEntityManager;
+    }
 
-        return (UserEntity) criteria.uniqueResult();
+    public UserEntity getUser() {
+        String email = trackerEntityManager.getUserEmail();
+        return trackerEntityManager.getUniqueResult(UserEntity.class, "user", Restrictions.eq("user.email", email));
     }
 }
