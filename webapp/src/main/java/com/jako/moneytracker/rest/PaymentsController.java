@@ -48,7 +48,7 @@ public class PaymentsController {
     @Path("/category")
     @Produces("application/json")
     public List<PaymentCategoryEntity> getCategory() {
-        return categoryDao.getCategories(userPrincipal.getName(), entityManager);
+        return categoryDao.getCategories();
     }
 
     @POST

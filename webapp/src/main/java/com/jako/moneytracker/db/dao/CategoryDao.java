@@ -2,30 +2,37 @@ package com.jako.moneytracker.db.dao;
 
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.UserEntity;
+import com.jako.moneytracker.db.manager.TrackerEntityManager;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Jako on 5.4.2015 ã..
+ * Created by Jako on 5.4.2015 ï¿½..
  */
 @Dependent
 public class CategoryDao {
 
-    @SuppressWarnings("unchecked")
-    public List<PaymentCategoryEntity> getCategories(String email, EntityManager entityManager) {
-        Session session = entityManager.unwrap(Session.class);
+    private final TrackerEntityManager trackerEntityManager;
 
-        Criteria categoryCriteria = session.createCriteria(PaymentCategoryEntity.class, "category");
-        categoryCriteria.createAlias("category.creator", "creator");
-        categoryCriteria.add(Restrictions.eq("creator.email", email));
+    @Inject
+    public CategoryDao(TrackerEntityManager trackerEntityManager) {
+        this.trackerEntityManager = trackerEntityManager;
+    }
 
-        return categoryCriteria.list();
+    @Deprecated
+    public CategoryDao() {
+        this(null);
+    }
+
+    public List<PaymentCategoryEntity> getCategories() {
+        return trackerEntityManager.getResultsForCurrentUser(PaymentCategoryEntity.class, "category");
     }
 
     public void createCategory(String name, UserEntity user, EntityManager entityManager) {

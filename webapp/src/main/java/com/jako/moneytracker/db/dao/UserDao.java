@@ -20,6 +20,11 @@ public class UserDao {
         this.trackerEntityManager = trackerEntityManager;
     }
 
+    @Deprecated
+    public UserDao() {
+        this(null);
+    }
+
     public UserEntity getUser() {
         String email = trackerEntityManager.getUserEmail();
         return trackerEntityManager.getUniqueResult(UserEntity.class, "user", Restrictions.eq("user.email", email));

@@ -42,7 +42,7 @@ public class TrackerEntityManagerTest {
     }
 
     @Test
-    public void shouldCreateCriteriaForRequestedClass() throws Exception {
+    public void shouldCreateCriteriaForRequestedClassAndGetUniqueResult() throws Exception {
         String alias = "alias";
         Class<UserEntity> clazz = UserEntity.class;
 
@@ -55,7 +55,7 @@ public class TrackerEntityManagerTest {
         sut.getUniqueResult(clazz, alias);
 
         verify(entityManager).unwrap(Session.class);
-        verify(session.createCriteria(clazz, alias));
+        verify(session).createCriteria(clazz, alias);
     }
 
     @Test
@@ -72,6 +72,25 @@ public class TrackerEntityManagerTest {
         sut.getUniqueResult(clazz, alias);
 
         verify(entityManager).unwrap(Session.class);
-        verify(session.createCriteria(clazz, alias));
+        verify(session).createCriteria(clazz, alias);
+    }
+
+    @Test
+    public void shouldCreateCriteriaForRequestedClassAndListAllRecordsForCurrentUser() throws Exception {
+        String alias = "alias";
+        Class<UserEntity> clazz = UserEntity.class;
+
+        Session session = mock(Session.class);
+        when(entityManager.unwrap(Session.class)).thenReturn(session);
+
+        Criteria criteria = mock(Criteria.class);
+        when(session.createCriteria(clazz, alias)).thenReturn(criteria);
+
+        sut.getResultsForCurrentUser(clazz, alias);
+
+        verify(entityManager).unwrap(Session.class);
+        verify(session).createCriteria(clazz, alias);
+        verify(criteria).createAlias("alias.creator", "creator");
+        // TODO : verify if restriction for users was added.
     }
 }
