@@ -52,6 +52,10 @@ h1{
 
 /* FORM */
 fieldset{
+	-webkit-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
+	-moz-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
+	box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
+	-moz-border-radius:4pt;
     border: none;
 }
 
@@ -101,54 +105,35 @@ label.inputLabel {
 }
 
 /* Navigation */
-#nav_top {
+nav {
 	position: relative;
 	background: gray;
 	min-width: 500pt;
-	
+
 	-webkit-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
 	-moz-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
 	box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
 	-moz-border-radius:4pt;
-	
+
 	-moz-border-radius: 5pt;
     border-radius: 5pt;
 }
 
-div {
-	font-size: 15pt;
-	vertical-align: baseline;
-	background: transparent;
-}
-
-#nav_top > ul {
-	display: inline-block;
-	margin: 0pt;
-}
-
-#nav_top li {
-	float: left;
-	list-style: none;
-	position: relative;
-	display: block;
-	line-height: 175%;
-}
-
-#nav_top a {
+nav a {
 	color: #fff;
     padding: 1pt 5pt;
     margin-top: 10pt;
     font-weight: bold;
-    
+
     -moz-border-radius: 5pt;
     border-radius: 5pt;
-    
+
 	text-decoration: none;
 	height: 100%;
 	width: 150%;
 }
 
-#nav_top a:hover {
+nav a:hover {
 	background: #199;
 	cursor: pointer;
 }

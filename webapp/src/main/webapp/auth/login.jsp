@@ -7,19 +7,16 @@
 	<style>#login{ background-color: #ffffff }</style>
 	<body class=" ">
 		<form id="login" action="j_security_check" method="post">
-			<fieldset>
-				<legend>Login</legend>
-				<h1 style="margin-bottom: 30px;">Login</h1>
-				
-						
-				<label>Email:</label>
-				<input type = "text"name = "j_username"  class="textInput"/>
-				
-				<label>Password:</label>
-				<input type = "password"name = "j_password"  class="textInput"/>
-				
-				<input type="submit" id="loginButton" value="Login" class="button"/>
-			</fieldset>
+			<legend>Login</legend>
+			<h1 style="margin-bottom: 30px;">Login</h1>
+
+			<label>Email:</label>
+			<input type = "text"name = "j_username"  class="textInput"/>
+
+			<label>Password:</label>
+			<input type = "password"name = "j_password"  class="textInput"/>
+
+			<input type="submit" id="loginButton" value="Login" class="button"/>
 		</form>
 	</body>
 </html>

@@ -1,5 +1,5 @@
 function initializeNavigation() {
-    var header = document.getElementById('header')
+    var header = document.getElementById('navigation')
     header.appendChild(createNavigationElement('Home', function() {
         createHomeBody();
     }))
@@ -15,9 +15,7 @@ function initializeNavigation() {
 		var text = document.createElement('a')
 		text.innerHTML = name
 		text.addEventListener('click', callback)
-		var header = document.createElement('li')
-		header.appendChild(text)
-		return header
+		return text
 	}
 
 	function createHomeBody() {
