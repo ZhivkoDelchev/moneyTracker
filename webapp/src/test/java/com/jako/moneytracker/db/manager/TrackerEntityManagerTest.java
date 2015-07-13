@@ -59,6 +59,24 @@ public class TrackerEntityManagerTest {
     }
 
     @Test
+    public void shouldCreateCriteriaForRequestedClassAndGetUniqueResultForCurrentUser() throws Exception {
+        String alias = "alias";
+        Class<UserEntity> clazz = UserEntity.class;
+
+        Session session = mock(Session.class);
+        when(entityManager.unwrap(Session.class)).thenReturn(session);
+
+        Criteria criteria = mock(Criteria.class);
+        when(session.createCriteria(clazz, alias)).thenReturn(criteria);
+
+        sut.getUniqueResultForCurrentUser(clazz, alias);
+
+        verify(entityManager).unwrap(Session.class);
+        verify(session).createCriteria(clazz, alias);
+        verify(criteria).createAlias("alias.creator", "creator");
+    }
+
+    @Test
     public void shouldCreateCriteriaForRequestedClassAndAddRestrictions() throws Exception {
         String alias = "alias";
         Class<UserEntity> clazz = UserEntity.class;

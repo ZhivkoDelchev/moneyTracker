@@ -3,9 +3,9 @@ package com.jako.moneytracker.db.dao;
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.UserEntity;
 import com.jako.moneytracker.db.manager.TrackerEntityManager;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -39,15 +39,12 @@ public class CategoryDao {
         entityManager.persist(category);
     }
 
-    public void deleteCategory(long id, String email, EntityManager entityManager) {
+    public void deleteCategory(long id, EntityManager entityManager) {
         Session session = entityManager.unwrap(Session.class);
 
-        Criteria categoryCriteria = session.createCriteria(PaymentCategoryEntity.class, "category");
-        categoryCriteria.add(Restrictions.eq("id", id));
-        categoryCriteria.createAlias("category.creator", "creator");
-        categoryCriteria.add(Restrictions.eq("creator.email", email));
+        SimpleExpression categoryIdRestriction = Restrictions.eq("id", id);
+        PaymentCategoryEntity category = trackerEntityManager.getUniqueResultForCurrentUser(PaymentCategoryEntity.class, "category", categoryIdRestriction);
 
-        PaymentCategoryEntity category = (PaymentCategoryEntity) categoryCriteria.uniqueResult();
         if (category != null) {
             session.delete(category);
         }

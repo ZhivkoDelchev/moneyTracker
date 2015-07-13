@@ -50,6 +50,21 @@ public class TrackerEntityManager {
         return clazz.cast(criteria.uniqueResult());
     }
 
+    public <T extends BaseEntity> T getUniqueResultForCurrentUser(Class<T> clazz, String alias, Criterion... restrictions) {
+        Session session = entityManager.unwrap(Session.class);
+
+        Criteria criteria = session.createCriteria(clazz, alias);
+        criteria.createAlias(alias + ".creator", "creator");
+        criteria.add(Restrictions.eq("creator.email", getUserEmail()));
+        if (restrictions != null) {
+            for (Criterion restriction : restrictions) {
+                criteria.add(restriction);
+            }
+        }
+
+        return clazz.cast(criteria.uniqueResult());
+    }
+
     public <T extends BaseEntity> List<T> getResultsForCurrentUser(Class<T> clazz, String alias, Criterion... restrictions) {
         Session session = entityManager.unwrap(Session.class);
 
