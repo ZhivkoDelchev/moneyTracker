@@ -40,7 +40,7 @@ public class PaymentsController {
 
     @GET
     public String get() {
-        List<PaymentEntity> userPayments = paymentDao.getUserPayments(userPrincipal.getName(), entityManager);
+        List<PaymentEntity> userPayments = paymentDao.getUserPayments();
         return userPayments.toString();
     }
 
@@ -63,7 +63,7 @@ public class PaymentsController {
     @DELETE
     @Path("/category/{id}")
     public Response deleteCategory(@PathParam("id") Long id) {
-        paymentDao.removePaymentsCategory(id, userPrincipal.getName(), entityManager);
+        paymentDao.removePaymentsCategory(id, entityManager);
         categoryDao.deleteCategory(id, userPrincipal.getName(), entityManager);
 
         return Response.ok().build();

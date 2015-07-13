@@ -1,11 +1,13 @@
 package com.jako.moneytracker.db.dao;
 
 import com.jako.moneytracker.db.entity.PaymentEntity;
-import org.hibernate.Criteria;
+import com.jako.moneytracker.db.manager.TrackerEntityManager;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
 
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -15,26 +17,22 @@ import java.util.List;
 @Dependent
 public class PaymentDao {
 
-    public List<PaymentEntity> getUserPayments(String email, EntityManager entityManager) {
-        Session session = entityManager.unwrap(Session.class);
+    private final TrackerEntityManager trackerEntityManager;
 
-        Criteria paymentsCriteria = session.createCriteria(PaymentEntity.class, "payment");
-        paymentsCriteria.createAlias("payment.creator", "creator");
-        paymentsCriteria.add(Restrictions.eq("creator.email", email));
-
-        return paymentsCriteria.list();
+    @Inject
+    public PaymentDao(TrackerEntityManager trackerEntityManager) {
+        this.trackerEntityManager = trackerEntityManager;
     }
 
-    public void removePaymentsCategory(long categoryId, String email, EntityManager entityManager) {
+    public List<PaymentEntity> getUserPayments() {
+        return trackerEntityManager.getResultsForCurrentUser(PaymentEntity.class, "payment");
+    }
+
+    public void removePaymentsCategory(long categoryId, EntityManager entityManager) {
         Session session = entityManager.unwrap(Session.class);
 
-        Criteria paymentsCriteria = session.createCriteria(PaymentEntity.class, "payment");
-        paymentsCriteria.createAlias("payment.creator", "creator");
-        paymentsCriteria.add(Restrictions.eq("creator.email", email));
-        paymentsCriteria.createAlias("payment.category", "category");
-        paymentsCriteria.add(Restrictions.eq("category.id", categoryId));
-
-        List<PaymentEntity> payments = paymentsCriteria.list();
+        SimpleExpression categoryIs = Restrictions.eq("payment.category.id", categoryId);
+        List<PaymentEntity> payments = trackerEntityManager.getResultsForCurrentUser(PaymentEntity.class, "payment", categoryIs);
         for (PaymentEntity payment: payments) {
             payment.setCategory(null);
             session.update(payment);
