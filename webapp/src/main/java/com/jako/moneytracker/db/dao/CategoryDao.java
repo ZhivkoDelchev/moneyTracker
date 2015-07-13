@@ -26,11 +26,6 @@ public class CategoryDao {
         this.trackerEntityManager = trackerEntityManager;
     }
 
-    @Deprecated
-    public CategoryDao() {
-        this(null);
-    }
-
     public List<PaymentCategoryEntity> getCategories() {
         return trackerEntityManager.getResultsForCurrentUser(PaymentCategoryEntity.class, "category");
     }
