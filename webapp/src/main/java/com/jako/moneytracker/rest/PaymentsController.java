@@ -64,7 +64,7 @@ public class PaymentsController {
     @Path("/category/{id}")
     public Response deleteCategory(@PathParam("id") Long id) {
         paymentDao.removePaymentsCategory(id, entityManager);
-        categoryDao.deleteCategory(id, entityManager);
+        categoryDao.deleteCategory(id);
 
         return Response.ok().build();
     }

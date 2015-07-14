@@ -3,7 +3,6 @@ package com.jako.moneytracker.db.dao;
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.UserEntity;
 import com.jako.moneytracker.db.manager.TrackerEntityManager;
-import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 
@@ -39,14 +38,12 @@ public class CategoryDao {
         entityManager.persist(category);
     }
 
-    public void deleteCategory(long id, EntityManager entityManager) {
-        Session session = entityManager.unwrap(Session.class);
-
+    public void deleteCategory(long id) {
         SimpleExpression categoryIdRestriction = Restrictions.eq("id", id);
         PaymentCategoryEntity category = trackerEntityManager.getUniqueResultForCurrentUser(PaymentCategoryEntity.class, "category", categoryIdRestriction);
 
         if (category != null) {
-            session.delete(category);
+            trackerEntityManager.delete(category);
         }
     }
 }

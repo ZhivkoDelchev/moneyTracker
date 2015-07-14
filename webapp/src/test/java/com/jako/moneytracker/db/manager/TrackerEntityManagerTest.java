@@ -1,5 +1,6 @@
 package com.jako.moneytracker.db.manager;
 
+import com.jako.moneytracker.db.entity.BaseEntity;
 import com.jako.moneytracker.db.entity.UserEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -110,5 +111,17 @@ public class TrackerEntityManagerTest {
         verify(session).createCriteria(clazz, alias);
         verify(criteria).createAlias("alias.creator", "creator");
         // TODO : verify if restriction for users was added.
+    }
+
+    @Test
+    public void shouldDeleteEntity() throws Exception {
+        Session session = mock(Session.class);
+
+        when(entityManager.unwrap(Session.class)).thenReturn(session);
+        BaseEntity entity = mock(BaseEntity.class);
+
+        sut.delete(entity);
+
+        verify(session).delete(entity);
     }
 }

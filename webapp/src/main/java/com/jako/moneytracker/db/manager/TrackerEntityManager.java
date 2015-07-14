@@ -80,6 +80,11 @@ public class TrackerEntityManager {
         return criteria.list();
     }
 
+    public void delete(BaseEntity entity) {
+        Session session = entityManager.unwrap(Session.class);
+        session.delete(entity);
+    }
+
     public String getUserEmail() {
         return userPrincipal.getName();
     }
