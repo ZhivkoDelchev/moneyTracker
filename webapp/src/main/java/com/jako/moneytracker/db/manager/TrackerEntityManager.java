@@ -95,6 +95,13 @@ public class TrackerEntityManager {
         session.persist(entity);
     }
 
+    public void update(BaseEntity entity) {
+        entity.setLastEditDate(new Date());
+
+        Session session = getSession();
+        session.update(entity);
+    }
+
     public String getUserEmail() {
         return userPrincipal.getName();
     }

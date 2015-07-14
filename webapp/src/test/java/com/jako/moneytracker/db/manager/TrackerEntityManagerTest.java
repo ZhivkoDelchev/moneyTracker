@@ -130,7 +130,7 @@ public class TrackerEntityManagerTest {
     }
 
     @Test
-    public void testShouldSetCurrentDateForCreatedAndLastChangedAndPersistTheEntity() throws Exception {
+    public void shouldSetCurrentDateForCreatedAndLastChangedAndPersistTheEntity() throws Exception {
         BaseEntity entity = mock(BaseEntity.class);
 
         Session session = mock(Session.class);
@@ -144,5 +144,20 @@ public class TrackerEntityManagerTest {
         verify(entity).setCreatedDate(any(Date.class));
         verify(entity).setLastEditDate(any(Date.class));
         verify(session).persist(entity);
+    }
+
+    @Test
+    public void shouldSetLastEditDateAndUpdateEntity() throws Exception {
+        BaseEntity entity = mock(BaseEntity.class);
+
+        Session session = mock(Session.class);
+        when(entityManager.unwrap(Session.class)).thenReturn(session);
+
+        sut.update(entity);
+
+//        Possible random failing test.
+//        verify(entity).setCreatedDate(new Date());
+        verify(entity).setLastEditDate(any(Date.class));
+        verify(session).update(entity);
     }
 }

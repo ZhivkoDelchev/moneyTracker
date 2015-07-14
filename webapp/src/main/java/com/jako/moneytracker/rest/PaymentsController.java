@@ -11,8 +11,6 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -26,17 +24,11 @@ import java.util.List;
 public class PaymentsController {
 
     @Inject
-    private java.security.Principal userPrincipal;
-
-    @Inject
     private PaymentDao paymentDao;
     @Inject
     private CategoryDao categoryDao;
     @Inject
     private UserDao userDao;
-
-    @PersistenceContext(unitName = "tracker")
-    private EntityManager entityManager;
 
     @GET
     public String get() {
@@ -63,7 +55,7 @@ public class PaymentsController {
     @DELETE
     @Path("/category/{id}")
     public Response deleteCategory(@PathParam("id") Long id) {
-        paymentDao.removePaymentsCategory(id, entityManager);
+        paymentDao.removePaymentsCategory(id);
         categoryDao.deleteCategory(id);
 
         return Response.ok().build();

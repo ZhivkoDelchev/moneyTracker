@@ -2,13 +2,11 @@ package com.jako.moneytracker.db.dao;
 
 import com.jako.moneytracker.db.entity.PaymentEntity;
 import com.jako.moneytracker.db.manager.TrackerEntityManager;
-import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
@@ -28,14 +26,12 @@ public class PaymentDao {
         return trackerEntityManager.getResultsForCurrentUser(PaymentEntity.class, "payment");
     }
 
-    public void removePaymentsCategory(long categoryId, EntityManager entityManager) {
-        Session session = entityManager.unwrap(Session.class);
-
+    public void removePaymentsCategory(long categoryId) {
         SimpleExpression categoryIs = Restrictions.eq("payment.category.id", categoryId);
         List<PaymentEntity> payments = trackerEntityManager.getResultsForCurrentUser(PaymentEntity.class, "payment", categoryIs);
         for (PaymentEntity payment: payments) {
             payment.setCategory(null);
-            session.update(payment);
+            trackerEntityManager.update(payment);
         }
     }
 }
