@@ -38,7 +38,7 @@ public class TrackerEntityManager {
     }
 
     public <T extends BaseEntity> T getUniqueResult(Class<T> clazz, String alias, Criterion... restrictions) {
-        Session session = entityManager.unwrap(Session.class);
+        Session session = getSession();
 
         Criteria criteria = session.createCriteria(clazz, alias);
         if (restrictions != null) {
@@ -51,7 +51,7 @@ public class TrackerEntityManager {
     }
 
     public <T extends BaseEntity> T getUniqueResultForCurrentUser(Class<T> clazz, String alias, Criterion... restrictions) {
-        Session session = entityManager.unwrap(Session.class);
+        Session session = getSession();
 
         Criteria criteria = session.createCriteria(clazz, alias);
         criteria.createAlias(alias + ".creator", "creator");
@@ -66,7 +66,7 @@ public class TrackerEntityManager {
     }
 
     public <T extends BaseEntity> List<T> getResultsForCurrentUser(Class<T> clazz, String alias, Criterion... restrictions) {
-        Session session = entityManager.unwrap(Session.class);
+        Session session = getSession();
 
         Criteria criteria = session.createCriteria(clazz, alias);
         criteria.createAlias(alias + ".creator", "creator");
@@ -81,11 +81,15 @@ public class TrackerEntityManager {
     }
 
     public void delete(BaseEntity entity) {
-        Session session = entityManager.unwrap(Session.class);
+        Session session = getSession();
         session.delete(entity);
     }
 
     public String getUserEmail() {
         return userPrincipal.getName();
+    }
+
+    private Session getSession() {
+        return entityManager.unwrap(Session.class);
     }
 }
