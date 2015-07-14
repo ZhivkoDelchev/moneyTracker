@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -47,9 +46,11 @@ public class CategoryDaoTest {
     @Test
     public void shouldCreateCategory() throws Exception {
         UserEntity user = mock(UserEntity.class);
-        EntityManager entityManager = mock(EntityManager.class);
 
-        sut.createCategory("name", user, entityManager);
+        sut.createCategory("name", user);
+
+        // TODO: verify if proper category is persisted.
+        verify(trackerEntityManager).persist(any(PaymentCategoryEntity.class));
     }
 
     @Test

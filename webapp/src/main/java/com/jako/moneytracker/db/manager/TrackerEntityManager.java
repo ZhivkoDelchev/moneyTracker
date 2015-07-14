@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -83,6 +84,15 @@ public class TrackerEntityManager {
     public void delete(BaseEntity entity) {
         Session session = getSession();
         session.delete(entity);
+    }
+
+    public void persist(BaseEntity entity) {
+        Date currentDate = new Date();
+        entity.setCreatedDate(currentDate);
+        entity.setLastEditDate(currentDate);
+
+        Session session = getSession();
+        session.persist(entity);
     }
 
     public String getUserEmail() {

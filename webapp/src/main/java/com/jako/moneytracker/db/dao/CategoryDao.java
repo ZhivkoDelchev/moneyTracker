@@ -8,8 +8,6 @@ import org.hibernate.criterion.SimpleExpression;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,13 +27,12 @@ public class CategoryDao {
         return trackerEntityManager.getResultsForCurrentUser(PaymentCategoryEntity.class, "category");
     }
 
-    public void createCategory(String name, UserEntity user, EntityManager entityManager) {
+    public void createCategory(String name, UserEntity user) {
         PaymentCategoryEntity category = new PaymentCategoryEntity();
         category.setName(name);
-        category.setCreatedDate(new Date());
         category.setCreator(user);
 
-        entityManager.persist(category);
+        trackerEntityManager.persist(category);
     }
 
     public void deleteCategory(long id) {

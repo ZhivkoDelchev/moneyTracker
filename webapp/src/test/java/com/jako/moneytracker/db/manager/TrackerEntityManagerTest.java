@@ -11,8 +11,10 @@ import org.mockito.MockitoAnnotations;
 
 import javax.persistence.EntityManager;
 import java.security.Principal;
+import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -23,8 +25,10 @@ import static org.mockito.Mockito.when;
 public class TrackerEntityManagerTest {
 
     private TrackerEntityManager sut;
-    @Mock private Principal principal;
-    @Mock private EntityManager entityManager;
+    @Mock
+    private Principal principal;
+    @Mock
+    private EntityManager entityManager;
 
     @Before
     public void setUp() throws Exception {
@@ -123,5 +127,22 @@ public class TrackerEntityManagerTest {
         sut.delete(entity);
 
         verify(session).delete(entity);
+    }
+
+    @Test
+    public void testShouldSetCurrentDateForCreatedAndLastChangedAndPersistTheEntity() throws Exception {
+        BaseEntity entity = mock(BaseEntity.class);
+
+        Session session = mock(Session.class);
+        when(entityManager.unwrap(Session.class)).thenReturn(session);
+
+        sut.persist(entity);
+//        Possible random failing test.
+//        Date currentDate = new Date();
+//        verify(entity).setCreatedDate(currentDate);
+//        verify(entity).setLastEditDate(currentDate);
+        verify(entity).setCreatedDate(any(Date.class));
+        verify(entity).setLastEditDate(any(Date.class));
+        verify(session).persist(entity);
     }
 }
