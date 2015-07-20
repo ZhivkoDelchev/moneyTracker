@@ -100,6 +100,16 @@ input.textInput{
     border-radius: 5pt;
 }
 
+select.textInput{
+    width: 97%;
+    padding: 7pt 0pt 7pt 0pt;
+    font-size: 15pt;
+    border: 1pt solid #ccc;
+    margin-bottom: 15pt;
+	-moz-border-radius: 5pt;
+    border-radius: 5pt;
+}
+
 label.inputLabel {
     text-align: left;
 }

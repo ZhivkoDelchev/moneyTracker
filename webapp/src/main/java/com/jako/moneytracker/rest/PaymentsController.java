@@ -31,9 +31,8 @@ public class PaymentsController {
     private UserDao userDao;
 
     @GET
-    public String get() {
-        List<PaymentEntity> userPayments = paymentDao.getUserPayments();
-        return userPayments.toString();
+    public List<PaymentEntity> get() {
+        return paymentDao.getUserPayments();
     }
 
     @GET

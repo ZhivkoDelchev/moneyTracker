@@ -4,7 +4,7 @@ function initializeNavigation() {
         createHomeBody();
     }))
     header.appendChild(createNavigationElement('Transactions', function() {
-		createTransactionsBody()
+		payment.createTransactionsBody()
 	}))
     header.appendChild(createNavigationElement('Categories', function() {
 		category.createCategoryBody()
@@ -23,11 +23,6 @@ function initializeNavigation() {
 		setBodyContent(element)
 	}
 
-	function createTransactionsBody() {
-		var element = createH1TemporarayMessage('Transactions are not yet implemented.')
-		setBodyContent(element)
-	}
-	
 	// TODO: cleanup
 	function createH1TemporarayMessage (message) {
 		var h1 = document.createElement('h1')
