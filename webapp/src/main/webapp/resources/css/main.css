@@ -148,12 +148,33 @@ nav a:hover {
 	cursor: pointer;
 }
 
-.popup{
+.popup {
     position:absolute;
     top: 5%;
     left: 40%;
     width: 20%;
     height: 150pt;
+    font-size: 15pt;
+    padding: 10px;
+	background: #fff;
+	
+    -webkit-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
+	-moz-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
+	box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
+	-moz-border-radius:4pt;
+	
+	-moz-border-radius: 5pt;
+    border-radius: 5pt;
+
+    z-index:20;
+}
+
+.popup-payments {
+    position:absolute;
+    top: 5%;
+    left: 40%;
+    width: 20%;
+    height: 200pt;
     font-size: 15pt;
     padding: 10px;
 	background: #fff;

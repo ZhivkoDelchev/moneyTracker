@@ -15,7 +15,7 @@ payment = new function payment() {
             $("#popup").show()
         } else {
             popup = document.createElement('div')
-            popup.setAttribute('class', 'popup ')
+            popup.setAttribute('class', 'popup-payments')
             popup.setAttribute('id', 'popup')
 
 
@@ -28,7 +28,7 @@ payment = new function payment() {
             type: 'GET',
             url: 'rest/payments/category',
             success: function(data) {
-				
+				$("#popup").empty()
 				$("#popup").append('<label class=\"inputLabel\">Category:</label>')
 				$("#popup").append('<div class=\"cancel\" onclick=\"closePopup();\"></div>')
 				var selection = $("<select class=\"textInput\" ></select>")
