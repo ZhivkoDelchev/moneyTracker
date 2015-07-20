@@ -22,11 +22,11 @@ category = new function category() {
 			var body = document.getElementById('body')
 			body.appendChild(popup)
 		}
-		$("#popup").html('<label class=\"inputLabel\">Name:</label><div class=\"cancel\" onclick=\"closePopup();\"></div><input type=\"text\" id=\"createCategoryName\"  class=\"textInput\"/><input type=\"button\" value=\"Create\" class=\"button\" onClick=\"category.createNewCatetgory()\"/>')
+		$("#popup").html('<label class=\"inputLabel\">Name:</label><div class=\"cancel\" onclick=\"closePopup();\"></div><input type=\"text\" id=\"createCategoryName\"  class=\"textInput\"/><input type=\"button\" value=\"Create\" class=\"button\" onClick=\"category.createNewCategory()\"/>')
 		$("#popup").draggable()
 	}
 	
-	this.createNewCatetgory = function() {
+	this.createNewCategory = function() {
 		var categoryName = $("#createCategoryName").val()
 		if (categoryName == null || categoryName == "" || categoryName == undefined || categoryName.length > 20) {
 			$("#createCategoryName").css({'background-color' : '#FFF2ED'})
