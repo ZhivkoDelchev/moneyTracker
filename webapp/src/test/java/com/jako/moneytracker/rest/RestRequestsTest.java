@@ -32,7 +32,7 @@ public class RestRequestsTest {
             HttpHost httpHost = new HttpHost(host, port, protocol);
             client.getParams().setParameter(ClientPNames.DEFAULT_HOST, httpHost);
 
-            HttpEntityEnclosingRequestBase securedResource = new HttpPost("/tracker/rest/payments/category/firstRestCategory");
+            HttpEntityEnclosingRequestBase securedResource = new HttpPost("/tracker/rest/category/firstRestCategory");
             org.apache.http.HttpResponse httpResponse = client.execute(securedResource);
             HttpEntity responseEntity = httpResponse.getEntity();
             String strResponse = EntityUtils.toString(responseEntity);

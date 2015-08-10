@@ -33,7 +33,7 @@ category = new function category() {
 		} else {
 			$.ajax({
 				type: 'POST',
-				url: 'rest/payments/category/' + categoryName,
+				url: 'rest/category/' + categoryName,
 				success: function(data) {
 					this.createCategoryBody()
 					closePopup()
@@ -56,7 +56,7 @@ category = new function category() {
         $.ajax({
             dataType: 'json',
             type: 'GET',
-            url: 'rest/payments/category',
+            url: 'rest/category',
             success: function(data) {
                 addCategoriesToTable(data, table)
             }.bind(this),
@@ -113,7 +113,7 @@ category = new function category() {
 	this.deleteCategory = function(categoryId) {
 		$.ajax({
 			type: 'DELETE',
-			url: 'rest/payments/category/' + categoryId,
+			url: 'rest/category/' + categoryId,
 			success: function(data) {
 				this.createCategoryBody()
 				closePopup()

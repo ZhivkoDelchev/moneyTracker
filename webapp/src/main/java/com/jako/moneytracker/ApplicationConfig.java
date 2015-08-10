@@ -1,5 +1,6 @@
 package com.jako.moneytracker;
 
+import com.jako.moneytracker.rest.CategoriesController;
 import com.jako.moneytracker.rest.CustomExceptionMapper;
 import com.jako.moneytracker.rest.PaymentsController;
 
@@ -18,6 +19,7 @@ public class ApplicationConfig extends Application {
     public Set<Class<?>> getClasses() {
         HashSet<Class<?>> classes = new HashSet<>();
         classes.add(PaymentsController.class);
+        classes.add(CategoriesController.class);
 
         classes.add(CustomExceptionMapper.class);
         return classes;

@@ -26,7 +26,7 @@ payment = new function payment() {
 		$.ajax({
             dataType: 'json',
             type: 'GET',
-            url: 'rest/payments/category',
+            url: 'rest/category',
             success: function(data) {
 				$("#popup").empty()
 				$("#popup").append('<label class=\"inputLabel\">Category:</label>')
