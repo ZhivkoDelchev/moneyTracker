@@ -27,7 +27,9 @@ public class CategoryDao {
         return trackerEntityManager.getResultsForCurrentUser(PaymentCategoryEntity.class, "category");
     }
 
-    public void createCategory(String name, UserEntity user) {
+    public void createCategory(String name) {
+        UserEntity user = trackerEntityManager.getCurrentUser();
+
         PaymentCategoryEntity category = new PaymentCategoryEntity();
         category.setName(name);
         category.setCreator(user);

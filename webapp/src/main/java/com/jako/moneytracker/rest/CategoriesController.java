@@ -2,9 +2,7 @@ package com.jako.moneytracker.rest;
 
 import com.jako.moneytracker.db.dao.CategoryDao;
 import com.jako.moneytracker.db.dao.PaymentDao;
-import com.jako.moneytracker.db.dao.UserDao;
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
-import com.jako.moneytracker.db.entity.UserEntity;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
@@ -26,9 +24,6 @@ public class CategoriesController {
     private CategoryDao categoryDao;
     @Inject
     private PaymentDao paymentDao;
-    @Inject
-    private UserDao userDao;
-
 
     @GET
     @Produces("application/json")
@@ -39,8 +34,7 @@ public class CategoriesController {
     @POST
     @Path("/{name}")
     public Response createCategory(@PathParam("name") String name) {
-        UserEntity user = userDao.getUser();
-        categoryDao.createCategory(name, user);
+        categoryDao.createCategory(name);
 
         return Response.ok().build();
     }

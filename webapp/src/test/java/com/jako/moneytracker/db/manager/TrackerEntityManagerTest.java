@@ -15,9 +15,7 @@ import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Jako on 23.6.2015 г. ;)
@@ -35,15 +33,6 @@ public class TrackerEntityManagerTest {
         MockitoAnnotations.initMocks(this);
         sut = new TrackerEntityManager(principal);
         sut.setEntityManager(entityManager);
-    }
-
-    @Test
-    public void userEmailShouldBePrincipalName() throws Exception {
-        String name = "name";
-        when(principal.getName()).thenReturn(name);
-
-        assertEquals(name, sut.getUserEmail());
-        verify(principal).getName();
     }
 
     @Test
@@ -159,5 +148,28 @@ public class TrackerEntityManagerTest {
 //        verify(entity).setCreatedDate(new Date());
         verify(entity).setLastEditDate(any(Date.class));
         verify(session).update(entity);
+    }
+
+    @Test
+    public void testReturnCurrentlyLoggedUser() throws Exception {
+        UserEntity expectedUser = mock(UserEntity.class);
+
+        Class<UserEntity> clazz = UserEntity.class;
+
+        Criteria criteria = mock(Criteria.class);
+        when(criteria.uniqueResult()).thenReturn(expectedUser);
+
+        Session session = mock(Session.class);
+        when(session.createCriteria(clazz, "user")).thenReturn(criteria);
+
+        when(entityManager.unwrap(Session.class)).thenReturn(session);
+        when(principal.getName()).thenReturn("mail");
+
+        UserEntity result = sut.getCurrentUser();
+
+        verify(entityManager).unwrap(Session.class);
+        verify(session).createCriteria(clazz, "user");
+        verify(principal).getName();
+        assertEquals(expectedUser, result);
     }
 }

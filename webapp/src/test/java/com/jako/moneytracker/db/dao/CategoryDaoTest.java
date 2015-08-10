@@ -46,8 +46,9 @@ public class CategoryDaoTest {
     @Test
     public void shouldCreateCategory() throws Exception {
         UserEntity user = mock(UserEntity.class);
+        when(trackerEntityManager.getCurrentUser()).thenReturn(user);
 
-        sut.createCategory("name", user);
+        sut.createCategory("name");
 
         // TODO: verify if proper category is persisted.
         verify(trackerEntityManager).persist(any(PaymentCategoryEntity.class));

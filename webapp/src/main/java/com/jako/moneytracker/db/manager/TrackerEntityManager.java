@@ -1,6 +1,7 @@
 package com.jako.moneytracker.db.manager;
 
 import com.jako.moneytracker.db.entity.BaseEntity;
+import com.jako.moneytracker.db.entity.UserEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
@@ -81,6 +82,11 @@ public class TrackerEntityManager {
         return criteria.list();
     }
 
+    public UserEntity getCurrentUser() {
+        String email = getUserEmail();
+        return getUniqueResult(UserEntity.class, "user", Restrictions.eq("user.email", email));
+    }
+
     public void delete(BaseEntity entity) {
         Session session = getSession();
         session.delete(entity);
@@ -102,7 +108,7 @@ public class TrackerEntityManager {
         session.update(entity);
     }
 
-    public String getUserEmail() {
+    private String getUserEmail() {
         return userPrincipal.getName();
     }
 

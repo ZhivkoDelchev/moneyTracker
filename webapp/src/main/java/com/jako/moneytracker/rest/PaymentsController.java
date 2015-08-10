@@ -1,7 +1,6 @@
 package com.jako.moneytracker.rest;
 
 import com.jako.moneytracker.db.dao.PaymentDao;
-import com.jako.moneytracker.db.dao.UserDao;
 import com.jako.moneytracker.db.entity.PaymentEntity;
 
 import javax.ejb.Stateless;
@@ -22,9 +21,6 @@ public class PaymentsController {
 
     @Inject
     private PaymentDao paymentDao;
-
-    @Inject
-    private UserDao userDao;
 
     @GET
     public List<PaymentEntity> get() {
