@@ -29,9 +29,11 @@ public class PaymentDao {
     public void removePaymentsCategory(long categoryId) {
         SimpleExpression categoryIs = Restrictions.eq("payment.category.id", categoryId);
         List<PaymentEntity> payments = trackerEntityManager.getResultsForCurrentUser(PaymentEntity.class, "payment", categoryIs);
-        for (PaymentEntity payment: payments) {
-            payment.setCategory(null);
-            trackerEntityManager.update(payment);
-        }
+        payments.stream().forEach(payment -> removeCategoryFromPayment(payment));
+    }
+
+    private void removeCategoryFromPayment(PaymentEntity payment) {
+        payment.setCategory(null);
+        trackerEntityManager.update(payment);
     }
 }
