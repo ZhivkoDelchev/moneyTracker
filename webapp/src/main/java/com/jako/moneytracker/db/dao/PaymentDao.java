@@ -1,12 +1,15 @@
 package com.jako.moneytracker.db.dao;
 
+import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.PaymentEntity;
+import com.jako.moneytracker.db.entity.PaymentType;
 import com.jako.moneytracker.db.manager.TrackerEntityManager;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -30,6 +33,18 @@ public class PaymentDao {
         SimpleExpression categoryIs = Restrictions.eq("payment.category.id", categoryId);
         List<PaymentEntity> payments = trackerEntityManager.getResultsForCurrentUser(PaymentEntity.class, "payment", categoryIs);
         payments.stream().forEach(payment -> removeCategoryFromPayment(payment));
+    }
+
+    public void createPayment(String note, BigDecimal amount, PaymentCategoryEntity category, PaymentType type) {
+        PaymentEntity payment = new PaymentEntity();
+
+        payment.setCategory(category);
+        payment.setAmount(amount);
+        payment.setPaymentType(type);
+        payment.setNote(note);
+        payment.setCreator(trackerEntityManager.getCurrentUser());
+
+        trackerEntityManager.persist(payment);
     }
 
     private void removeCategoryFromPayment(PaymentEntity payment) {

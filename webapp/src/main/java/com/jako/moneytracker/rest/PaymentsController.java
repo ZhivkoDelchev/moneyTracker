@@ -1,14 +1,21 @@
 package com.jako.moneytracker.rest;
 
+import com.jako.moneytracker.db.dao.CategoryDao;
 import com.jako.moneytracker.db.dao.PaymentDao;
+import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.PaymentEntity;
+import com.jako.moneytracker.db.entity.PaymentType;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -21,9 +28,28 @@ public class PaymentsController {
 
     @Inject
     private PaymentDao paymentDao;
+    @Inject
+    private CategoryDao categoryDao;
 
     @GET
     public List<PaymentEntity> get() {
         return paymentDao.getUserPayments();
+    }
+
+    @POST
+    public Response createPayment(@HeaderParam("category") Long categoryId,
+                                  @HeaderParam("note") String note,
+                                  @HeaderParam("amount") BigDecimal amount,
+                                  @HeaderParam("type") PaymentType type) {
+        validateInput(categoryId, note, amount, type);
+        PaymentCategoryEntity category = categoryDao.findCategoryById(categoryId);
+
+        paymentDao.createPayment(note, amount, category, type);
+
+        return Response.ok().build();
+    }
+
+    private void validateInput(Long categoryId, String note, BigDecimal amount, PaymentType type) {
+        // TODO
     }
 }

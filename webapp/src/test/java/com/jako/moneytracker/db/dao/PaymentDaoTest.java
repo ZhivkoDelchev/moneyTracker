@@ -1,6 +1,8 @@
 package com.jako.moneytracker.db.dao;
 
+import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.PaymentEntity;
+import com.jako.moneytracker.db.entity.PaymentType;
 import com.jako.moneytracker.db.manager.TrackerEntityManager;
 import org.hibernate.criterion.SimpleExpression;
 import org.junit.Before;
@@ -8,6 +10,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -50,5 +53,15 @@ public class PaymentDaoTest {
 
         verify(payment2).setCategory(null);
         verify(trackerEntityManager).update(payment2);
+    }
+
+    @Test
+    public void shouldCreateCategory() throws Exception {
+        PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
+        BigDecimal amount = mock(BigDecimal.class);
+
+        sut.createPayment("note", amount, category, PaymentType.DEPOSIT);
+        // TODO: verify if proper category is persisted.
+        verify(trackerEntityManager).persist(any(PaymentEntity.class));
     }
 }

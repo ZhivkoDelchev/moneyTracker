@@ -49,6 +49,7 @@ CREATE TABLE `payments` (
 	`last_edit_date` date DEFAULT NULL,
 	`amount` DECIMAL(12,2) NULL DEFAULT NULL,
 	`type` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_bin',
+	`note` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_bin',
 	`category_id` BIGINT(20) NULL DEFAULT NULL,
 	`creator` BIGINT(20) NOT NULL,
 	PRIMARY KEY (`id`),

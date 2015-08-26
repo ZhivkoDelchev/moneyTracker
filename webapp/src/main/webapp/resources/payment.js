@@ -27,28 +27,40 @@ payment = new function payment() {
             dataType: 'json',
             type: 'GET',
             url: 'rest/category',
-            success: function(data) {
-				$("#popup").empty()
-				$("#popup").append('<label class=\"inputLabel\">Category:</label>')
-				$("#popup").append('<div class=\"cancel\" onclick=\"closePopup();\"></div>')
-				var selection = $("<select class=\"textInput\" ></select>")
-				selection.append('<option></option>')
-				data.forEach(function(entry) {
-					selection.append('<option id=\""' + entry.id + '\">' + entry.name + '</option>')
+            success: function(categories) {
+                var popup = $("#popup");
+				popup.empty()
+				popup.append('<div class=\"cancel\" onclick=\"closePopup();\"></div>')
+
+				popup.append('<label class=\"inputLabel\">Amount:</label>')
+                popup.append('<input type=\"text\" id=\"paymentAmount\"  class=\"textInput\"/>')
+
+                popup.append('<label class=\"inputLabel\">Category:</label>')
+				var categorySelection = $('<select id=\"paymentCategory\" class=\"textInput\" ></select>')
+				categorySelection.append('<option></option>')
+				categories.forEach(function(entry) {
+					categorySelection.append('<option id=\"' + entry.id + '\">' + entry.name + '</option>')
 				})
-				$("#popup").append(selection)
-				$("#popup").append('<label class=\"inputLabel\">Amount:</label>')
-				$("#popup").append('<input type=\"text\" id=\"transactionAmount\"  class=\"textInput\"/>')
-				$("#popup").append('<input type=\"button\" value=\"Create\" class=\"button\" onClick=\"payment.createNewTransaction()\"/>')
+				popup.append(categorySelection)
+
+                popup.append('<label class=\"inputLabel\">Type:</label>')
+				var typeSelection = $('<select id=\"paymentType\" class=\"textInput\" ></select>')
+				typeSelection.append('<option></option>')
+				typeSelection.append('<option>Income</option>')
+				typeSelection.append('<option>Expense</option>')
+				popup.append(typeSelection)
+
+				popup.append('<label class=\"inputLabel\">Note:</label>')
+                popup.append('<input type=\"text\" id=\"paymentNote\"  class=\"textInput\"/>')
+
+				popup.append('<input type=\"button\" value=\"Create\" class=\"button\" onClick=\"payment.createNewTransaction()\"/>')
                 
-        $("#popup").draggable()
+                popup.draggable()
             }.bind(this),
             error: function() {
                 console.log('Error getting categories!')
             }
         })
-		
-        
     }
 
 	function createTransactionsTable() {
@@ -94,6 +106,32 @@ payment = new function payment() {
     }
 	
 	this.createNewTransaction = function() {
-		
+	    var categorySelection = document.getElementById("paymentCategory")
+	    var categoryId = categorySelection.options[categorySelection.selectedIndex].id
+
+	    var amount = document.getElementById("paymentAmount").value
+	    var note = document.getElementById("paymentNote").value
+
+	    var typeSelection = document.getElementById("paymentType")
+        var type = typeSelection.options[typeSelection.selectedIndex].value.toUpperCase()
+
+		$.ajax({
+            type: 'POST',
+            url: 'rest/payments/',
+            headers: {
+              'amount': amount,
+              'type': type,
+              'note': note,
+              'category': categoryId
+            },
+            success: function() {
+                this.createTransactionsBody()
+                closePopup()
+            }.bind(this),
+            error: function(data) {
+                closePopup()
+                console.log('Error creating payment')
+            }
+        })
 	}
 }

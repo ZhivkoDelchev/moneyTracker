@@ -20,6 +20,8 @@ public class PaymentEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "creator")
     private UserEntity creator;
+    @Column(name = "note")
+    private String note;
 
     public BigDecimal getAmount() {
         return amount;
@@ -43,6 +45,14 @@ public class PaymentEntity extends BaseEntity {
 
     public void setPaymentType(PaymentType paymentType) {
         this.paymentType = paymentType;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getNote() {
+        return note;
     }
 
     public UserEntity getCreator() {

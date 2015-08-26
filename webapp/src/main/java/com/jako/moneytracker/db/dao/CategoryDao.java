@@ -45,4 +45,8 @@ public class CategoryDao {
             trackerEntityManager.delete(category);
         }
     }
+
+    public PaymentCategoryEntity findCategoryById(Long categoryId) {
+        return trackerEntityManager.getUniqueResultForCurrentUser(PaymentCategoryEntity.class, "category", Restrictions.eq("id", categoryId));
+    }
 }
