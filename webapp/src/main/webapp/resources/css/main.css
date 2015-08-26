@@ -174,7 +174,7 @@ nav a:hover {
     top: 5%;
     left: 40%;
     width: 20%;
-    height: 200pt;
+    height: 350pt;
     font-size: 15pt;
     padding: 10px;
 	background: #fff;
@@ -196,7 +196,7 @@ nav a:hover {
     position:absolute;
     display:relative;
     cursor:pointer;
-	top: 5%;
+	top: 1%;
 	left: 92%;
 }
 
