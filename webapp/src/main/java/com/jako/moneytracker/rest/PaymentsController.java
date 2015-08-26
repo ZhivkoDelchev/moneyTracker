@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Created by Jako on 21.2.2015 г..
+ * Created by Jako on 21.2.2015 .
  */
 @Stateless
 @Path("/payments")

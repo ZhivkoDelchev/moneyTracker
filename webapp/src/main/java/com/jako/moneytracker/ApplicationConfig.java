@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Jako on 14.1.2015 г..
+ * Created by Jako on 14.1.2015.
  */
 @ApplicationPath("/rest/")
 public class ApplicationConfig extends Application {

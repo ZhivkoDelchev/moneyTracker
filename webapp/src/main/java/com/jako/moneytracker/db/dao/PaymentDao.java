@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Created by Jako on 16.2.2015 г..
+ * Created by Jako on 16.2.2015.
  */
 @Dependent
 public class PaymentDao {

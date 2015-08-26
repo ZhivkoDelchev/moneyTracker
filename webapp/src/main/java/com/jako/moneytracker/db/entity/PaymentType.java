@@ -1,7 +1,7 @@
 package com.jako.moneytracker.db.entity;
 
 /**
- * Created by Jako on 15.2.2015 г..
+ * Created by Jako on 15.2.2015.
  */
 public enum PaymentType {
 

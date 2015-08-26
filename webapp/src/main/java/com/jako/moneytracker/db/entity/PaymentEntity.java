@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
- * Created by Jako on 15.2.2015 г..
+ * Created by Jako on 15.2.2015.
  */
 @Entity(name = "payments")
 public class PaymentEntity extends BaseEntity {

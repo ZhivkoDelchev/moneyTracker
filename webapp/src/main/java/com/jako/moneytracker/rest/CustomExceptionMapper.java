@@ -8,7 +8,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 /**
- * Created by Jako on 7.4.2015 ã..
+ * Created by Jako on 7.4.2015.
  */
 @Provider
 @Dependent

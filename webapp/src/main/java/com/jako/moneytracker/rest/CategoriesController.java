@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
- * Created by Jako on 10.8.2015 ã. ;)
+ * Created by Jako on 10.8.2015 ;)
  */
 @Stateless
 @Path("/category")

@@ -18,7 +18,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by Jako on 23.6.2015 г. ;)
+ * Created by Jako on 23.6.2015 ;)
  */
 public class TrackerEntityManagerTest {
 

@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * Created by Jako on 17.1.2015 г..
+ * Created by Jako on 17.1.2015.
  */
 @Entity
 @Table(name = "principles")

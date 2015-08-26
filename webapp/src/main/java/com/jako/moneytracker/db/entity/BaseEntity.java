@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by Jako on 15.2.2015 г..
+ * Created by Jako on 15.2.2015.
  */
 @MappedSuperclass
 public class BaseEntity {
