@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 /**
- * Created by Jako on 5.4.2015 �..
+ * Created by Jako on 5.4.2015.
  */
 @Dependent
 public class CategoryDao {
