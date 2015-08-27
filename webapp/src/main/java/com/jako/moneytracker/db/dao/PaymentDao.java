@@ -36,7 +36,7 @@ public class PaymentDao {
         payments.stream().forEach(payment -> removeCategoryFromPayment(payment));
     }
 
-    public void createPayment(String note, BigDecimal amount, PaymentCategoryEntity category, PaymentType type) {
+    public void createPayment(BigDecimal amount, PaymentType type, PaymentCategoryEntity category, String note) {
         PaymentEntity payment = new PaymentEntity();
 
         payment.setCategory(category);

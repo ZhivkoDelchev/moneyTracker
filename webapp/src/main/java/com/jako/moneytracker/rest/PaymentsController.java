@@ -32,19 +32,21 @@ public class PaymentsController {
     private CategoryDao categoryDao;
 
     @GET
-    public List<PaymentEntity> get() {
+    public List<PaymentEntity> getPayments() {
         return paymentDao.getUserPayments();
     }
 
     @POST
-    public Response createPayment(@HeaderParam("category") Long categoryId,
-                                  @HeaderParam("note") String note,
+    public Response createPayment(
                                   @HeaderParam("amount") BigDecimal amount,
-                                  @HeaderParam("type") PaymentType type) {
+                                  @HeaderParam("type") PaymentType type,
+                                  @HeaderParam("category") Long categoryId,
+                                  @HeaderParam("note") String note
+                                ) {
         validateInput(categoryId, note, amount, type);
         PaymentCategoryEntity category = categoryDao.findCategoryById(categoryId);
 
-        paymentDao.createPayment(note, amount, category, type);
+        paymentDao.createPayment(amount, type, category, note);
 
         return Response.ok().build();
     }

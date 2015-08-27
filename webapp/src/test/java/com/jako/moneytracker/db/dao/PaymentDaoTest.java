@@ -66,7 +66,7 @@ public class PaymentDaoTest {
         PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
         BigDecimal amount = mock(BigDecimal.class);
 
-        sut.createPayment("note", amount, category, PaymentType.DEPOSIT);
+        sut.createPayment(amount, PaymentType.DEPOSIT, category, "note");
         // TODO: verify if proper category is persisted.
         verify(trackerEntityManager).persist(any(PaymentEntity.class));
     }
