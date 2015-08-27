@@ -3,7 +3,6 @@ package com.jako.moneytracker.db.dao;
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.UserEntity;
 import com.jako.moneytracker.db.manager.TrackerEntityManager;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 
 import javax.enterprise.context.Dependent;
@@ -17,10 +16,12 @@ import java.util.List;
 public class CategoryDao {
 
     private final TrackerEntityManager trackerEntityManager;
+    private final CriteriaBuilder criteriaBuilder;
 
     @Inject
-    public CategoryDao(TrackerEntityManager trackerEntityManager) {
+    public CategoryDao(TrackerEntityManager trackerEntityManager, CriteriaBuilder criteriaBuilder) {
         this.trackerEntityManager = trackerEntityManager;
+        this.criteriaBuilder = criteriaBuilder;
     }
 
     public List<PaymentCategoryEntity> getCategories() {
@@ -38,7 +39,7 @@ public class CategoryDao {
     }
 
     public void deleteCategory(long id) {
-        SimpleExpression categoryIdRestriction = Restrictions.eq("id", id);
+        SimpleExpression categoryIdRestriction = criteriaBuilder.buildEqualsCriteria("id", id);
         PaymentCategoryEntity category = trackerEntityManager.getUniqueResultForCurrentUser(PaymentCategoryEntity.class, "category", categoryIdRestriction);
 
         if (category != null) {
@@ -47,6 +48,7 @@ public class CategoryDao {
     }
 
     public PaymentCategoryEntity findCategoryById(Long categoryId) {
-        return trackerEntityManager.getUniqueResultForCurrentUser(PaymentCategoryEntity.class, "category", Restrictions.eq("id", categoryId));
+        SimpleExpression equalsCriteria = criteriaBuilder.buildEqualsCriteria("id", categoryId);
+        return trackerEntityManager.getUniqueResultForCurrentUser(PaymentCategoryEntity.class, "category", equalsCriteria);
     }
 }

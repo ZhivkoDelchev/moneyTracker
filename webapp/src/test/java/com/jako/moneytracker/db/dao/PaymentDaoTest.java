@@ -21,11 +21,12 @@ public class PaymentDaoTest {
 
     private PaymentDao sut;
     @Mock private TrackerEntityManager trackerEntityManager;
+    @Mock private CriteriaBuilder criteriaBuilder;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        sut = new PaymentDao(trackerEntityManager);
+        sut = new PaymentDao(trackerEntityManager, criteriaBuilder);
     }
 
     @Test
@@ -41,12 +42,17 @@ public class PaymentDaoTest {
 
     @Test
     public void shouldRemoveCategoriesFromAllPaymentsAssociatedToGivenCategory() throws Exception {
+        long id = 1;
+
         PaymentEntity payment1 = mock(PaymentEntity.class);
         PaymentEntity payment2 = mock(PaymentEntity.class);
 
-        when(trackerEntityManager.getResultsForCurrentUser(eq(PaymentEntity.class), eq("payment"), any(SimpleExpression.class))).thenReturn(Arrays.asList(payment1, payment2));
+        SimpleExpression equalsCriteria = mock(SimpleExpression.class);
+        when(criteriaBuilder.buildEqualsCriteria("payment.category.id", id)).thenReturn(equalsCriteria);
 
-        sut.removePaymentsCategory(1);
+        when(trackerEntityManager.getResultsForCurrentUser(PaymentEntity.class, "payment", equalsCriteria)).thenReturn(Arrays.asList(payment1, payment2));
+
+        sut.removePaymentsCategory(id);
 
         verify(payment1).setCategory(null);
         verify(trackerEntityManager).update(payment1);

@@ -4,7 +4,6 @@ import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.PaymentEntity;
 import com.jako.moneytracker.db.entity.PaymentType;
 import com.jako.moneytracker.db.manager.TrackerEntityManager;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 
 import javax.enterprise.context.Dependent;
@@ -19,10 +18,12 @@ import java.util.List;
 public class PaymentDao {
 
     private final TrackerEntityManager trackerEntityManager;
+    private final CriteriaBuilder criteriaBuilder;
 
     @Inject
-    public PaymentDao(TrackerEntityManager trackerEntityManager) {
+    public PaymentDao(TrackerEntityManager trackerEntityManager, CriteriaBuilder criteriaBuilder) {
         this.trackerEntityManager = trackerEntityManager;
+        this.criteriaBuilder = criteriaBuilder;
     }
 
     public List<PaymentEntity> getUserPayments() {
@@ -30,8 +31,8 @@ public class PaymentDao {
     }
 
     public void removePaymentsCategory(long categoryId) {
-        SimpleExpression categoryIs = Restrictions.eq("payment.category.id", categoryId);
-        List<PaymentEntity> payments = trackerEntityManager.getResultsForCurrentUser(PaymentEntity.class, "payment", categoryIs);
+        SimpleExpression equalsCriteria = criteriaBuilder.buildEqualsCriteria("payment.category.id", categoryId);
+        List<PaymentEntity> payments = trackerEntityManager.getResultsForCurrentUser(PaymentEntity.class, "payment", equalsCriteria);
         payments.stream().forEach(payment -> removeCategoryFromPayment(payment));
     }
 

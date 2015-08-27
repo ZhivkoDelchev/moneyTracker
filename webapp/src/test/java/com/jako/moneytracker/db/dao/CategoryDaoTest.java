@@ -13,7 +13,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
 /**
@@ -24,11 +23,12 @@ public class CategoryDaoTest {
     private CategoryDao sut;
 
     @Mock private TrackerEntityManager trackerEntityManager;
+    @Mock private CriteriaBuilder criteriaBuilder;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        sut = new CategoryDao(trackerEntityManager);
+        sut = new CategoryDao(trackerEntityManager, criteriaBuilder);
     }
 
     @Test
@@ -46,6 +46,7 @@ public class CategoryDaoTest {
     @Test
     public void shouldCreateCategory() throws Exception {
         UserEntity user = mock(UserEntity.class);
+
         when(trackerEntityManager.getCurrentUser()).thenReturn(user);
 
         sut.createCategory("name");
@@ -56,13 +57,33 @@ public class CategoryDaoTest {
 
     @Test
     public void testDeleteCategory() throws Exception {
+        long id = 1;
         PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
 
-        when(trackerEntityManager.getUniqueResultForCurrentUser(eq(PaymentCategoryEntity.class), eq("category"), any(SimpleExpression.class))).thenReturn(category);
+        SimpleExpression equalsCriteria = mock(SimpleExpression.class);
+        when(criteriaBuilder.buildEqualsCriteria("id", id)).thenReturn(equalsCriteria);
 
-        sut.deleteCategory(1);
+        when(trackerEntityManager.getUniqueResultForCurrentUser(PaymentCategoryEntity.class, "category", equalsCriteria)).thenReturn(category);
 
-        verify(trackerEntityManager).getUniqueResultForCurrentUser(eq(PaymentCategoryEntity.class), eq("category"), any(SimpleExpression.class));
+        sut.deleteCategory(id);
+
+        verify(trackerEntityManager).getUniqueResultForCurrentUser(PaymentCategoryEntity.class, "category", equalsCriteria);
         verify(trackerEntityManager).delete(category);
+    }
+
+    @Test
+    public void testFindCategoryById() throws Exception {
+        long id = 1;
+
+        SimpleExpression equalsCriteria = mock(SimpleExpression.class);
+        when(criteriaBuilder.buildEqualsCriteria("id", id)).thenReturn(equalsCriteria);
+
+        PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
+        when(trackerEntityManager.getUniqueResultForCurrentUser(PaymentCategoryEntity.class, "category", equalsCriteria)).thenReturn(category);
+
+        PaymentCategoryEntity result = sut.findCategoryById(id);
+
+        verify(trackerEntityManager).getUniqueResultForCurrentUser(PaymentCategoryEntity.class, "category", equalsCriteria);
+        assertEquals(category, result);
     }
 }
