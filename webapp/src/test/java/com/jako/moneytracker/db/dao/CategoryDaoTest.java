@@ -12,11 +12,10 @@ import org.mockito.MockitoAnnotations;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by Jako on 5.4.2015 �..
+ * Created by Jako on 5.4.2015.
  */
 public class CategoryDaoTest {
 
@@ -33,7 +32,7 @@ public class CategoryDaoTest {
 
     @Test
     public void testCreateCriteriaForListingAllPaymentsForAGivenUser() throws Exception {
-        List payments = mock(List.class);
+        List<PaymentCategoryEntity> payments = mock(List.class);
 
         when(trackerEntityManager.getResultsForCurrentUser(PaymentCategoryEntity.class, "category")).thenReturn(payments);
 
