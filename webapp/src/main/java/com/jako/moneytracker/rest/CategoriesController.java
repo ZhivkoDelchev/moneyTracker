@@ -27,7 +27,7 @@ public class CategoriesController {
 
     @GET
     @Produces("application/json")
-    public List<PaymentCategoryEntity> getCategory() {
+    public List<PaymentCategoryEntity> getCategories() {
         return categoryDao.getCategories();
     }
 
