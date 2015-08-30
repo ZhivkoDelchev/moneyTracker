@@ -53,6 +53,10 @@ payment = new function payment() {
 				popup.append('<label class=\"inputLabel\">Note:</label>')
                 popup.append('<input type=\"text\" id=\"paymentNote\"  class=\"textInput\"/>')
 
+                popup.append('<label class=\"inputLabel\">Date:</label>')
+                popup.append('<input type="date" id="paymentDate" class="dateInput" />')
+                $("#paymentDate").datepicker()
+
 				popup.append('<input type=\"button\" value=\"Create\" class=\"button\" onClick=\"payment.createNewTransaction()\"/>')
                 
                 popup.draggable()
@@ -115,6 +119,8 @@ payment = new function payment() {
 	    var typeSelection = document.getElementById("paymentType")
         var type = typeSelection.options[typeSelection.selectedIndex].value.toUpperCase()
 
+        var date = document.getElementById("paymentDate").value
+
 		$.ajax({
             type: 'POST',
             url: 'rest/payments/',
@@ -122,7 +128,8 @@ payment = new function payment() {
               'amount': amount,
               'type': type,
               'note': note,
-              'category': categoryId
+              'category': categoryId,
+              'date': date
             },
             success: function() {
                 this.createTransactionsBody()

@@ -90,7 +90,7 @@ input.button:hover{
     background: #199;
 }
 
-input.textInput{
+input.textInput {
     width: 97%;
     padding: 7pt 0pt 7pt 0pt;
     font-size: 15pt;
@@ -101,6 +101,16 @@ input.textInput{
 }
 
 select.textInput{
+    width: 97%;
+    padding: 7pt 0pt 7pt 0pt;
+    font-size: 15pt;
+    border: 1pt solid #ccc;
+    margin-bottom: 15pt;
+	-moz-border-radius: 5pt;
+    border-radius: 5pt;
+}
+
+input.dateInput{
     width: 97%;
     padding: 7pt 0pt 7pt 0pt;
     font-size: 15pt;
@@ -174,7 +184,7 @@ nav a:hover {
     top: 5%;
     left: 40%;
     width: 20%;
-    height: 350pt;
+    height: 440pt;
     font-size: 15pt;
     padding: 10px;
 	background: #fff;
