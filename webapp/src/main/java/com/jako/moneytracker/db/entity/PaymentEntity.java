@@ -55,10 +55,6 @@ public class PaymentEntity extends BaseEntity {
         return note;
     }
 
-    public UserEntity getCreator() {
-        return creator;
-    }
-
     public void setCreator(UserEntity creator) {
         this.creator = creator;
     }
