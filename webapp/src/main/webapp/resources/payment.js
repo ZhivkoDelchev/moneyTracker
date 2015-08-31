@@ -129,7 +129,7 @@ payment = new function payment() {
               'type': type,
               'note': note,
               'category': categoryId,
-              'date': date
+              'paymentDate': date
             },
             success: function() {
                 this.createTransactionsBody()
