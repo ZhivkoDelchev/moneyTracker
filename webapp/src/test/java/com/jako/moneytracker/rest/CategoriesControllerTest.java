@@ -5,7 +5,7 @@ import com.jako.moneytracker.db.dao.PaymentDao;
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.exception.MoneyTrackerException;
 import com.jako.moneytracker.test.utils.DependencyResolver;
-import com.jako.moneytracker.test.utils.TestOn;
+import com.jako.moneytracker.test.utils.TestOnStrings;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.experimental.theories.Theories;
@@ -109,7 +109,7 @@ public class CategoriesControllerTest {
     }
 
     @Theory
-    public void shouldThrowExceptionIfNameContainsNonEnglishCharacters(@TestOn(strings={"", " ", " a", "a1", "фa"}) String name) throws Exception {
+    public void shouldThrowExceptionIfNameContainsNonEnglishCharacters(@TestOnStrings(strings={TestOnStrings.NULL, "", " ", " a", "a1", "фa"}) String name) throws Exception {
         expected.expect(MoneyTrackerException.class);
         expected.expectMessage("Invalid category name. Up to 255 characters from A to Z upper and lower case allowed.");
         sut.createCategory(name);

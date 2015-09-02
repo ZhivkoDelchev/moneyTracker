@@ -15,11 +15,11 @@ import java.util.List;
 /**
  * Created by Jako on 28.8.2015 ;)
  */
-@ParametersSuppliedBy(TestOn.TestOnSupplier.class)
+@ParametersSuppliedBy(TestOnStrings.TestOnSupplier.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.PARAMETER})
-public @interface TestOn {
-    String NULL = null;
+public @interface TestOnStrings {
+    public static final String NULL = "\u0000";
 
     String[] strings();
 
@@ -29,9 +29,9 @@ public @interface TestOn {
 
             List<PotentialAssignment> result = new ArrayList<>();
 
-            TestOn testOn = sig.getAnnotation(TestOn.class);
-            if (testOn != null) {
-                for (String param : testOn.strings()) {
+            TestOnStrings testOnStrings = sig.getAnnotation(TestOnStrings.class);
+            if (testOnStrings != null) {
+                for (String param : testOnStrings.strings()) {
                     result.add(PotentialAssignment.forValue(param, param));
                 }
             }
