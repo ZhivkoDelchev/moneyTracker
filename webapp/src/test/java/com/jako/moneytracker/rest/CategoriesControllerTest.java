@@ -8,6 +8,7 @@ import com.jako.moneytracker.test.utils.DependencyResolver;
 import com.jako.moneytracker.test.utils.TestOnStrings;
 import org.junit.Before;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.rules.ExpectedException;
@@ -44,7 +45,7 @@ public class CategoriesControllerTest {
         sut = new DependencyResolver().resolveDependencies(new CategoriesController(), this);
     }
 
-    @Theory
+    @Test
     public void shouldListAllCategories() throws Exception {
         @SuppressWarnings("unchecked")
         List<PaymentCategoryEntity> categories = mock(List.class);
@@ -54,14 +55,14 @@ public class CategoriesControllerTest {
         assertSame(categories, result);
     }
 
-    @Theory
+    @Test
     public void shouldListCategoriesWithHttpGetMethod() throws Exception {
         Method getCategories = CategoriesController.class.getMethod("getCategories");
 
         assertTrue(getCategories.isAnnotationPresent(GET.class));
     }
 
-    @Theory
+    @Test
     public void shouldProduceJsonWhenAskedForAllCategories() throws Exception {
         Method getCategories = CategoriesController.class.getMethod("getCategories");
 
@@ -73,7 +74,7 @@ public class CategoriesControllerTest {
         assertEquals("application/json", values[0]);
     }
 
-    @Theory
+    @Test
     public void shouldCreateCategory() throws Exception {
         String categoryName = "category";
 
@@ -82,7 +83,7 @@ public class CategoriesControllerTest {
         verify(categoryDao).createCategory(categoryName);
     }
 
-    @Theory
+    @Test
     public void shouldReturnHttpResponseCode200WhenCreatingCategory() throws Exception {
         String categoryName = "category";
 
@@ -91,14 +92,14 @@ public class CategoriesControllerTest {
         assertEquals(200, result.getStatus());
     }
 
-    @Theory
+    @Test
     public void shouldCreateCategoriesWithHttpPostMethod() throws Exception {
         Method getCategories = CategoriesController.class.getMethod("createCategory", String.class);
 
         assertTrue(getCategories.isAnnotationPresent(POST.class));
     }
 
-    @Theory
+    @Test
     public void shouldCreateCategoryWithPathParameterName() throws Exception {
         Method getCategories = CategoriesController.class.getMethod("createCategory", String.class);
 
