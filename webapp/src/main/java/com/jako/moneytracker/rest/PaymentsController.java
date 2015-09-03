@@ -5,17 +5,19 @@ import com.jako.moneytracker.db.dao.PaymentDao;
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.PaymentEntity;
 import com.jako.moneytracker.db.entity.PaymentType;
+import com.jako.moneytracker.exception.MoneyTrackerException;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,6 +34,7 @@ public class PaymentsController {
     private CategoryDao categoryDao;
 
     @GET
+    @Produces("application/json")
     public List<PaymentEntity> getPayments() {
         return paymentDao.getUserPayments();
     }
@@ -41,17 +44,28 @@ public class PaymentsController {
                                   @HeaderParam("amount") BigDecimal amount,
                                   @HeaderParam("type") PaymentType type,
                                   @HeaderParam("category") Long categoryId,
-                                  @HeaderParam("note") String note
+                                  @HeaderParam("note") String note,
+                                  @HeaderParam("paymentDate") String paymentDate
                                 ) {
-        validateInput(categoryId, note, amount, type);
+        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        Date date = formatDate(paymentDate, formatter);
+        validateInput(categoryId, note, amount, type, date);
         PaymentCategoryEntity category = categoryDao.findCategoryById(categoryId);
 
-        paymentDao.createPayment(amount, type, category, note);
+        paymentDao.createPayment(amount, type, category, note, date);
 
         return Response.ok().build();
     }
 
-    private void validateInput(Long categoryId, String note, BigDecimal amount, PaymentType type) {
+    private Date formatDate(@HeaderParam("paymentDate") String paymentDate, DateFormat formatter) {
+        try {
+            return formatter.parse(paymentDate);
+        } catch (ParseException e) {
+            throw new MoneyTrackerException("Invalid date!");
+        }
+    }
+
+    private void validateInput(Long categoryId, String note, BigDecimal amount, PaymentType type, Date date) {
         // TODO
     }
 }

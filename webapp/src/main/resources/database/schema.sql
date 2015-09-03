@@ -50,6 +50,7 @@ CREATE TABLE `payments` (
 	`amount` DECIMAL(12,2) NULL DEFAULT NULL,
 	`type` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_bin',
 	`note` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_bin',
+	`payment_date` DATE NULL DEFAULT NULL,
 	`category_id` BIGINT(20) NULL DEFAULT NULL,
 	`creator` BIGINT(20) NOT NULL,
 	PRIMARY KEY (`id`),

@@ -2,6 +2,7 @@ package com.jako.moneytracker.db.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Created by Jako on 15.2.2015.
@@ -22,6 +23,9 @@ public class PaymentEntity extends BaseEntity {
     private UserEntity creator;
     @Column(name = "note")
     private String note;
+    @Column(name = "payment_date")
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
     public BigDecimal getAmount() {
         return amount;
@@ -59,12 +63,11 @@ public class PaymentEntity extends BaseEntity {
         this.creator = creator;
     }
 
-    @Override
-    public String toString() {
-        return "Payment{" +
-                "paymentType=" + paymentType +
-                ", category=" + category +
-                ", amount=" + amount +
-                '}';
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Date getDate() {
+        return date;
     }
 }

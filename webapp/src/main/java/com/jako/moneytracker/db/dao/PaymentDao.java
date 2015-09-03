@@ -9,6 +9,7 @@ import org.hibernate.criterion.SimpleExpression;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,13 +37,14 @@ public class PaymentDao {
         payments.stream().forEach(payment -> removeCategoryFromPayment(payment));
     }
 
-    public void createPayment(BigDecimal amount, PaymentType type, PaymentCategoryEntity category, String note) {
+    public void createPayment(BigDecimal amount, PaymentType type, PaymentCategoryEntity category, String note, Date date) {
         PaymentEntity payment = new PaymentEntity();
 
         payment.setCategory(category);
         payment.setAmount(amount);
         payment.setPaymentType(type);
         payment.setNote(note);
+        payment.setDate(date);
         payment.setCreator(trackerEntityManager.getCurrentUser());
 
         trackerEntityManager.persist(payment);

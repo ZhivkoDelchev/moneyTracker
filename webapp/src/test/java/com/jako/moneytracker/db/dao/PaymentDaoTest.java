@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -62,11 +63,12 @@ public class PaymentDaoTest {
     }
 
     @Test
-    public void shouldCreateCategory() throws Exception {
+    public void shouldCreatePayment() throws Exception {
         PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
         BigDecimal amount = mock(BigDecimal.class);
+        Date date = new Date();
 
-        sut.createPayment(amount, PaymentType.DEPOSIT, category, "note");
+        sut.createPayment(amount, PaymentType.DEPOSIT, category, "note", date);
         // TODO: verify if proper category is persisted.
         verify(trackerEntityManager).persist(any(PaymentEntity.class));
     }

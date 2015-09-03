@@ -12,12 +12,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Jako on 27.8.2015 ;)
@@ -51,12 +52,16 @@ public class PaymentsControllerTest {
         long categoryId = 1;
         BigDecimal amount = mock(BigDecimal.class);
         PaymentType paymentType = PaymentType.DEPOSIT;
+        String paymentDateString = "08/19/2015";
+
+        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        Date paymentDate = formatter.parse(paymentDateString);
 
         PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
         when(categoryDao.findCategoryById(categoryId)).thenReturn(category);
 
-        sut.createPayment(amount, paymentType, categoryId, note);
+        sut.createPayment(amount, paymentType, categoryId, note, paymentDateString);
 
-        verify(paymentDao).createPayment(amount, paymentType, category, note);
+        verify(paymentDao).createPayment(amount, paymentType, category, note, paymentDate);
     }
 }
