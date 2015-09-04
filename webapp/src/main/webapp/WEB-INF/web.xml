@@ -13,8 +13,8 @@
         <auth-method>FORM</auth-method>
         <realm-name>tracker</realm-name>
         <form-login-config>
-            <form-login-page>/auth/login.jsp</form-login-page>
-            <form-error-page>/auth/error.jsp</form-error-page>
+            <form-login-page>/auth/login.html</form-login-page>
+            <form-error-page>/auth/error.html</form-error-page>
         </form-login-config>
     </login-config>
     <error-page>
