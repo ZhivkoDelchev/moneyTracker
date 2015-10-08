@@ -12,8 +12,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -52,16 +50,13 @@ public class PaymentsControllerTest {
         long categoryId = 1;
         BigDecimal amount = mock(BigDecimal.class);
         PaymentType paymentType = PaymentType.DEPOSIT;
-        String paymentDateString = "08/19/2015";
-
-        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        Date paymentDate = formatter.parse(paymentDateString);
+        long timestamp = System.currentTimeMillis();
 
         PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
         when(categoryDao.findCategoryById(categoryId)).thenReturn(category);
 
-        sut.createPayment(amount, paymentType, categoryId, note, paymentDateString);
+        sut.createPayment(amount, paymentType, categoryId, note, timestamp);
 
-        verify(paymentDao).createPayment(amount, paymentType, category, note, paymentDate);
+        verify(paymentDao).createPayment(amount, paymentType, category, note, new Date(timestamp));
     }
 }

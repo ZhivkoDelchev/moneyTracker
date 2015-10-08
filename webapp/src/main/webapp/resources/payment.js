@@ -119,7 +119,7 @@ payment = new function payment() {
 	    var typeSelection = document.getElementById("paymentType")
         var type = typeSelection.options[typeSelection.selectedIndex].value.toUpperCase()
 
-        var date = document.getElementById("paymentDate").value
+        var paymentTimestamp = Date.parse(document.getElementById("paymentDate").value)
 
 		$.ajax({
             type: 'POST',
@@ -129,7 +129,7 @@ payment = new function payment() {
               'type': type,
               'note': note,
               'category': categoryId,
-              'paymentDate': date
+              'paymentTimestamp': paymentTimestamp
             },
             success: function() {
                 this.createTransactionsBody()
