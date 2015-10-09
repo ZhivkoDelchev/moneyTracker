@@ -5,6 +5,7 @@ import com.jako.moneytracker.db.dao.PaymentDao;
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.PaymentEntity;
 import com.jako.moneytracker.db.entity.PaymentType;
+import com.jako.moneytracker.rest.validator.PaymentValidator;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
@@ -28,6 +29,8 @@ public class PaymentsController {
     private PaymentDao paymentDao;
     @Inject
     private CategoryDao categoryDao;
+    @Inject
+    private PaymentValidator paymentValidator;
 
     @GET
     @Produces("application/json")
@@ -43,16 +46,12 @@ public class PaymentsController {
                                   @HeaderParam("note") String note,
                                   @HeaderParam("paymentTimestamp") Long paymentTimestamp
                                 ) {
-        validateInput(categoryId, note, amount, type, paymentTimestamp);
+        paymentValidator.validate(categoryId, note, amount, type, paymentTimestamp);
         Date date = new Date(paymentTimestamp);
         PaymentCategoryEntity category = categoryDao.findCategoryById(categoryId);
 
         paymentDao.createPayment(amount, type, category, note, date);
 
         return Response.ok().build();
-    }
-
-    private void validateInput(Long categoryId, String note, BigDecimal amount, PaymentType type, Long paymentTimestamp) {
-        // TODO
     }
 }

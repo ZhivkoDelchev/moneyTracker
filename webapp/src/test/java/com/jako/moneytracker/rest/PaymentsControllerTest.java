@@ -5,6 +5,7 @@ import com.jako.moneytracker.db.dao.PaymentDao;
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.PaymentEntity;
 import com.jako.moneytracker.db.entity.PaymentType;
+import com.jako.moneytracker.rest.validator.PaymentValidator;
 import com.jako.moneytracker.test.utils.DependencyResolver;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +27,7 @@ public class PaymentsControllerTest {
     private PaymentsController sut;
     @Mock private PaymentDao paymentDao;
     @Mock private CategoryDao categoryDao;
+    @Mock private PaymentValidator paymentValidator;
 
     @Before
     public void setUp() throws Exception {
@@ -58,5 +60,21 @@ public class PaymentsControllerTest {
         sut.createPayment(amount, paymentType, categoryId, note, timestamp);
 
         verify(paymentDao).createPayment(amount, paymentType, category, note, new Date(timestamp));
+    }
+
+    @Test
+    public void shouldValidateInputForCreatingPayment() throws Exception {
+        String note = "note";
+        long categoryId = 1;
+        BigDecimal amount = mock(BigDecimal.class);
+        PaymentType paymentType = PaymentType.DEPOSIT;
+        long timestamp = System.currentTimeMillis();
+
+        PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
+        when(categoryDao.findCategoryById(categoryId)).thenReturn(category);
+
+        sut.createPayment(amount, paymentType, categoryId, note, timestamp);
+
+        verify(paymentValidator).validate(categoryId, note, amount, paymentType, timestamp);
     }
 }
