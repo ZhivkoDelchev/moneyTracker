@@ -3,12 +3,16 @@ package com.jako.moneytracker.rest.validator;
 import com.jako.moneytracker.db.entity.PaymentType;
 import com.jako.moneytracker.exception.InvalidPaymentInputException;
 
+import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Default;
 import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
 /**
  * Created by Jako on 9.10.2015 ;)
  */
+@Dependent
+@Default
 public class PaymentValidator {
 
     private static final Pattern notePattern = Pattern.compile("^[a-zA-Z]*$");
