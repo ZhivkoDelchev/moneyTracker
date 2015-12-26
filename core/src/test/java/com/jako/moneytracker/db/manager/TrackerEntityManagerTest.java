@@ -4,8 +4,10 @@ import com.jako.moneytracker.db.entity.BaseEntity;
 import com.jako.moneytracker.db.entity.UserEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -13,7 +15,6 @@ import javax.persistence.EntityManager;
 import java.security.Principal;
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 /**
@@ -129,8 +130,8 @@ public class TrackerEntityManagerTest {
 //        Date currentDate = new Date();
 //        verify(entity).setCreatedDate(currentDate);
 //        verify(entity).setLastEditDate(currentDate);
-        verify(entity).setCreatedDate(any(Date.class));
-        verify(entity).setLastEditDate(any(Date.class));
+        verify(entity).setCreatedDate(Matchers.any(Date.class));
+        verify(entity).setLastEditDate(Matchers.any(Date.class));
         verify(session).persist(entity);
     }
 
@@ -145,7 +146,7 @@ public class TrackerEntityManagerTest {
 
 //        Possible random failing test.
 //        verify(entity).setCreatedDate(new Date());
-        verify(entity).setLastEditDate(any(Date.class));
+        verify(entity).setLastEditDate(Matchers.any(Date.class));
         verify(session).update(entity);
     }
 
@@ -169,6 +170,6 @@ public class TrackerEntityManagerTest {
         verify(entityManager).unwrap(Session.class);
         verify(session).createCriteria(clazz, "user");
         verify(principal).getName();
-        assertEquals(expectedUser, result);
+        Assert.assertEquals(expectedUser, result);
     }
 }

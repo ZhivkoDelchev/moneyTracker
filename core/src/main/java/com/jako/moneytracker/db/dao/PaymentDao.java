@@ -1,8 +1,8 @@
 package com.jako.moneytracker.db.dao;
 
+import com.jako.moneytracker.db.entity.PaymentType;
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.PaymentEntity;
-import com.jako.moneytracker.db.entity.PaymentType;
 import com.jako.moneytracker.db.manager.TrackerEntityManager;
 import org.hibernate.criterion.SimpleExpression;
 

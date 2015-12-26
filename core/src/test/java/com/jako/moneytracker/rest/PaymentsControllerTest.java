@@ -10,6 +10,7 @@ import com.jako.moneytracker.test.utils.DependencyResolver;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
@@ -17,7 +18,8 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by Jako on 27.8.2015 ;)
@@ -39,7 +41,7 @@ public class PaymentsControllerTest {
     public void shouldReturnAllUserPayments() throws Exception {
         List<PaymentEntity> payments = mock(List.class);
 
-        when(paymentDao.getUserPayments()).thenReturn(payments);
+        Mockito.when(paymentDao.getUserPayments()).thenReturn(payments);
 
         List<PaymentEntity> result = sut.getPayments();
 
@@ -55,7 +57,7 @@ public class PaymentsControllerTest {
         long timestamp = System.currentTimeMillis();
 
         PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
-        when(categoryDao.findCategoryById(categoryId)).thenReturn(category);
+        Mockito.when(categoryDao.findCategoryById(categoryId)).thenReturn(category);
 
         sut.createPayment(amount, paymentType, categoryId, note, timestamp);
 
@@ -71,7 +73,7 @@ public class PaymentsControllerTest {
         long timestamp = System.currentTimeMillis();
 
         PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
-        when(categoryDao.findCategoryById(categoryId)).thenReturn(category);
+        Mockito.when(categoryDao.findCategoryById(categoryId)).thenReturn(category);
 
         sut.createPayment(amount, paymentType, categoryId, note, timestamp);
 

@@ -1,8 +1,8 @@
 package com.jako.moneytracker;
 
-import com.jako.moneytracker.rest.CategoriesController;
 import com.jako.moneytracker.rest.CustomExceptionMapper;
 import com.jako.moneytracker.rest.PaymentsController;
+import com.jako.moneytracker.rest.CategoriesController;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

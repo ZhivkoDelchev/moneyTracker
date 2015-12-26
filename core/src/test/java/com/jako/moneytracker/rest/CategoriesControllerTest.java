@@ -14,6 +14,7 @@ import org.junit.experimental.theories.Theory;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import javax.ws.rs.GET;
@@ -25,7 +26,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by Jako on 28.8.2015 ;)
@@ -49,7 +51,7 @@ public class CategoriesControllerTest {
     public void shouldListAllCategories() throws Exception {
         @SuppressWarnings("unchecked")
         List<PaymentCategoryEntity> categories = mock(List.class);
-        when(categoryDao.getCategories()).thenReturn(categories);
+        Mockito.when(categoryDao.getCategories()).thenReturn(categories);
 
         List<PaymentCategoryEntity> result = sut.getCategories();
         assertSame(categories, result);

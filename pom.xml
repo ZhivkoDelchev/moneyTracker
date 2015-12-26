@@ -12,6 +12,7 @@
     <modules>
         <module>./webapp</module>
         <module>./ear</module>
+        <module>./core</module>
     </modules>
 
     <build>

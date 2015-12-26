@@ -1,11 +1,11 @@
 package com.jako.moneytracker.rest;
 
+import com.jako.moneytracker.db.entity.PaymentType;
+import com.jako.moneytracker.rest.validator.PaymentValidator;
 import com.jako.moneytracker.db.dao.CategoryDao;
 import com.jako.moneytracker.db.dao.PaymentDao;
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.PaymentEntity;
-import com.jako.moneytracker.db.entity.PaymentType;
-import com.jako.moneytracker.rest.validator.PaymentValidator;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;

@@ -5,8 +5,10 @@ import com.jako.moneytracker.db.entity.PaymentEntity;
 import com.jako.moneytracker.db.entity.PaymentType;
 import com.jako.moneytracker.db.manager.TrackerEntityManager;
 import org.hibernate.criterion.SimpleExpression;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -15,7 +17,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class PaymentDaoTest {
@@ -37,7 +38,7 @@ public class PaymentDaoTest {
 
         List<PaymentEntity> result = sut.getUserPayments();
 
-        assertEquals(payments, result);
+        Assert.assertEquals(payments, result);
         verify(trackerEntityManager).getResultsForCurrentUser(PaymentEntity.class, "payment");
     }
 
@@ -70,6 +71,6 @@ public class PaymentDaoTest {
 
         sut.createPayment(amount, PaymentType.DEPOSIT, category, "note", date);
         // TODO: verify if proper category is persisted.
-        verify(trackerEntityManager).persist(any(PaymentEntity.class));
+        verify(trackerEntityManager).persist(Matchers.any(PaymentEntity.class));
     }
 }

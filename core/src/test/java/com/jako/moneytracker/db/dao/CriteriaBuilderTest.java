@@ -1,9 +1,8 @@
 package com.jako.moneytracker.db.dao;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by Jako on 27.8.2015 ;)
@@ -19,6 +18,6 @@ public class CriteriaBuilderTest {
 
     @Test
     public void shouldReturnNonNullEqualsCriteria() throws Exception {
-        assertNotNull(sut.buildEqualsCriteria("name", "value"));
+        Assert.assertNotNull(sut.buildEqualsCriteria("name", "value"));
     }
 }
