@@ -1,13 +1,13 @@
 package com.jako.moneytracker.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * Created by Jako on 15.2.2015.
- */
 @Entity(name = "payments")
+@JsonIgnoreProperties({ "internal" })
 public class PaymentEntity extends BaseEntity {
 
     @Column( scale = 2, precision = 12)

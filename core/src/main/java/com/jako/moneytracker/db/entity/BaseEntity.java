@@ -1,11 +1,10 @@
 package com.jako.moneytracker.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by Jako on 15.2.2015.
- */
 @MappedSuperclass
 public class BaseEntity {
 
@@ -15,9 +14,11 @@ public class BaseEntity {
     private Long id;
     @Column(name = "created_date")
     @Temporal(TemporalType.DATE)
+    @JsonIgnore
     private Date createdDate;
     @Column(name = "last_edit_date")
     @Temporal(TemporalType.DATE)
+    @JsonIgnore
     private Date lastEditDate;
 
     public Date getCreatedDate() {
