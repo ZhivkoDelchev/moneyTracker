@@ -6,8 +6,8 @@ function initializeNavigation() {
     header.appendChild(createNavigationElement('Transactions', function() {
 		payment.createTransactionsBody()
 	}))
-    header.appendChild(createNavigationElement('Categories', function() {
-		category.createCategoryBody()
+	header.appendChild(createNavigationElement('Categories', function() {
+		categoryController.openCategories()
 	}))
 }
 
