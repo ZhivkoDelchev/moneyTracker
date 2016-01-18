@@ -1,4 +1,4 @@
-categoryView = new function CategoryView() {
+function CategoryView() {
 
     this.showCategoryTab = function(callback) {
 	    $.ajax({
@@ -50,5 +50,4 @@ categoryView = new function CategoryView() {
 			}
 		})
     }
-
 }

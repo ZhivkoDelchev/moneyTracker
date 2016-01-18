@@ -1,5 +1,8 @@
 categoryController = new function CategoryController() {
 
+    var categoryModel = new CategoryModel()
+    var categoryView = new CategoryView()
+
 	this.openCategories = function() {
 		categoryView.showCategoryTab(this.addCategories)
 	}
@@ -60,5 +63,4 @@ categoryController = new function CategoryController() {
 			}
 		})
 	}
-
 }

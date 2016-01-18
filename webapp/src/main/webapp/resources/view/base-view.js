@@ -30,5 +30,4 @@ baseView = new function BaseView() {
 		$(".overlay").fadeOut(300)
 		$(".overlay").fadeOut(300)
 	}
-
 }

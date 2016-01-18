@@ -1,4 +1,4 @@
-categoryModel = new function CategoryModel() {
+function CategoryModel() {
 
     this.getCategories = function(callback) {
 		$.ajax({
