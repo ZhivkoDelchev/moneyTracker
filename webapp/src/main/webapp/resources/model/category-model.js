@@ -10,7 +10,6 @@ function CategoryModel() {
             },
             error: function() {
                 console.log('Error getting categories!')
-                return []
             }
         })
     }
