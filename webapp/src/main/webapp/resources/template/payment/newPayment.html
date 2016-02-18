@@ -1,0 +1,18 @@
+<div class="cancel" onclick="closePopup();"></div>
+<label class="inputLabel">Amount:</label>
+<input type="text" id="paymentAmount" class="textInput">
+<label class="inputLabel">Category:</label>
+<select id="paymentCategory" class="textInput">
+${categoryOptions}
+</select>
+<label class="inputLabel">Type:</label>
+<select id="paymentType" class="textInput">
+	<option></option>
+	<option>Income</option>
+	<option>Expense</option>
+</select>
+<label class="inputLabel">Note:</label>
+<input type="text" id="paymentNote" class="textInput">
+<label class="inputLabel">Date:</label>
+<input type="date" id="paymentDate" class="dateInput hasDatepicker">
+<input type="button" value="Create" class="button" onclick="paymentController.createNewTransaction()">

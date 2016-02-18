@@ -4,7 +4,7 @@ function initializeNavigation() {
         createHomeBody();
     }))
     header.appendChild(createNavigationElement('Transactions', function() {
-		payment.createTransactionsBody()
+		paymentController.openPayments()
 	}))
 	header.appendChild(createNavigationElement('Categories', function() {
 		categoryController.openCategories()
