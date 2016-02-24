@@ -43,7 +43,7 @@ paymentController = new function PaymentController() {
               'paymentTimestamp': paymentTimestamp
             },
             success: function() {
-                this.createTransactionsBody()
+                this.openPayments()
                 closePopup()
             }.bind(this),
             error: function(data) {
