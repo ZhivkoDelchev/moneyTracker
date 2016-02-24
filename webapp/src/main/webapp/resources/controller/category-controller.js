@@ -22,27 +22,21 @@ categoryController = new function CategoryController() {
 		if (isValidName(categoryNameField.val())) {
 			categoryView.markCategoryNameAsInvalid(categoryNameField)
 		} else {
-			postNewCategory(categoryNameField.val())
+			categoryModel.postNewCategory(categoryNameField.val(),
+                function() {
+                    baseView.closePopup()
+                    categoryController.addCategories()
+                },
+                function() {
+                    baseView.closePopup()
+    				console.log('Error creating category!')
+                }
+			)
 		}
 	}
 
 	function isValidName(categoryName) {
 		return categoryName == null || categoryName == "" || categoryName == undefined || categoryName.length > 20
-	}
-
-	function postNewCategory(categoryName) {
-		$.ajax({
-			type: 'POST',
-			url: 'rest/category/' + categoryName,
-			success: function(data) {
-				baseView.closePopup()
-				categoryController.addCategories()
-			}.bind(categoryController),
-			error: function() {
-				baseView.closePopup()
-				console.log('Error creating category!')
-			}
-		})
 	}
 
 	this.deleteCategoryPopup = function(categoryId) {

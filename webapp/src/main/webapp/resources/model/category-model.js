@@ -13,4 +13,17 @@ function CategoryModel() {
             }
         })
     }
+
+    this.postNewCategory = function(categoryName, successCallback, errorCallback) {
+        $.ajax({
+            type: 'POST',
+            url: 'rest/category/' + categoryName,
+            success: function(data) {
+                successCallback()
+            }.bind(categoryController),
+            error: function() {
+                errorCallback()
+            }
+        })
+    }
 }
