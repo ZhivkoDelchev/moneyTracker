@@ -30,31 +30,6 @@ function initializeNavigation() {
 		return h1;
 	}
 	
-	function createAddButton(displayPopup) {
-		var button = document.createElement('div')
-		button.className = 'icon icon-plus'
-		button.addEventListener('click', function() {
-			displayPopup()
-			fadeIn()
-		})
-		return button
-	}
-
-	function fadeIn() {
-		$(".overlay").fadeIn(750)
-		$(".overlay").fadeTo(750, 0.3).css('display', 'block')
-	}
-
-	function closePopup() {
-		$("#popup").hide()
-		fadeOut()
-	}
-	
-	function fadeOut() {
-		$(".overlay").fadeOut(300)
-		$(".overlay").fadeOut(300)
-	}
-
 	function setBodyContent(element) {
 		removeBodyContent()
 		body.appendChild(element)

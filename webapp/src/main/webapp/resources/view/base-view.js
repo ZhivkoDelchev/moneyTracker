@@ -23,11 +23,6 @@ baseView = new function BaseView() {
 
 	this.closePopup = function() {
 		$("#popup").hide()
-		fadeOut()
-	}
-	
-	function fadeOut() {
-		$(".overlay").fadeOut(300)
 		$(".overlay").fadeOut(300)
 	}
 }

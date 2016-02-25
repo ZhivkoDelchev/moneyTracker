@@ -44,10 +44,10 @@ paymentController = new function PaymentController() {
             },
             success: function() {
                 this.openPayments()
-                closePopup()
+                baseView.closePopup()
             }.bind(this),
             error: function(data) {
-                closePopup()
+                baseView.closePopup()
                 console.log('Error creating payment')
             }
         })
