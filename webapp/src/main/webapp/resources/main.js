@@ -19,30 +19,6 @@ function initializeNavigation() {
 	}
 
 	function createHomeBody() {
-		var element = createH1TemporarayMessage('Welcome to your money tracker ;)')
-		setBodyContent(element)
-	}
-
-	// TODO: cleanup
-	function createH1TemporarayMessage (message) {
-		var h1 = document.createElement('h1')
-		h1.innerHTML = message
-		return h1;
-	}
-	
-	function setBodyContent(element) {
-		removeBodyContent()
-		body.appendChild(element)
-	}
-
-	function removeBodyContent() {
-		var body = document.getElementById('body')
-		removeChildren(body)
-	}
-
-	function removeChildren(element) {
-		while (element.firstChild) {
-			removeChildren(element.firstChild)
-			element.removeChild(element.firstChild);
-		}
+	    var body = document.getElementById('body')
+        body.innerHTML = "<h1>Welcome to your money tracker ;)</h1>"
 	}
