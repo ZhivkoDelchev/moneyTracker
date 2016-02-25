@@ -35,12 +35,6 @@ function initializeNavigation() {
 		body.appendChild(element)
 	}
 
-	function appendContainerChildrenToBody(container) {
-		while(container.firstChild) {
-			body.appendChild(container.firstChild);
-		}
-	}
-
 	function removeBodyContent() {
 		var body = document.getElementById('body')
 		removeChildren(body)
