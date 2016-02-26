@@ -4,16 +4,20 @@ baseView = new function BaseView() {
 		if (document.getElementById("popup")) {
 			$("#popup").show()
 		} else { 
-			popup = document.createElement('div')
-			popup.setAttribute('class', popupClass)
-			popup.setAttribute('id', 'popup')
-
-			var body = document.getElementById('body')
-			body.appendChild(popup)
-			$("#popup").draggable()
+			createNewPopup(popupClass)
 		}
 		$("#popup").html(popupContent)
 		fadeIn()
+	}
+
+	function createNewPopup(popupClass) {
+	    var popup = document.createElement('div')
+        popup.setAttribute('class', popupClass)
+        popup.setAttribute('id', 'popup')
+
+        var body = document.getElementById('body')
+        body.appendChild(popup)
+        $("#popup").draggable()
 	}
 
 	function fadeIn() {
