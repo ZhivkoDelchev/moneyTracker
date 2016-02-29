@@ -31,7 +31,7 @@ public class PaymentDao {
     public void removePaymentsCategory(long categoryId) {
         SimpleExpression equalsCriteria = criteriaBuilder.buildEqualsCriteria("payment.category.id", categoryId);
         List<PaymentEntity> payments = trackerEntityManager.getResultsForCurrentUser(PaymentEntity.class, "payment", equalsCriteria);
-        payments.stream().forEach(payment -> removeCategoryFromPayment(payment));
+        payments.stream().forEach(this::removeCategoryFromPayment);
     }
 
     public void createPayment(BigDecimal amount, PaymentType type, PaymentCategoryEntity category, String note, Date date) {
