@@ -16,7 +16,7 @@ import java.util.List;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.PARAMETER})
 public @interface TestOnStrings {
-    public static final String NULL = "\u0000";
+    String NULL = "\u0000";
 
     String[] value();
 
