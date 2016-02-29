@@ -36,7 +36,7 @@ public class CategoriesControllerTest {
 
     @Mock private CategoryDao categoryDao;
     @Mock private PaymentDao paymentDao;
-    @Rule public ExpectedException expected = ExpectedException.none();
+    @Rule public final ExpectedException expected = ExpectedException.none();
 
     @Before
     public void setUp() throws Exception {

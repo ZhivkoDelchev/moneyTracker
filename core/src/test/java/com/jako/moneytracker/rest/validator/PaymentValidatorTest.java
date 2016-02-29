@@ -18,7 +18,7 @@ public class PaymentValidatorTest {
 
     private PaymentValidator sut;
 
-    @Rule public ExpectedException expectedException = ExpectedException.none();
+    @Rule public final ExpectedException expectedException = ExpectedException.none();
 
     @Before
     public void setUp() throws Exception {
