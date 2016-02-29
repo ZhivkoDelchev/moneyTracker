@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 @Default
 public class PaymentValidator {
 
-    private static final Pattern notePattern = Pattern.compile("^[a-zA-Z]*$");
+    private static final Pattern notePattern = Pattern.compile("^[a-zA-Z -//_]*$");
 
     public void validate(Long categoryId, String note, BigDecimal amount, PaymentType type, Long paymentTimestamp) {
         validateCategoryId(categoryId);

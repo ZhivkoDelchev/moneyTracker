@@ -54,9 +54,14 @@ public class PaymentValidatorTest {
     }
 
     @Theory
-    public void shouldThrowExceptionIfNoteContainsNonLatinNonNumericCharacter(@TestOnStrings({"1ц", "qш", "#", "@", "^"}) String note) throws Exception {
+    public void shouldThrowExceptionIfNoteContainsNonLatinNonNumericCharacter(@TestOnStrings({"1ц", "qш", "@", "^"}) String note) throws Exception {
         expectedException.expect(InvalidPaymentInputException.class);
         expectedException.expectMessage("Cannot add payment. Note is invalid.");
         sut.validate(1L, note, new BigDecimal(1), PaymentType.EXPENSE, 1L);
+    }
+
+    @Theory
+    public void shouldPass() throws Exception {
+        sut.validate(1L, "nosach dvigatel", new BigDecimal(1), PaymentType.EXPENSE, 1L);
     }
 }
