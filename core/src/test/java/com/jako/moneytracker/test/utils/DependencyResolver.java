@@ -41,11 +41,11 @@ public class DependencyResolver {
     private Collection<Field> getAnnotatedFields(Class<? extends Object> clazz, Class<? extends Annotation> annotation) {
         final Collection<Field> allFields = getFields(clazz);
         Collection<Field> annotatedFields = new ArrayList<>();
-        for (Field field: allFields) {
+        allFields.forEach(field -> {
             if (field.isAnnotationPresent(annotation)) {
                 annotatedFields.add(field);
             }
-        }
+        });
         return annotatedFields;
     }
 
@@ -77,11 +77,11 @@ public class DependencyResolver {
     private static Field findMockFor(Field dependency, final Collection<Field> availableMocks) {
         final Class<?> dependencyType = dependency.getType();
         List<Field> matchingMocks = new ArrayList<>();
-        for (Field mock: availableMocks) {
+        availableMocks.forEach(mock -> {
             if (dependencyType.isAssignableFrom(mock.getType())) {
                 matchingMocks.add(mock);
             }
-        }
+        });
         if (matchingMocks.size() == 1) {
             return matchingMocks.get(0);
         }
