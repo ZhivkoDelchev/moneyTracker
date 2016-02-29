@@ -17,9 +17,6 @@ import java.util.Date;
 
 import static org.mockito.Mockito.*;
 
-/**
- * Created by Jako on 23.6.2015 ;)
- */
 public class TrackerEntityManagerTest {
 
     private TrackerEntityManager sut;

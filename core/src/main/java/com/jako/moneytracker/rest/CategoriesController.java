@@ -14,9 +14,6 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.regex.Pattern;
 
-/**
- * Created by Jako on 10.8.2015 ;)
- */
 @Stateless
 @Path("/category")
 @TransactionManagement(TransactionManagementType.CONTAINER)

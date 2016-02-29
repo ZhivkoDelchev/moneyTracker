@@ -17,9 +17,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Jako on 21.2.2015 .
- */
 @Stateless
 @Path("/payments")
 @TransactionManagement(TransactionManagementType.CONTAINER)

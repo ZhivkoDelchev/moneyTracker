@@ -8,9 +8,6 @@ import javax.enterprise.inject.Default;
 import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
-/**
- * Created by Jako on 9.10.2015 ;)
- */
 @Dependent
 @Default
 public class PaymentValidator {

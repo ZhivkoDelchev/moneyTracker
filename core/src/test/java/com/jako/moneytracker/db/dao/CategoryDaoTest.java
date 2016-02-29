@@ -14,9 +14,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
-/**
- * Created by Jako on 5.4.2015.
- */
 public class CategoryDaoTest {
 
     private CategoryDao sut;

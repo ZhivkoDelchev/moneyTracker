@@ -12,9 +12,6 @@ import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Jako on 28.8.2015 ;)
- */
 @ParametersSuppliedBy(TestOnStrings.TestOnSupplier.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.PARAMETER})

@@ -29,9 +29,6 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-/**
- * Created by Jako on 28.8.2015 ;)
- */
 @RunWith(Theories.class)
 public class CategoriesControllerTest {
 

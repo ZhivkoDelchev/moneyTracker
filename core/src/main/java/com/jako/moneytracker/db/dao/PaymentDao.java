@@ -12,9 +12,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Jako on 16.2.2015.
- */
 @Dependent
 public class PaymentDao {
 

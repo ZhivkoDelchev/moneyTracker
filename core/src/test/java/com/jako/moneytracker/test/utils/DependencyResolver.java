@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by Jako on 27.8.2015 ;)
- */
 public class DependencyResolver {
 
     public <T> T resolveDependencies(final T sut, final Object dependencyContainer) throws IllegalAccessException {

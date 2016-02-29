@@ -15,9 +15,6 @@ import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Jako on 23.6.2015 ;)
- */
 @RequestScoped
 public class TrackerEntityManager {
 

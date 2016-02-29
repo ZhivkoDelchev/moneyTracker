@@ -13,9 +13,6 @@ import org.junit.runner.RunWith;
 
 import java.math.BigDecimal;
 
-/**
- * Created by Jako on 9.10.2015 ;)
- */
 @RunWith(Theories.class)
 public class PaymentValidatorTest {
 

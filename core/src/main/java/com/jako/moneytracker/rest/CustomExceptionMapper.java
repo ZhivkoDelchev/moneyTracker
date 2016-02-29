@@ -7,9 +7,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
-/**
- * Created by Jako on 7.4.2015.
- */
 @Provider
 @Dependent
 public class CustomExceptionMapper implements ExceptionMapper<MoneyTrackerException> {

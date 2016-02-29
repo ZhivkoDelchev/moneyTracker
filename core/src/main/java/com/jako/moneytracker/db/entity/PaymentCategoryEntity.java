@@ -5,9 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-/**
- * Created by Jako on 15.2.2015.
- */
 @Entity(name = "categories")
 public class PaymentCategoryEntity extends BaseEntity {
 

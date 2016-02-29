@@ -4,9 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-/**
- * Created by Jako on 17.1.2015.
- */
 @Entity
 @Table(name = "principles")
 public class UserEntity extends BaseEntity {

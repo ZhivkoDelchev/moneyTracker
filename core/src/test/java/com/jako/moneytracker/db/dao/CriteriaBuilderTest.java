@@ -4,9 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Created by Jako on 27.8.2015 ;)
- */
 public class CriteriaBuilderTest {
 
     private CriteriaBuilder sut;
