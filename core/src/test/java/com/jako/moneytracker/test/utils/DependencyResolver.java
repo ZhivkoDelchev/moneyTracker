@@ -7,6 +7,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class DependencyResolver {
@@ -52,9 +53,7 @@ public class DependencyResolver {
     private Collection<Field> getFields(Class<?> clazz) {
         Collection<Field> fields = new ArrayList<>();
         while (clazz != null && clazz != Object.class) {
-            for (Field field: clazz.getDeclaredFields()) {
-                fields.add(field);
-            }
+            Collections.addAll(fields, clazz.getDeclaredFields());
             clazz = clazz.getSuperclass();
         }
         return fields;
