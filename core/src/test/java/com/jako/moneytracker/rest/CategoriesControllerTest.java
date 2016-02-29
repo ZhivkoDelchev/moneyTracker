@@ -112,7 +112,7 @@ public class CategoriesControllerTest {
     }
 
     @Theory
-    public void shouldThrowExceptionIfNameContainsNonEnglishCharacters(@TestOnStrings(strings={TestOnStrings.NULL, "", " ", " a", "a1", "фa"}) String name) throws Exception {
+    public void shouldThrowExceptionIfNameContainsNonEnglishCharacters(@TestOnStrings({TestOnStrings.NULL, "", " ", " a", "a1", "фa"}) String name) throws Exception {
         expected.expect(MoneyTrackerException.class);
         expected.expectMessage("Invalid category name. Up to 255 characters from A to Z upper and lower case allowed.");
         sut.createCategory(name);

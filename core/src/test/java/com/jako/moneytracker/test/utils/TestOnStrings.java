@@ -21,7 +21,7 @@ import java.util.List;
 public @interface TestOnStrings {
     public static final String NULL = "\u0000";
 
-    String[] strings();
+    String[] value();
 
     class TestOnSupplier extends ParameterSupplier {
         @Override
@@ -31,7 +31,7 @@ public @interface TestOnStrings {
 
             TestOnStrings testOnStrings = sig.getAnnotation(TestOnStrings.class);
             if (testOnStrings != null) {
-                for (String param : testOnStrings.strings()) {
+                for (String param : testOnStrings.value()) {
                     result.add(PotentialAssignment.forValue(param, param));
                 }
             }
