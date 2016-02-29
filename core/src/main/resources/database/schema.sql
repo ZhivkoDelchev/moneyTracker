@@ -39,7 +39,7 @@ CREATE TABLE `categories` (
 	PRIMARY KEY (`id`),
 	INDEX `FK_categories_users_id` (`creator`),
 	CONSTRAINT `FK_categories_users_id` FOREIGN KEY (`creator`) REFERENCES `principles` (`id`),
-	UNIQUE INDEX `payment_category_name` (`name`)
+	UNIQUE INDEX `payment_category_name` (`name`, `id`)
 ) COLLATE='utf8_bin' ENGINE=InnoDB AUTO_INCREMENT=1;
 
 DROP TABLE IF EXISTS `payments`;
