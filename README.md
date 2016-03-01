@@ -6,9 +6,9 @@ The main use of the software is to deliver and satisfy its creators personal nee
 
 ### How do I get set up? ###
 
-* Download and install wildfly 9
-* Configure data source java:jboss/datasources/trackerDS
-* Configure security-domain trackerRealm that uses just created datasource as follows:
+* Download and install _wildfly 9_
+* Configure data source _java:jboss/datasources/trackerDS_
+* Configure security-domain _trackerRealm_ that uses just created datasource as follows:
 ```
 <security-domain name="trackerRealm" cache-type="default">
   <authentication>
@@ -25,4 +25,4 @@ The main use of the software is to deliver and satisfy its creators personal nee
 * Use maven for building the project
 * Deploy the EAR file generated in sourceRoot/ear/target
 * Deployment instructions
-* Any other java application servers would be working but some configuration may require changes. In order to change data source change the value of jta-data-source in sourceRoot/webapp/src/main/resources/META-INF/persistence.xml. In order to change security domain you may need to add new configuration instead of sourceRoot/webapp/src/main/webapp/WEB-INF/jboss-web.xml.
+* Any other java application servers would be working but some configuration may require changes. In order to change data source change the value of jta-data-source in _sourceRoot/webapp/src/main/resources/META-INF/persistence.xml_. In order to change security domain you may need to add new configuration instead of _sourceRoot/webapp/src/main/webapp/WEB-INF/jboss-web.xml_.
