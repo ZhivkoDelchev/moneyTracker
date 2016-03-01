@@ -1,33 +1,28 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+### This is open source project for personal use and experiments. ###
 
-### What is this repository for? ###
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+The main use of the software is to deliver and satisfy its creators personal need but it also shares the code with the world.
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
+* Download and install wildfly 9
+* Configure data source java:jboss/datasources/trackerDS
+* Configure security-domain trackerRealm that uses just created datasource as follows:
+```
+<security-domain name="trackerRealm" cache-type="default">
+  <authentication>
+    <login-module code="Database" flag="sufficient">
+      <module-option name="dsJndiName" value="java:jboss/datasources/trackerDS"/>
+      <module-option name="principalsQuery" value="select password from principles where principal_id=?"/>
+      <module-option name="rolesQuery" value="select r.user_role, 'Roles' from roles r inner join principles p on r.principal_id = p.principal_id where p.principal_id=?"/>
+      <module-option name="hashAlgorithm" value="MD5"/>
+      <module-option name="hashEncoding" value="hex"/>
+    </login-module>
+  </authentication>
+</security-domain>
+```
+* Use maven for building the project
+* Deploy the EAR file generated in sourceRoot/ear/target
 * Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
-
-
-## Requirements ##
-IE9
+* Any other java application servers would be working but some configuration may require changes. In order to change data source change the value of jta-data-source in sourceRoot/webapp/src/main/resources/META-INF/persistence.xml. In order to change security domain you may need to add new configuration instead of sourceRoot/webapp/src/main/webapp/WEB-INF/jboss-web.xml.
