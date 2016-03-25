@@ -5,8 +5,8 @@ USE `money_tracker`;
 DROP TABLE IF EXISTS `principles`;
 CREATE TABLE IF NOT EXISTS `principles` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `created_date` date DEFAULT NULL,
-  `last_edit_date` date DEFAULT NULL,
+  `created_date` DATETIME DEFAULT NULL,
+  `last_edit_date` DATETIME DEFAULT NULL,
   `principal_id` varchar(255) COLLATE utf8_bin NOT NULL,
   `password` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
@@ -32,8 +32,8 @@ INSERT INTO `roles` (`user_role`, `principal_id`) VALUES
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-	`created_date` DATE NULL DEFAULT NULL,
-	`last_edit_date` date DEFAULT NULL,
+	`created_date` DATETIME NULL DEFAULT NULL,
+	`last_edit_date` DATETIME DEFAULT NULL,
 	`name` VARCHAR(255) NOT NULL COLLATE 'utf8_bin',
 	`creator` BIGINT(20) NULL DEFAULT NULL,
 	PRIMARY KEY (`id`),
@@ -45,8 +45,8 @@ CREATE TABLE `categories` (
 DROP TABLE IF EXISTS `payments`;
 CREATE TABLE `payments` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-	`created_date` DATE NULL DEFAULT NULL,
-	`last_edit_date` date DEFAULT NULL,
+	`created_date` DATETIME NULL DEFAULT NULL,
+	`last_edit_date` DATETIME DEFAULT NULL,
 	`amount` DECIMAL(12,2) NULL DEFAULT NULL,
 	`type` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_bin',
 	`note` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_bin',

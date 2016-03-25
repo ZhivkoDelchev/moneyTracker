@@ -13,11 +13,11 @@ public class BaseEntity {
     @Column(name = "id")
     private Long id;
     @Column(name = "created_date")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonIgnore
     private Date createdDate;
     @Column(name = "last_edit_date")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonIgnore
     private Date lastEditDate;
 
