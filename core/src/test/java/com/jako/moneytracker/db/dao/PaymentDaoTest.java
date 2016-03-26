@@ -4,6 +4,7 @@ import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.PaymentEntity;
 import com.jako.moneytracker.db.entity.PaymentType;
 import com.jako.moneytracker.db.manager.TrackerEntityManager;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.SimpleExpression;
 import org.junit.Assert;
 import org.junit.Before;
@@ -34,12 +35,21 @@ public class PaymentDaoTest {
     @Test
     public void testCreateCriteriaForListingAllPaymentsForAGivenUser() throws Exception {
         List<PaymentEntity> payments = mock(List.class);
-        when(trackerEntityManager.getResultsForCurrentUser(PaymentEntity.class, "payment")).thenReturn(payments);
+
+        final Order dateOrder = mock(Order.class);
+        when(criteriaBuilder.descending("date")).thenReturn(dateOrder);
+
+        final Order createdDateOrder = mock(Order.class);
+        when(criteriaBuilder.descending("createdDate")).thenReturn(createdDateOrder);
+
+        final Order[] orders = {dateOrder, createdDateOrder};
+
+        when(trackerEntityManager.getResultsForCurrentUser(PaymentEntity.class, "payment", 20, orders, null)).thenReturn(payments);
 
         List<PaymentEntity> result = sut.getUserPayments();
 
         Assert.assertEquals(payments, result);
-        verify(trackerEntityManager).getResultsForCurrentUser(PaymentEntity.class, "payment");
+        verify(trackerEntityManager).getResultsForCurrentUser(PaymentEntity.class, "payment", 20, orders, null);
     }
 
     @Test

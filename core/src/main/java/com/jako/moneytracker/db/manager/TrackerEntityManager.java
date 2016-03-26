@@ -5,6 +5,7 @@ import com.jako.moneytracker.db.entity.UserEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import javax.enterprise.context.RequestScoped;
@@ -40,11 +41,7 @@ public class TrackerEntityManager {
         Session session = getSession();
 
         Criteria criteria = session.createCriteria(clazz, alias);
-        if (restrictions != null) {
-            for (Criterion restriction : restrictions) {
-                criteria.add(restriction);
-            }
-        }
+        addRestrictions(restrictions, criteria);
 
         return clazz.cast(criteria.uniqueResult());
     }
@@ -55,11 +52,7 @@ public class TrackerEntityManager {
         Criteria criteria = session.createCriteria(clazz, alias);
         criteria.createAlias(alias + ".creator", "creator");
         criteria.add(Restrictions.eq("creator.email", getUserEmail()));
-        if (restrictions != null) {
-            for (Criterion restriction : restrictions) {
-                criteria.add(restriction);
-            }
-        }
+        addRestrictions(restrictions, criteria);
 
         return clazz.cast(criteria.uniqueResult());
     }
@@ -70,13 +63,38 @@ public class TrackerEntityManager {
         Criteria criteria = session.createCriteria(clazz, alias);
         criteria.createAlias(alias + ".creator", "creator");
         criteria.add(Restrictions.eq("creator.email", getUserEmail()));
+        addRestrictions(restrictions, criteria);
+
+        return criteria.list();
+    }
+
+    public <T extends BaseEntity> List<T> getResultsForCurrentUser(Class<T> clazz, String alias, int limit, Order[] orders, Criterion[] restrictions) {
+        Session session = getSession();
+
+        Criteria criteria = session.createCriteria(clazz, alias);
+        criteria.createAlias(alias + ".creator", "creator");
+        criteria.add(Restrictions.eq("creator.email", getUserEmail()));
+        criteria.setMaxResults(limit);
+        addRestrictions(restrictions, criteria);
+        addOrders(orders, criteria);
+
+        return criteria.list();
+    }
+
+    private void addRestrictions(final Criterion[] restrictions, final Criteria criteria) {
         if (restrictions != null) {
             for (Criterion restriction : restrictions) {
                 criteria.add(restriction);
             }
         }
+    }
 
-        return criteria.list();
+    private void addOrders(final Order[] orders, final Criteria criteria) {
+        if (orders != null) {
+            for (Order order : orders) {
+                criteria.addOrder(order);
+            }
+        }
     }
 
     public UserEntity getCurrentUser() {

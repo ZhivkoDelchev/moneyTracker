@@ -4,6 +4,7 @@ import com.jako.moneytracker.db.entity.PaymentType;
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.PaymentEntity;
 import com.jako.moneytracker.db.manager.TrackerEntityManager;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.SimpleExpression;
 
 import javax.enterprise.context.Dependent;
@@ -25,7 +26,8 @@ public class PaymentDao {
     }
 
     public List<PaymentEntity> getUserPayments() {
-        return trackerEntityManager.getResultsForCurrentUser(PaymentEntity.class, "payment");
+        Order[] orders = {criteriaBuilder.descending("date"), criteriaBuilder.descending("createdDate")};
+        return trackerEntityManager.getResultsForCurrentUser(PaymentEntity.class, "payment", 20, orders, null);
     }
 
     public void removePaymentsCategory(long categoryId) {
