@@ -1,6 +1,5 @@
 /* GENERAL STUFF */
 body{
-    background: #fff;
     margin: 0;
     padding: 0;
     text-align: center;    
@@ -27,9 +26,7 @@ body{
 	height: 100%;
 }
 
-/* LAYOUT */
 #login, #register, #forgot {
-	width: 500pt;
     margin: 15pt auto 0;
     text-align: left;
     background: #eee;
@@ -38,11 +35,10 @@ body{
     border-radius: 5pt;
 }
 
-#step, #login, #register, #forgot, #main {
-    -webkit-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
-	-moz-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
-	box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
-	-moz-border-radius:4pt;
+@media only screen and (min-width: 768px) {
+    #login, #register, #forgot {
+        width: 500pt;
+    }
 }
 
 h1{
@@ -66,13 +62,6 @@ input.button{
     margin-top: 10pt;
     font-weight: bold;
     
-    -moz-border-radius: 5pt;
-    border-radius: 5pt;
-    
-    -moz-box-shadow: 1pt 1pt 5pt #ccc;
-    -webkit-box-shadow: 1pt 1pt 5pt #ccc;
-    box-shadow: 1pt 1pt 5pt #aaa;
-	
 	background: #999;
     border: 1pt groove #aaa;
 }
@@ -87,8 +76,6 @@ input.textInput {
     font-size: 15pt;
     border: 1pt solid #ccc;
     margin-bottom: 15pt;
-	-moz-border-radius: 5pt;
-    border-radius: 5pt;
 }
 
 select.textInput{
@@ -97,8 +84,6 @@ select.textInput{
     font-size: 15pt;
     border: 1pt solid #ccc;
     margin-bottom: 15pt;
-	-moz-border-radius: 5pt;
-    border-radius: 5pt;
 }
 
 input.dateInput{
@@ -107,8 +92,6 @@ input.dateInput{
     font-size: 15pt;
     border: 1pt solid #ccc;
     margin-bottom: 15pt;
-	-moz-border-radius: 5pt;
-    border-radius: 5pt;
 }
 
 label.inputLabel {
@@ -119,14 +102,6 @@ label.inputLabel {
 nav {
 	position: relative;
 	background: gray;
-
-	-webkit-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
-	-moz-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
-	box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
-	-moz-border-radius:4pt;
-
-	-moz-border-radius: 5pt;
-    border-radius: 5pt;
 }
 
 nav a {
@@ -134,9 +109,6 @@ nav a {
     padding: 1pt 5pt;
     margin-top: 10pt;
     font-weight: bold;
-
-    -moz-border-radius: 5pt;
-    border-radius: 5pt;
 
 	text-decoration: none;
 	height: 100%;
@@ -148,46 +120,43 @@ nav a:hover {
 	cursor: pointer;
 }
 
+
 .popup {
     position:absolute;
     top: 5%;
-    left: 40%;
-    width: 20%;
-    height: 150pt;
+
     font-size: 15pt;
     padding: 10px;
 	background: #fff;
 	
-    -webkit-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
-	-moz-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
-	box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
-	-moz-border-radius:4pt;
-	
-	-moz-border-radius: 5pt;
-    border-radius: 5pt;
-
     z-index:20;
+}
+
+@media only screen and (min-width: 768px) {
+    .popup {
+        left: 40%;
+        width: 20%;
+        height: 150pt;
+    }
 }
 
 .popup-payments {
     position:absolute;
     top: 5%;
-    left: 40%;
-    width: 20%;
-    height: 440pt;
+
     font-size: 15pt;
     padding: 10px;
 	background: #fff;
 	
-    -webkit-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
-	-moz-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
-	box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
-	-moz-border-radius:4pt;
-	
-	-moz-border-radius: 5pt;
-    border-radius: 5pt;
-
     z-index:20;
+}
+
+@media only screen and (min-width: 768px) {
+    .popup-payments {
+        left: 40%;
+        width: 20%;
+        height: 440pt;
+    }
 }
     
 .cancel{
@@ -199,7 +168,6 @@ nav a:hover {
 	top: 1%;
 	left: 92%;
 }
-
 .cancel:before,.cancel:after{
     content:'';
     position:absolute;
@@ -210,7 +178,6 @@ nav a:hover {
     top:41%;
     background: #999;
 }
-
 .cancel:before{
     -webkit-transform:rotate(45deg);
     -moz-transform:rotate(45deg);
