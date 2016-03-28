@@ -38,7 +38,7 @@ body{
     border-radius: 5pt;
 }
 
-#step, #login, #register, #forgot, #header_form, #main {
+#step, #login, #register, #forgot, #main {
     -webkit-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
 	-moz-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
 	box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
@@ -48,15 +48,6 @@ body{
 h1{
     font-size: 20pt;
     font-weight: normal;
-}
-
-/* FORM */
-fieldset{
-	-webkit-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
-	-moz-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
-	box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
-	-moz-border-radius:4pt;
-    border: none;
 }
 
 legend{
@@ -128,7 +119,6 @@ label.inputLabel {
 nav {
 	position: relative;
 	background: gray;
-	min-width: 500pt;
 
 	-webkit-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
 	-moz-box-shadow:0 1pt 4pt rgba(0, 0, 0, 0.3), 0 0 40pt rgba(0, 0, 0, 0.1) inset;
