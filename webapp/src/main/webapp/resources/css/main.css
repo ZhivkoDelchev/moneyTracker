@@ -31,8 +31,6 @@ body{
     text-align: left;
     background: #eee;
     padding: 15pt 25pt 25pt;
-    -moz-border-radius: 5pt;
-    border-radius: 5pt;
 }
 
 @media only screen and (min-width: 768px) {
