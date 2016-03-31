@@ -9,6 +9,10 @@ body{
     height:100%;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .overlay {
  	position:fixed;
 	display:none; 
@@ -105,12 +109,8 @@ nav {
 nav a {
 	color: #fff;
     padding: 1pt 5pt;
-    margin-top: 10pt;
     font-weight: bold;
-
-	text-decoration: none;
-	height: 100%;
-	width: 150%;
+    font-size: 16pt;
 }
 
 nav a:hover {
