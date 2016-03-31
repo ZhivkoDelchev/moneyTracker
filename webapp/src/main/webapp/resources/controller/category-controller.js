@@ -44,6 +44,15 @@ categoryController = new function CategoryController() {
 	}
 
 	this.deleteCategory = function(categoryId) {
-		categoryModel.delete(categoryId)
+		categoryModel.delete(categoryId,
+		    function() {
+                baseView.closePopup()
+		        categoryController.addCategories()
+            },
+            function() {
+                baseView.closePopup()
+                console.log('Error deleting category!')
+            }
+        )
 	}
 }

@@ -27,17 +27,15 @@ function CategoryModel() {
         })
     }
 
-    this.delete = function(categoryId) {
+    this.delete = function(categoryId, successCallback, errorCallback) {
         $.ajax({
             type: 'DELETE',
             url: 'rest/categories/' + categoryId,
             success: function(data) {
-                categoryController.addCategories()
-                baseView.closePopup()
+                successCallback()
             },
             error: function() {
-                baseView.closePopup()
-                console.log('Error creating category!')
+                errorCallback()
             }
         })
     }
