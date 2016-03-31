@@ -27,7 +27,7 @@ function CategoryModel() {
         })
     }
 
-    this.delete = function(categoryId, successCallback, errorCallback) {
+    this.deleteCategory = function(categoryId, successCallback, errorCallback) {
         $.ajax({
             type: 'DELETE',
             url: 'rest/categories/' + categoryId,
