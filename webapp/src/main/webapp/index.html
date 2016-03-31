@@ -5,16 +5,36 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" media="all" href="resources/css/main.css">
         <link rel="stylesheet" type="text/css" media="all" href="resources/css/jquery-ui-1.10.1.min.css">
-        <script src="resources/main.js"></script>
-        <script src="resources/model/category-model.js"></script>
-        <script src="resources/model/payment-model.js"></script>
-        <script src="resources/view/category-view.js"></script>
-        <script src="resources/view/payment-view.js"></script>
-        <script src="resources/controller/category-controller.js"></script>
-        <script src="resources/controller/payment-controller.js"></script>
-        <script src="resources/view/base-view.js"></script>
-		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript">
+            function initializeNavigation() {
+                var header = document.getElementById('navigation')
+                header.appendChild(createNavigationElement('Home', function() {
+                    var body = document.getElementById('body')
+                    body.innerHTML = "<h1>Welcome to your money tracker ;)</h1>"
+                }))
+                header.appendChild(createNavigationElement('Transactions', function() {
+                    paymentController.openPayments()
+                }))
+                header.appendChild(createNavigationElement('Categories', function() {
+                    categoryController.openCategories()
+                }))
+            }
+            function createNavigationElement(name, callback) {
+                var text = document.createElement('a')
+                text.innerHTML = name
+                text.addEventListener('click', callback)
+                return text
+            }
+        </script>
+        <script async src="resources/model/category-model.js"></script>
+        <script async src="resources/model/payment-model.js"></script>
+        <script async src="resources/view/category-view.js"></script>
+        <script async src="resources/view/payment-view.js"></script>
+        <script async src="resources/controller/category-controller.js"></script>
+        <script async src="resources/controller/payment-controller.js"></script>
+        <script async src="resources/view/base-view.js"></script>
+		<script async src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+		<script async src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     </header>
 
     <body>
