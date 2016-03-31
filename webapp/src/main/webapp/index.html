@@ -9,8 +9,7 @@
             function initializeNavigation() {
                 var header = document.getElementById('navigation')
                 header.appendChild(createNavigationElement('Home', function() {
-                    var body = document.getElementById('body')
-                    body.innerHTML = "<h1>Welcome to your money tracker ;)</h1>"
+                    createHomeBody()
                 }))
                 header.appendChild(createNavigationElement('Transactions', function() {
                     paymentController.openPayments()
@@ -24,6 +23,10 @@
                 text.innerHTML = name
                 text.addEventListener('click', callback)
                 return text
+            }
+            function createHomeBody() {
+                var body = document.getElementById('body')
+                body.innerHTML = "<h1>Welcome to your money tracker ;)</h1>"
             }
         </script>
         <script async src="resources/model/category-model.js"></script>
