@@ -26,4 +26,19 @@ function CategoryModel() {
             }
         })
     }
+
+    this.delete = function(categoryId) {
+        $.ajax({
+            type: 'DELETE',
+            url: 'rest/category/' + categoryId,
+            success: function(data) {
+                categoryController.addCategories()
+                baseView.closePopup()
+            },
+            error: function() {
+                baseView.closePopup()
+                console.log('Error creating category!')
+            }
+        })
+    }
 }

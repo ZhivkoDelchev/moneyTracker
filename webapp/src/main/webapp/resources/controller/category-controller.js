@@ -44,17 +44,6 @@ categoryController = new function CategoryController() {
 	}
 
 	this.deleteCategory = function(categoryId) {
-		$.ajax({
-			type: 'DELETE',
-			url: 'rest/category/' + categoryId,
-			success: function(data) {
-				categoryController.addCategories()
-				baseView.closePopup()
-			},
-			error: function() {
-				baseView.closePopup()
-				console.log('Error creating category!')
-			}
-		})
+		categoryModel.delete(categoryId)
 	}
 }
