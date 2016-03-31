@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 @Stateless
-@Path("/category")
+@Path("/categories")
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class CategoriesController {
 

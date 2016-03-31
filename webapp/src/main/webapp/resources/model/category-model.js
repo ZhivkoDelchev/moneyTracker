@@ -4,7 +4,7 @@ function CategoryModel() {
 		$.ajax({
             dataType: 'json',
             type: 'GET',
-            url: 'rest/category',
+            url: 'rest/categories',
             success: function(data) {
                 callback(data)
             },
@@ -17,7 +17,7 @@ function CategoryModel() {
     this.postNewCategory = function(categoryName, successCallback, errorCallback) {
         $.ajax({
             type: 'POST',
-            url: 'rest/category/' + categoryName,
+            url: 'rest/categories/' + categoryName,
             success: function(data) {
                 successCallback()
             }.bind(categoryController),
@@ -30,7 +30,7 @@ function CategoryModel() {
     this.delete = function(categoryId) {
         $.ajax({
             type: 'DELETE',
-            url: 'rest/category/' + categoryId,
+            url: 'rest/categories/' + categoryId,
             success: function(data) {
                 categoryController.addCategories()
                 baseView.closePopup()
