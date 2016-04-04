@@ -6,24 +6,6 @@
         <link rel="stylesheet" type="text/css" media="all" href="resources/css/main.css">
         <link rel="stylesheet" type="text/css" media="all" href="resources/css/jquery-ui-1.10.1.min.css">
         <script type="text/javascript">
-            function initializeNavigation() {
-                var header = document.getElementById('navigation')
-                header.appendChild(createNavigationElement('Home', function() {
-                    createHomeBody()
-                }))
-                header.appendChild(createNavigationElement('Transactions', function() {
-                    paymentController.openPayments()
-                }))
-                header.appendChild(createNavigationElement('Categories', function() {
-                    categoryController.openCategories()
-                }))
-            }
-            function createNavigationElement(name, callback) {
-                var text = document.createElement('a')
-                text.innerHTML = name
-                text.addEventListener('click', callback)
-                return text
-            }
             function createHomeBody() {
                 var body = document.getElementById('body')
                 body.innerHTML = "<h1>Welcome to your money tracker ;)</h1>"
@@ -42,12 +24,14 @@
 
     <body>
 		<div class="overlay"></div>
-        <nav id="navigation"></nav>
-        <div id="body"></div>
-        <script>
-            initializeNavigation()
-			createHomeBody()
-        </script>
+        <nav id="navigation">
+            <a onClick="createHomeBody()">Home</a>
+            <a onClick="paymentController.openPayments()">Transactions</a>
+            <a onClick="categoryController.openCategories()">Categories</a>
+        </nav>
+        <div id="body">
+            <h1>Welcome to your money tracker ;)</h1>
+        </div>
     </body>
 </html>
 
