@@ -1,4 +1,4 @@
-package com.jako.moneytracker.test.utils;
+package com.jako.moneytracker.utils.test;
 
 import org.junit.experimental.theories.ParameterSignature;
 import org.junit.experimental.theories.ParameterSupplier;

@@ -2,7 +2,7 @@ package com.jako.moneytracker.rest.validator;
 
 import com.jako.moneytracker.db.entity.PaymentType;
 import com.jako.moneytracker.exception.InvalidPaymentInputException;
-import com.jako.moneytracker.test.utils.TestOnStrings;
+import com.jako.moneytracker.utils.test.TestOnStrings;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

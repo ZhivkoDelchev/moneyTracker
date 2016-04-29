@@ -4,8 +4,8 @@ import com.jako.moneytracker.db.dao.CategoryDao;
 import com.jako.moneytracker.db.dao.PaymentDao;
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.exception.MoneyTrackerException;
-import com.jako.moneytracker.test.utils.DependencyResolver;
-import com.jako.moneytracker.test.utils.TestOnStrings;
+import com.jako.moneytracker.utils.test.DependencyResolver;
+import com.jako.moneytracker.utils.test.TestOnStrings;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -17,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -41,7 +42,7 @@ public class CategoriesControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        sut = new DependencyResolver().resolveDependencies(new CategoriesController(), this);
+        sut = new DependencyResolver().resolveDependencies(new CategoriesController(), Inject.class, this);
     }
 
     @Test

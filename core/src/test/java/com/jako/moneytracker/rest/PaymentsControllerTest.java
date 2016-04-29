@@ -6,13 +6,14 @@ import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.PaymentEntity;
 import com.jako.moneytracker.db.entity.PaymentType;
 import com.jako.moneytracker.rest.validator.PaymentValidator;
-import com.jako.moneytracker.test.utils.DependencyResolver;
+import com.jako.moneytracker.utils.test.DependencyResolver;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +32,7 @@ public class PaymentsControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        sut = new DependencyResolver().resolveDependencies(new PaymentsController(), this);
+        sut = new DependencyResolver().resolveDependencies(new PaymentsController(), Inject.class, this);
     }
 
     @Test

@@ -28,6 +28,11 @@
         </dependency>
         <!-- Test scope libraries!-->
         <dependency>
+            <groupId>com.jako.money.tracker</groupId>
+            <artifactId>utils</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>1.10.19</version>

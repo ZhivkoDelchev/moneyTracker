@@ -1,8 +1,7 @@
-package com.jako.moneytracker.test.utils;
+package com.jako.moneytracker.utils.test;
 
 import org.mockito.Mock;
 
-import javax.inject.Inject;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -12,14 +11,14 @@ import java.util.List;
 
 public class DependencyResolver {
 
-    public <T> T resolveDependencies(final T sut, final Object dependencyContainer) throws IllegalAccessException {
+    public <T> T resolveDependencies(final T sut, final Class<? extends Annotation> sutDependencyAnnotation, final Object dependencyContainer) throws IllegalAccessException {
         if (sut == null) {
             throw new NullPointerException("System under test must not be null");
         }
         if (dependencyContainer == null) {
             throw new NullPointerException("Dependency container must not be null");
         }
-        final Collection<Field> requiredDependencies = getRequiredDependencies(sut);
+        final Collection<Field> requiredDependencies = getRequiredDependencies(sut, sutDependencyAnnotation);
         final Collection<Field> availableMocks = getAnnotatedFields(dependencyContainer.getClass(), Mock.class);
 
         injectMocksForDependencies(sut, requiredDependencies, dependencyContainer, availableMocks);
@@ -27,8 +26,8 @@ public class DependencyResolver {
         return sut;
     }
 
-    private <T> Collection<Field> getRequiredDependencies(T sut) throws IllegalAccessException {
-        final Collection<Field> dependencies = getAnnotatedFields(sut.getClass(), Inject.class);
+    private <T> Collection<Field> getRequiredDependencies(T sut, final Class<? extends Annotation> sutDependencyAnnotation) throws IllegalAccessException {
+        final Collection<Field> dependencies = getAnnotatedFields(sut.getClass(), sutDependencyAnnotation);
         final Collection<Field> result = new ArrayList<>();
         for (Field field: dependencies) {
             field.setAccessible(true);
