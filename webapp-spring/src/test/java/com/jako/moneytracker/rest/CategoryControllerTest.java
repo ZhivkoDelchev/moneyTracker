@@ -2,11 +2,17 @@ package com.jako.moneytracker.rest;
 
 import com.jako.moneytracker.db.dao.CategoryDao;
 import com.jako.moneytracker.db.dao.UserDao;
+import com.jako.moneytracker.db.entity.ObjectFactory;
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.UserEntity;
+import com.jako.moneytracker.exception.MoneyTrackerException;
 import com.jako.moneytracker.utils.test.DependencyResolver;
+import com.jako.moneytracker.utils.test.TestOnStrings;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -15,17 +21,16 @@ import java.security.Principal;
 import java.util.List;
 
 import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
+@RunWith(Theories.class)
 public class CategoryControllerTest {
 
     private CategoryController sut;
 
     @Mock private UserDao userDao;
     @Mock private CategoryDao categoryDao;
-
+    @Mock private ObjectFactory objectFactory;
 
     @Before
     public void setUp() throws Exception {
@@ -52,5 +57,35 @@ public class CategoryControllerTest {
         verify(principal).getName();
         verify(userDao).findByEmail(mail);
         verify(categoryDao).findByCreator(userEntity);
+    }
+
+    @Theory
+    @Test(expected = MoneyTrackerException.class)
+    public void shouldThrowExceptionIfNameContainsNonEnglishCharacters(@TestOnStrings({TestOnStrings.NULL, "", " ", " a", "a1", "фa"}) String name) throws Exception {
+        final Principal principal = mock(Principal.class);
+
+        sut.createCategory(name, principal);
+    }
+
+    @Test
+    public void shouldCreateCategoryAndPersistIt() throws Exception {
+        final String name = "foo";
+        final String email = "bar";
+        final PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
+
+        final Principal principal = mock(Principal.class);
+        when(principal.getName()).thenReturn(email);
+
+        final UserEntity user = mock(UserEntity.class);
+        when(userDao.findByEmail(email)).thenReturn(user);
+
+        when(objectFactory.createPaymentCategoryEntity(name, user)).thenReturn(category);
+
+        sut.createCategory(name, principal);
+
+        verify(principal).getName();
+        verify(userDao).findByEmail(email);
+        verify(objectFactory).createPaymentCategoryEntity(name, user);
+        verify(categoryDao).save(category);
     }
 }
