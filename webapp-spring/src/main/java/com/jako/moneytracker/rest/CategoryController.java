@@ -1,16 +1,17 @@
 package com.jako.moneytracker.rest;
 
 import com.jako.moneytracker.db.dao.CategoryDao;
+import com.jako.moneytracker.db.dao.PaymentDao;
 import com.jako.moneytracker.db.dao.UserDao;
 import com.jako.moneytracker.db.entity.ObjectFactory;
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.UserEntity;
 import com.jako.moneytracker.exception.MoneyTrackerException;
+import com.jako.moneytracker.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import javax.ws.rs.Path;
 import java.security.Principal;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -21,6 +22,7 @@ public class CategoryController {
 
     @Inject private CategoryDao categoryDao;
     @Inject private UserDao userDao;
+    @Inject private PaymentDao paymentDao;
     @Inject private ObjectFactory objectFactory;
 
     private Pattern namePattern = Pattern.compile("^[a-zA-Z]{1,255}$");
@@ -34,7 +36,6 @@ public class CategoryController {
 
 
     @RequestMapping(value = "/{name}", method = RequestMethod.POST)
-    @Path("/{name}")
     @ResponseStatus(value = HttpStatus.OK)
     public void createCategory(@PathVariable("name") String name, Principal principal) {
         validateCategoryName(name);
@@ -48,4 +49,17 @@ public class CategoryController {
             throw new MoneyTrackerException("Invalid category name. Up to 255 characters from A to Z upper and lower case allowed.");
         }
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deleteCategory(@PathVariable("id") Long id, final Principal principal) {
+        final UserEntity user = userDao.findByEmail(principal.getName());
+        final PaymentCategoryEntity category = categoryDao.findByIdAndCreator(id, user);
+        if (category == null) {
+            throw new NotFoundException("Category with id " + id + " not found!");
+        }
+        paymentDao.removeCategory(category, user);
+        categoryDao.delete(category);
+    }
+
 }

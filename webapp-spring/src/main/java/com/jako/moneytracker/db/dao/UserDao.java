@@ -7,5 +7,5 @@ import javax.transaction.Transactional;
 
 @Transactional
 public interface UserDao extends CrudRepository<UserEntity, Long> {
-    public UserEntity findByEmail(final String email);
+    UserEntity findByEmail(final String email);
 }

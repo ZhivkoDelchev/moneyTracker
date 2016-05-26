@@ -11,4 +11,5 @@ import java.util.List;
 public interface CategoryDao extends CrudRepository<PaymentCategoryEntity, Long> {
     List<PaymentCategoryEntity> findByCreator(final UserEntity creator);
     PaymentCategoryEntity findByCreatorAndName(final UserEntity user, final String name);
+    PaymentCategoryEntity findByIdAndCreator(final Long id, final UserEntity creator);
 }

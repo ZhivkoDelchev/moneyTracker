@@ -1,11 +1,13 @@
 package com.jako.moneytracker.rest;
 
 import com.jako.moneytracker.db.dao.CategoryDao;
+import com.jako.moneytracker.db.dao.PaymentDao;
 import com.jako.moneytracker.db.dao.UserDao;
 import com.jako.moneytracker.db.entity.ObjectFactory;
 import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.UserEntity;
 import com.jako.moneytracker.exception.MoneyTrackerException;
+import com.jako.moneytracker.exception.NotFoundException;
 import com.jako.moneytracker.utils.test.DependencyResolver;
 import com.jako.moneytracker.utils.test.TestOnStrings;
 import org.junit.Before;
@@ -30,6 +32,7 @@ public class CategoryControllerTest {
 
     @Mock private UserDao userDao;
     @Mock private CategoryDao categoryDao;
+    @Mock private PaymentDao paymentDao;
     @Mock private ObjectFactory objectFactory;
 
     @Before
@@ -87,5 +90,66 @@ public class CategoryControllerTest {
         verify(userDao).findByEmail(email);
         verify(objectFactory).createPaymentCategoryEntity(name, user);
         verify(categoryDao).save(category);
+    }
+
+    @Test
+    public void shouldDeletePaymentsOfGivenCategory() throws Exception {
+        final Long id = 1L;
+        final String email = "foo";
+
+        final Principal principal = mock(Principal.class);
+        when(principal.getName()).thenReturn(email);
+
+        final UserEntity user = mock(UserEntity.class);
+        when(userDao.findByEmail(email)).thenReturn(user);
+
+        final PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
+
+        when(categoryDao.findByIdAndCreator(id, user)).thenReturn(category);
+
+        sut.deleteCategory(id, principal);
+
+        verify(principal).getName();
+        verify(userDao).findByEmail(email);
+        verify(categoryDao).findByIdAndCreator(id, user);
+        verify(paymentDao).removeCategory(category, user);
+    }
+
+    @Test
+    public void shouldDeleteCategory() throws Exception {
+        final Long id = 1L;
+        final String email = "foo";
+
+        final Principal principal = mock(Principal.class);
+        when(principal.getName()).thenReturn(email);
+
+        final UserEntity user = mock(UserEntity.class);
+        when(userDao.findByEmail(email)).thenReturn(user);
+
+        final PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
+        when(categoryDao.findByIdAndCreator(id, user)).thenReturn(category);
+
+        sut.deleteCategory(id, principal);
+
+        verify(principal).getName();
+        verify(userDao).findByEmail(email);
+        verify(categoryDao).findByIdAndCreator(id, user);
+        verify(categoryDao).delete(category);
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void shouldThrowExceptionIfCategoryIsNotFound() throws Exception {
+        final Long id = 1L;
+        final String email = "foo";
+
+        final Principal principal = mock(Principal.class);
+        when(principal.getName()).thenReturn(email);
+
+        final UserEntity user = mock(UserEntity.class);
+        when(userDao.findByEmail(email)).thenReturn(user);
+
+        when(categoryDao.findByIdAndCreator(id, user)).thenReturn(null);
+
+        sut.deleteCategory(id, principal);
     }
 }
