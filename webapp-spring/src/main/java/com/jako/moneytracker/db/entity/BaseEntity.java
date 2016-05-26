@@ -45,4 +45,13 @@ public class BaseEntity {
         this.id = id;
     }
 
+    @PreUpdate
+    public void updatedAt() {
+        lastEditDate = new Date();
+    }
+
+    @PrePersist
+    public void createdAt() {
+        createdDate = new Date();
+    }
 }
