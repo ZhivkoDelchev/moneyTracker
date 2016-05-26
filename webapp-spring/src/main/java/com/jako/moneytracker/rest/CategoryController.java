@@ -61,5 +61,4 @@ public class CategoryController {
         paymentDao.removeCategory(category, user);
         categoryDao.delete(category);
     }
-
 }

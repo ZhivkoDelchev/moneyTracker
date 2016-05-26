@@ -38,7 +38,7 @@ public class DependencyResolver {
         return result;
     }
 
-    private Collection<Field> getAnnotatedFields(Class<? extends Object> clazz, Class<? extends Annotation> annotation) {
+    private Collection<Field> getAnnotatedFields(Class<?> clazz, Class<? extends Annotation> annotation) {
         final Collection<Field> allFields = getFields(clazz);
         Collection<Field> annotatedFields = new ArrayList<>();
         allFields.forEach(field -> {
