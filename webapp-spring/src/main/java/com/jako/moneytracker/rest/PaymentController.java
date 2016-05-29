@@ -6,6 +6,7 @@ import com.jako.moneytracker.db.dao.UserDao;
 import com.jako.moneytracker.db.entity.*;
 import com.jako.moneytracker.rest.valdator.PaymentValidator;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,11 @@ public class PaymentController {
     @ResponseBody
     List<PaymentEntity> getPayments(final Principal principal) {
         final UserEntity user = userDao.findByEmail(principal.getName());
-        return paymentDao.findByCreator(user, new PageRequest(1, 20)).getContent();
+        return paymentDao.findByCreator(user, new PageRequest(0, 20, orderBy())).getContent();
+    }
+
+    private Sort orderBy() {
+        return new Sort(Sort.Direction.DESC, "date").and(new Sort(Sort.Direction.DESC, "createdDate"));
     }
 
     @RequestMapping(method = RequestMethod.POST)

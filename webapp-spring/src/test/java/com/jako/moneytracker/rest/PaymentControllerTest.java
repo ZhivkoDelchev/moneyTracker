@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
@@ -48,7 +49,8 @@ public class PaymentControllerTest {
         final UserEntity user = mock(UserEntity.class);
         when(userDao.findByEmail(email)).thenReturn(user);
 
-        final PageRequest pageRequest = new PageRequest(1, 20);
+        final Sort sort = new Sort(Sort.Direction.DESC, "date").and(new Sort(Sort.Direction.DESC, "createdDate"));
+        final PageRequest pageRequest = new PageRequest(0, 20, sort);
 
         final List<PaymentEntity> payments = mock(List.class);
 
