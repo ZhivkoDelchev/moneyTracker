@@ -63,6 +63,10 @@ public class PaymentEntity extends BaseEntity {
         this.creator = creator;
     }
 
+    public UserEntity getCreator() {
+        return creator;
+    }
+
     public void setDate(Date date) {
         this.date = date;
     }
