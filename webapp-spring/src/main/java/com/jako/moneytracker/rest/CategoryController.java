@@ -29,7 +29,7 @@ public class CategoryController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public List<PaymentCategoryEntity> getCategories(Principal principal) {
+    public List<PaymentCategoryEntity> getCategories(final Principal principal) {
         final UserEntity user = userDao.findByEmail(principal.getName());
         return categoryDao.findByCreator(user);
     }
@@ -37,7 +37,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/{name}", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void createCategory(@PathVariable("name") String name, Principal principal) {
+    public void createCategory(final @PathVariable("name") String name, final Principal principal) {
         validateCategoryName(name);
         final UserEntity user = userDao.findByEmail(principal.getName());
         final PaymentCategoryEntity category = objectFactory.createPaymentCategoryEntity(name, user);
@@ -52,7 +52,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void deleteCategory(@PathVariable("id") Long id, final Principal principal) {
+    public void deleteCategory(final @PathVariable("id") Long id, final Principal principal) {
         final UserEntity user = userDao.findByEmail(principal.getName());
         final PaymentCategoryEntity category = categoryDao.findByIdAndCreator(id, user);
         if (category == null) {
