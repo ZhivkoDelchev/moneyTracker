@@ -8,6 +8,7 @@ import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.UserEntity;
 import com.jako.moneytracker.exception.MoneyTrackerException;
 import com.jako.moneytracker.exception.NotFoundException;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,11 @@ public class CategoryController {
     @ResponseBody
     public List<PaymentCategoryEntity> getCategories(final Principal principal) {
         final UserEntity user = userDao.findByEmail(principal.getName());
-        return categoryDao.findByCreator(user);
+        return categoryDao.findByCreator(user, getSort());
+    }
+
+    private Sort getSort() {
+        return new Sort(new Sort.Order(Sort.Direction.ASC, "name").ignoreCase());
     }
 
 

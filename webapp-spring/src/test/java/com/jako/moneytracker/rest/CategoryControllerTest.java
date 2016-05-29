@@ -17,6 +17,7 @@ import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Sort;
 
 import javax.inject.Inject;
 import java.security.Principal;
@@ -51,15 +52,17 @@ public class CategoryControllerTest {
         final UserEntity userEntity = mock(UserEntity.class);
         when(userDao.findByEmail(mail)).thenReturn(userEntity);
 
+        final Sort sort = new Sort(new Sort.Order(Sort.Direction.ASC, "name").ignoreCase());
+
         final List<PaymentCategoryEntity> categories = mock(List.class);
-        when(categoryDao.findByCreator(userEntity)).thenReturn(categories);
+        when(categoryDao.findByCreator(userEntity, sort)).thenReturn(categories);
 
         List<PaymentCategoryEntity> result = sut.getCategories(principal);
 
         assertSame(categories, result);
         verify(principal).getName();
         verify(userDao).findByEmail(mail);
-        verify(categoryDao).findByCreator(userEntity);
+        verify(categoryDao).findByCreator(userEntity, sort);
     }
 
     @Theory
