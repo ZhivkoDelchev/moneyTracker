@@ -5,12 +5,12 @@ import com.jako.moneytracker.db.dao.PaymentDao;
 import com.jako.moneytracker.db.dao.UserDao;
 import com.jako.moneytracker.db.entity.*;
 import com.jako.moneytracker.rest.valdator.PaymentValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
@@ -19,11 +19,11 @@ import java.util.List;
 @RequestMapping("/rest/payments")
 public class PaymentController {
 
-    @Inject private UserDao userDao;
-    @Inject private PaymentDao paymentDao;
-    @Inject private CategoryDao categoryDao;
-    @Inject private PaymentValidator paymentValidator;
-    @Inject private ObjectFactory objectFactory;
+    @Autowired private UserDao userDao;
+    @Autowired private PaymentDao paymentDao;
+    @Autowired private CategoryDao categoryDao;
+    @Autowired private PaymentValidator paymentValidator;
+    @Autowired private ObjectFactory objectFactory;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody

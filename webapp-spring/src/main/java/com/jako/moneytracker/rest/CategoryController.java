@@ -8,11 +8,11 @@ import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.db.entity.UserEntity;
 import com.jako.moneytracker.exception.MoneyTrackerException;
 import com.jako.moneytracker.exception.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.inject.Inject;
 import java.security.Principal;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -21,10 +21,10 @@ import java.util.regex.Pattern;
 @RequestMapping("/rest/categories")
 public class CategoryController {
 
-    @Inject private CategoryDao categoryDao;
-    @Inject private UserDao userDao;
-    @Inject private PaymentDao paymentDao;
-    @Inject private ObjectFactory objectFactory;
+    @Autowired private CategoryDao categoryDao;
+    @Autowired private UserDao userDao;
+    @Autowired private PaymentDao paymentDao;
+    @Autowired private ObjectFactory objectFactory;
 
     private Pattern namePattern = Pattern.compile("^[a-zA-Z]{1,255}$");
 

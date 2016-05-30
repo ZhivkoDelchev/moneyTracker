@@ -17,9 +17,9 @@ import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 
-import javax.inject.Inject;
 import java.security.Principal;
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class CategoryControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        sut = new DependencyResolver().resolveDependencies(new CategoryController(), Inject.class, this);
+        sut = new DependencyResolver().resolveDependencies(new CategoryController(), Autowired.class, this);
     }
 
     @Test

@@ -10,19 +10,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
-import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 
 import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class PaymentControllerTest {
 
@@ -37,7 +35,7 @@ public class PaymentControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        sut = new DependencyResolver().resolveDependencies(new PaymentController(), Inject.class, this);
+        sut = new DependencyResolver().resolveDependencies(new PaymentController(), Autowired.class, this);
     }
 
     @Test
