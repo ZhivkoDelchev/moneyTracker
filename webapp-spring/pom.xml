@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>webapp-spring</artifactId>
     <packaging>war</packaging>
-    <name>webapp-spring Maven Webapp</name>
+    <name>tracker</name>
     <version>1.0-SNAPSHOT</version>
     <properties>
         <spring.security.version>4.0.4.RELEASE</spring.security.version>
@@ -95,6 +95,6 @@
     </pluginRepositories>
 
     <build>
-        <finalName>webapp-spring</finalName>
+        <finalName>tracker</finalName>
     </build>
 </project>
