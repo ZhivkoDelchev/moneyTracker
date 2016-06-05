@@ -67,15 +67,14 @@ public class CategoryControllerTest {
 
     @Theory
     @Test(expected = MoneyTrackerException.class)
-    public void shouldThrowExceptionIfNameContainsNonEnglishCharacters(@TestOnStrings({TestOnStrings.NULL, "", " ", " a", "a1", "фa"}) String name) throws Exception {
+    public void shouldThrowExceptionIfNameContainsNonEnglishCharacters(@TestOnStrings({TestOnStrings.NULL, "", " ", "a1"}) String name) throws Exception {
         final Principal principal = mock(Principal.class);
 
         sut.createCategory(name, principal);
     }
 
-    @Test
-    public void shouldCreateCategoryAndPersistIt() throws Exception {
-        final String name = "foo";
+    @Theory
+    public void shouldCreateCategoryAndPersistIt(@TestOnStrings({"foo", "бар", "foo bar"}) final String name) throws Exception {
         final String email = "bar";
         final PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
 
@@ -92,6 +91,28 @@ public class CategoryControllerTest {
         verify(principal).getName();
         verify(userDao).findByEmail(email);
         verify(objectFactory).createPaymentCategoryEntity(name, user);
+        verify(categoryDao).save(category);
+    }
+
+    @Test
+    public void shouldTrimCategoryName() throws Exception {
+        final String name = "foo ";
+        final String email = "bar";
+        final PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
+
+        final Principal principal = mock(Principal.class);
+        when(principal.getName()).thenReturn(email);
+
+        final UserEntity user = mock(UserEntity.class);
+        when(userDao.findByEmail(email)).thenReturn(user);
+
+        when(objectFactory.createPaymentCategoryEntity(name.trim(), user)).thenReturn(category);
+
+        sut.createCategory(name, principal);
+
+        verify(principal).getName();
+        verify(userDao).findByEmail(email);
+        verify(objectFactory).createPaymentCategoryEntity(name.trim(), user);
         verify(categoryDao).save(category);
     }
 

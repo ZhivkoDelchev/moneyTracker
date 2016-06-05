@@ -26,7 +26,7 @@ public class CategoryController {
     @Autowired private PaymentDao paymentDao;
     @Autowired private ObjectFactory objectFactory;
 
-    private Pattern namePattern = Pattern.compile("^[a-zA-Z]{1,255}$");
+    private Pattern namePattern = Pattern.compile("^[a-zA-Zа-яА-Я ]{1,255}$");
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
@@ -45,12 +45,12 @@ public class CategoryController {
     public void createCategory(final @PathVariable("name") String name, final Principal principal) {
         validateCategoryName(name);
         final UserEntity user = userDao.findByEmail(principal.getName());
-        final PaymentCategoryEntity category = objectFactory.createPaymentCategoryEntity(name, user);
+        final PaymentCategoryEntity category = objectFactory.createPaymentCategoryEntity(name.trim(), user);
         categoryDao.save(category);
     }
 
     private void validateCategoryName(String name) {
-        if (name == null || !namePattern.matcher(name).matches()) {
+        if (name == null || !namePattern.matcher(name.trim()).matches()) {
             throw new MoneyTrackerException("Invalid category name. Up to 255 characters from A to Z upper and lower case allowed.");
         }
     }
