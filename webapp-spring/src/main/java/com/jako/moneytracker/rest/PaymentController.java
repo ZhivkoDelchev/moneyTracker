@@ -4,8 +4,10 @@ import com.jako.moneytracker.db.dao.CategoryDao;
 import com.jako.moneytracker.db.dao.PaymentDao;
 import com.jako.moneytracker.db.dao.UserDao;
 import com.jako.moneytracker.db.entity.*;
+import com.jako.moneytracker.exception.NotFoundException;
 import com.jako.moneytracker.rest.valdator.PaymentValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -25,11 +27,17 @@ public class PaymentController {
     @Autowired private PaymentValidator paymentValidator;
     @Autowired private ObjectFactory objectFactory;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, params = {"page", "size"})
     @ResponseBody
-    List<PaymentEntity> getPayments(final Principal principal) {
+    List<PaymentEntity> getPayments(final Principal principal,
+                                    final @RequestParam("page") int page,
+                                    final @RequestParam("size") int size) {
         final UserEntity user = userDao.findByEmail(principal.getName());
-        return paymentDao.findByCreator(user, new PageRequest(0, 20, orderBy())).getContent();
+        final Page<PaymentEntity> paymentsPage = paymentDao.findByCreator(user, new PageRequest(page, size, orderBy()));
+        if (page >= paymentsPage.getTotalPages()) {
+            throw new NotFoundException("Page " + page + " not found.");
+        }
+        return paymentsPage.getContent();
     }
 
     private Sort orderBy() {

@@ -4,10 +4,15 @@ import com.jako.moneytracker.db.dao.CategoryDao;
 import com.jako.moneytracker.db.dao.PaymentDao;
 import com.jako.moneytracker.db.dao.UserDao;
 import com.jako.moneytracker.db.entity.*;
+import com.jako.moneytracker.exception.NotFoundException;
 import com.jako.moneytracker.rest.valdator.PaymentValidator;
 import com.jako.moneytracker.utils.test.DependencyResolver;
+import com.jako.moneytracker.utils.test.TestOnInts;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +27,7 @@ import java.util.List;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.*;
 
+@RunWith(Theories.class)
 public class PaymentControllerTest {
 
     private PaymentController sut;
@@ -40,6 +46,8 @@ public class PaymentControllerTest {
 
     @Test
     public void shouldReturnFirst20PaymentsForGivenUser() throws Exception {
+        final int page = 1;
+        final int size = 20;
         final String email = "foo";
         final Principal principal = mock(Principal.class);
         when(principal.getName()).thenReturn(email);
@@ -48,21 +56,47 @@ public class PaymentControllerTest {
         when(userDao.findByEmail(email)).thenReturn(user);
 
         final Sort sort = new Sort(Sort.Direction.DESC, "date").and(new Sort(Sort.Direction.DESC, "createdDate"));
-        final PageRequest pageRequest = new PageRequest(0, 20, sort);
+        final PageRequest pageRequest = new PageRequest(page, size, sort);
 
         final List<PaymentEntity> payments = mock(List.class);
 
         final Page<PaymentEntity> pageOfPayments = mock(Page.class);
         when(pageOfPayments.getContent()).thenReturn(payments);
+        when(pageOfPayments.getTotalPages()).thenReturn(5);
 
         when(paymentDao.findByCreator(user, pageRequest)).thenReturn(pageOfPayments);
 
-        final List<PaymentEntity> result = sut.getPayments(principal);
+        final List<PaymentEntity> result = sut.getPayments(principal, page, size);
 
         verify(principal).getName();
         verify(userDao).findByEmail(email);
         verify(paymentDao).findByCreator(user, pageRequest);
         assertSame(payments, result);
+    }
+
+    @Theory
+    @Test(expected = NotFoundException.class)
+    public void shouldThrowExceptionIfAskingForNonAvailablePage(@TestOnInts({2, 3, 4}) final int page) throws Exception {
+        final int size = 20;
+        final String email = "foo";
+        final Principal principal = mock(Principal.class);
+        when(principal.getName()).thenReturn(email);
+
+        final UserEntity user = mock(UserEntity.class);
+        when(userDao.findByEmail(email)).thenReturn(user);
+
+        final Sort sort = new Sort(Sort.Direction.DESC, "date").and(new Sort(Sort.Direction.DESC, "createdDate"));
+        final PageRequest pageRequest = new PageRequest(page, size, sort);
+
+        final List<PaymentEntity> payments = mock(List.class);
+
+        final Page<PaymentEntity> pageOfPayments = mock(Page.class);
+        when(pageOfPayments.getContent()).thenReturn(payments);
+        when(pageOfPayments.getTotalPages()).thenReturn(2);
+
+        when(paymentDao.findByCreator(user, pageRequest)).thenReturn(pageOfPayments);
+
+        sut.getPayments(principal, page, size);
     }
 
     @Test

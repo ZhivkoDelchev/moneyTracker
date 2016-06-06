@@ -4,7 +4,7 @@ function PaymentModel() {
 		$.ajax({
             dataType: 'json',
             type: 'GET',
-            url: 'rest/payments',
+            url: 'rest/payments?page=0&size=20',
             success: function(data) {
                 callback(data)
             },
