@@ -8,7 +8,7 @@
         <script type="text/javascript">
             function createHomeBody() {
                 var body = document.getElementById('body')
-                body.innerHTML = "<h1>Welcome to your money tracker ;)</h1>"
+                body.innerHTML = '<h1>Welcome to your money tracker ;) <br /><form name="logout" action="logout" method="post"><button>logout</button></form></h1>'
             }
         </script>
 
@@ -23,7 +23,7 @@
 		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     </header>
 
-    <body>
+    <body onload="createHomeBody()">
 		<div class="overlay"></div>
         <nav id="navigation">
             <a onClick="createHomeBody()">Home</a>
@@ -31,7 +31,6 @@
             <a onClick="categoryController.openCategories()">Categories</a>
         </nav>
         <div id="body">
-            <h1>Welcome to your money tracker ;)</h1>
         </div>
     </body>
 </html>
