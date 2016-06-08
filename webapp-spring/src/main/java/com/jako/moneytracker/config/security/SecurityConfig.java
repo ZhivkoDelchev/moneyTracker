@@ -1,4 +1,4 @@
-package com.jako.moneytracker.config;
+package com.jako.moneytracker.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,14 +17,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private DataSource dataSource;
+    @Autowired private UserDetailsService userDetailsService;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
             .jdbcAuthentication().dataSource(dataSource)
-                .passwordEncoder(passwordEncoder())
                 .usersByUsernameQuery("SELECT principal_id, password, id FROM principles WHERE UPPER(principal_id) = UPPER(?)")
-                .authoritiesByUsernameQuery("SELECT principal_id, user_role from roles WHERE UPPER(principal_id) = UPPER(?)");
+                .authoritiesByUsernameQuery("SELECT principal_id, user_role from roles WHERE UPPER(principal_id) = UPPER(?)")
+                .and().userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder());
+
     }
 
     @Bean
