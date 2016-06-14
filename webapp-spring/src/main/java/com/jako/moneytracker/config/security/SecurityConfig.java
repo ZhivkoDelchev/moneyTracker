@@ -24,7 +24,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth
             .jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery("SELECT principal_id, password, id FROM principles WHERE UPPER(principal_id) = UPPER(?)")
-                .authoritiesByUsernameQuery("SELECT principal_id, user_role from roles WHERE UPPER(principal_id) = UPPER(?)")
+                .authoritiesByUsernameQuery("SELECT principal.principal_id, role.user_role " +
+                        "FROM `roles` as role " +
+                        "INNER JOIN " +
+                        "`principles` as `principal` " +
+                        "ON principal.id = role.user_id " +
+                        "WHERE UPPER(principal.principal_id) = UPPER(?)")
                 .and().userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
 

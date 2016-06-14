@@ -15,6 +15,7 @@
         <module>./core</module>
         <module>./utils</module>
         <module>./webapp-spring</module>
+        <module>./persistency</module>
     </modules>
 
     <build>
