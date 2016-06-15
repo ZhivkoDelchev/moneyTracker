@@ -5,8 +5,8 @@ function BalanceView() {
 			url: 'resources/template/home/balance.html',
 			success: function(template) {
 				var body = document.getElementById('body')
-                var balanceHtml = 'incomes: ' + balance.incomes + ', expenses: ' + balance.expenses + ', balance: ' + balance.balance
-                body.innerHTML = template.replace('${balance}', balanceHtml)
+                var balanceHtml = template.replace('${incomes}', balance.incomes).replace('${expenses}', balance.expenses).replace('${balance}', balance.balance)
+                body.innerHTML = balanceHtml
 			}
 		})
     }
