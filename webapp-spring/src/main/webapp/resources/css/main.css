@@ -106,14 +106,17 @@ nav {
 	background: gray;
 }
 
-nav a {
+nav button {
 	color: #fff;
     padding: 1pt 5pt;
     font-weight: bold;
     font-size: 16pt;
+	background: Transparent;
+	outline: none;
+	border: none;
 }
 
-nav a:hover {
+nav button:hover {
 	background: #199;
 	cursor: pointer;
 }
