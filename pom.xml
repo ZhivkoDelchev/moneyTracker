@@ -10,12 +10,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>./webapp</module>
-        <module>./ear</module>
-        <module>./core</module>
         <module>./utils</module>
-        <module>./webapp-spring</module>
         <module>./persistency</module>
+        <module>./webapp-spring</module>
     </modules>
 
     <build>
