@@ -1,7 +1,7 @@
 package com.jako.moneytracker.rest.valdator;
 
-import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
-import com.jako.moneytracker.db.entity.PaymentType;
+import com.jako.moneytracker.persistence.entity.PaymentCategoryEntity;
+import com.jako.moneytracker.persistence.entity.PaymentType;
 import com.jako.moneytracker.exception.InvalidPaymentInputException;
 import com.jako.moneytracker.utils.test.TestOnStrings;
 import org.junit.Before;

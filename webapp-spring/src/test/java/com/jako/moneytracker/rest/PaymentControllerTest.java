@@ -1,10 +1,10 @@
 package com.jako.moneytracker.rest;
 
-import com.jako.moneytracker.db.dao.CategoryDao;
-import com.jako.moneytracker.db.dao.PaymentDao;
-import com.jako.moneytracker.db.dao.UserDao;
-import com.jako.moneytracker.db.entity.*;
 import com.jako.moneytracker.exception.NotFoundException;
+import com.jako.moneytracker.persistence.dao.CategoryDao;
+import com.jako.moneytracker.persistence.dao.PaymentDao;
+import com.jako.moneytracker.persistence.dao.UserDao;
+import com.jako.moneytracker.persistence.entity.*;
 import com.jako.moneytracker.rest.valdator.PaymentValidator;
 import com.jako.moneytracker.utils.test.DependencyResolver;
 import com.jako.moneytracker.utils.test.TestOnInts;

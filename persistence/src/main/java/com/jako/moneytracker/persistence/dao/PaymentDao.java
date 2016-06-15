@@ -1,9 +1,9 @@
-package com.jako.moneytracker.db.dao;
+package com.jako.moneytracker.persistence.dao;
 
-import com.jako.moneytracker.db.entity.PaymentCategoryEntity;
-import com.jako.moneytracker.db.entity.PaymentEntity;
-import com.jako.moneytracker.db.entity.PaymentType;
-import com.jako.moneytracker.db.entity.UserEntity;
+import com.jako.moneytracker.persistence.entity.PaymentCategoryEntity;
+import com.jako.moneytracker.persistence.entity.PaymentEntity;
+import com.jako.moneytracker.persistence.entity.PaymentType;
+import com.jako.moneytracker.persistence.entity.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;

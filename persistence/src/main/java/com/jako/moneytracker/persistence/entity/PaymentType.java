@@ -1,4 +1,4 @@
-package com.jako.moneytracker.db.entity;
+package com.jako.moneytracker.persistence.entity;
 
 public enum PaymentType {
 

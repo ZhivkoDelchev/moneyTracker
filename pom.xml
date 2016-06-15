@@ -11,7 +11,7 @@
 
     <modules>
         <module>./utils</module>
-        <module>./persistency</module>
+        <module>./persistence</module>
         <module>./webapp-spring</module>
     </modules>
 

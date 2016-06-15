@@ -1,8 +1,8 @@
 package com.jako.moneytracker.config.security;
 
-import com.jako.moneytracker.db.dao.UserDao;
-import com.jako.moneytracker.db.dao.UserRoleDao;
-import com.jako.moneytracker.db.entity.UserEntity;
+import com.jako.moneytracker.persistence.dao.UserDao;
+import com.jako.moneytracker.persistence.dao.UserRoleDao;
+import com.jako.moneytracker.persistence.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

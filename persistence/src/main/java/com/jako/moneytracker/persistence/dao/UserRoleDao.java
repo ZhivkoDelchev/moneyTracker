@@ -1,7 +1,7 @@
-package com.jako.moneytracker.db.dao;
+package com.jako.moneytracker.persistence.dao;
 
-import com.jako.moneytracker.db.entity.UserEntity;
-import com.jako.moneytracker.db.entity.UserRole;
+import com.jako.moneytracker.persistence.entity.UserEntity;
+import com.jako.moneytracker.persistence.entity.UserRole;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

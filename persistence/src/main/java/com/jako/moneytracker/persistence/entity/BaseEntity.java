@@ -1,4 +1,4 @@
-package com.jako.moneytracker.db.entity;
+package com.jako.moneytracker.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

@@ -1,14 +1,12 @@
-package com.jako.moneytracker.db.entity;
+package com.jako.moneytracker.persistence.entity;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 import java.util.Date;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
 
 public class ObjectFactoryTest {
 
@@ -22,11 +20,11 @@ public class ObjectFactoryTest {
     @Test
     public void shouldCreateCategoryWithAGivenName() throws Exception {
         final String name = "foo";
-        final UserEntity user = mock(UserEntity.class);
+        final UserEntity user = Mockito.mock(UserEntity.class);
 
         final PaymentCategoryEntity paymentCategoryEntity = sut.createPaymentCategoryEntity(name, user);
 
-        assertEquals(name, paymentCategoryEntity.getName());
+        Assert.assertEquals(name, paymentCategoryEntity.getName());
     }
 
     @Test
@@ -34,18 +32,18 @@ public class ObjectFactoryTest {
         final BigDecimal amount = BigDecimal.ONE;
         final Long paymentTimestamp = 2L;
         final String note = "foo";
-        final PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
+        final PaymentCategoryEntity category = Mockito.mock(PaymentCategoryEntity.class);
         final PaymentType type = PaymentType.EXPENSE;
-        final UserEntity user = mock(UserEntity.class);
+        final UserEntity user = Mockito.mock(UserEntity.class);
 
         final PaymentEntity paymentEntity = sut.createPaymentEntity(amount, paymentTimestamp, note, category, type, user);
 
-        assertNotNull(paymentEntity);
-        assertEquals(amount, paymentEntity.getAmount());
-        assertEquals(new Date(paymentTimestamp), paymentEntity.getDate());
-        assertEquals(note, paymentEntity.getNote());
-        assertEquals(category, paymentEntity.getCategory());
-        assertEquals(type, paymentEntity.getPaymentType());
-        assertEquals(user, paymentEntity.getCreator());
+        Assert.assertNotNull(paymentEntity);
+        Assert.assertEquals(amount, paymentEntity.getAmount());
+        Assert.assertEquals(new Date(paymentTimestamp), paymentEntity.getDate());
+        Assert.assertEquals(note, paymentEntity.getNote());
+        Assert.assertEquals(category, paymentEntity.getCategory());
+        Assert.assertEquals(type, paymentEntity.getPaymentType());
+        Assert.assertEquals(user, paymentEntity.getCreator());
     }
 }

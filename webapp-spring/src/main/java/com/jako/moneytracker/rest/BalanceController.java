@@ -1,10 +1,10 @@
 package com.jako.moneytracker.rest;
 
-import com.jako.moneytracker.db.dao.AccountDao;
-import com.jako.moneytracker.db.dao.PaymentDao;
-import com.jako.moneytracker.db.dao.UserDao;
-import com.jako.moneytracker.db.entity.PaymentType;
-import com.jako.moneytracker.db.entity.UserEntity;
+import com.jako.moneytracker.persistence.dao.AccountDao;
+import com.jako.moneytracker.persistence.dao.PaymentDao;
+import com.jako.moneytracker.persistence.dao.UserDao;
+import com.jako.moneytracker.persistence.entity.PaymentType;
+import com.jako.moneytracker.persistence.entity.UserEntity;
 import com.jako.moneytracker.dto.BalanceObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
