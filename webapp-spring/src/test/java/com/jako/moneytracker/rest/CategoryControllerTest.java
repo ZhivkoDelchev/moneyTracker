@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertSame;
@@ -54,7 +55,7 @@ public class CategoryControllerTest {
 
         final Sort sort = new Sort(new Sort.Order(Sort.Direction.ASC, "name").ignoreCase());
 
-        final List<PaymentCategoryEntity> categories = mock(List.class);
+        final List<PaymentCategoryEntity> categories = new ArrayList<>();
         when(categoryDao.findByCreator(userEntity, sort)).thenReturn(categories);
 
         List<PaymentCategoryEntity> result = sut.getCategories(principal);

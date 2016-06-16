@@ -22,6 +22,7 @@ import org.springframework.data.domain.Sort;
 
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertSame;
@@ -58,7 +59,7 @@ public class PaymentControllerTest {
         final Sort sort = new Sort(Sort.Direction.DESC, "date").and(new Sort(Sort.Direction.DESC, "createdDate"));
         final PageRequest pageRequest = new PageRequest(page, size, sort);
 
-        final List<PaymentEntity> payments = mock(List.class);
+        final List<PaymentEntity> payments = new ArrayList<>();
 
         final Page<PaymentEntity> pageOfPayments = mock(Page.class);
         when(pageOfPayments.getContent()).thenReturn(payments);
@@ -88,7 +89,7 @@ public class PaymentControllerTest {
         final Sort sort = new Sort(Sort.Direction.DESC, "date").and(new Sort(Sort.Direction.DESC, "createdDate"));
         final PageRequest pageRequest = new PageRequest(page, size, sort);
 
-        final List<PaymentEntity> payments = mock(List.class);
+        final List<PaymentEntity> payments = new ArrayList<>();
 
         final Page<PaymentEntity> pageOfPayments = mock(Page.class);
         when(pageOfPayments.getContent()).thenReturn(payments);
