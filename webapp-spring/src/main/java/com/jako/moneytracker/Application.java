@@ -28,10 +28,9 @@ public class Application extends SpringBootServletInitializer {
     }
 
     @Bean
-    DataSource primaryDataSource() {
-        JndiDataSourceLookup dataSourceLookup = new JndiDataSourceLookup();
-        DataSource dataSource = dataSourceLookup.getDataSource("java:comp/env/jdbc/tracker");
-        return dataSource;
+    DataSource dataSource() {
+        final JndiDataSourceLookup dataSourceLookup = new JndiDataSourceLookup();
+        return dataSourceLookup.getDataSource("java:comp/env/jdbc/tracker");
     }
 
 }
