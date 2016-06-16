@@ -1,5 +1,6 @@
 package com.jako.moneytracker.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class PaymentEntity extends BaseEntity {
     private PaymentType paymentType;
     @ManyToOne
     @JoinColumn(name = "creator")
+    @JsonIgnore
     private UserEntity creator;
     @Column(name = "note")
     private String note;
