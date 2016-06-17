@@ -26,7 +26,7 @@ public class CategoryController {
     @Autowired private PaymentDao paymentDao;
     @Autowired private ObjectFactory objectFactory;
 
-    private Pattern namePattern = Pattern.compile("^[a-zA-Zа-яА-Я ]{1,255}$");
+    private final Pattern namePattern = Pattern.compile("^[a-zA-Zа-яА-Я ]{1,255}$");
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody

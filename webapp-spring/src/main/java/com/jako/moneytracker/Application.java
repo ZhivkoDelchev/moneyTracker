@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 @EnableAutoConfiguration
 public class Application extends SpringBootServletInitializer {
 
-    private static Class<Application> applicationClass = Application.class;
+    private static final Class<Application> applicationClass = Application.class;
 
     public static void main(String[] args) {
         SpringApplication.run(applicationClass, args);

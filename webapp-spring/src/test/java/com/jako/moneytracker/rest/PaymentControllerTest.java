@@ -37,7 +37,7 @@ public class PaymentControllerTest {
     @Mock private PaymentDao paymentDao;
     @Mock private CategoryDao categoryDao;
     @Mock private PaymentValidator paymentValidator;
-    @Mock private ObjectFactory objectFacory;
+    @Mock private ObjectFactory objectFactory;
 
     @Before
     public void setUp() throws Exception {
@@ -145,11 +145,11 @@ public class PaymentControllerTest {
         when(categoryDao.findByIdAndCreator(categoryId, user)).thenReturn(category);
 
         final PaymentEntity payment = mock(PaymentEntity.class);
-        when(objectFacory.createPaymentEntity(amount, paymentTimeStamp, note, category, type, user)).thenReturn(payment);
+        when(objectFactory.createPaymentEntity(amount, paymentTimeStamp, note, category, type, user)).thenReturn(payment);
 
         sut.createPayment(amount, type, categoryId, note, paymentTimeStamp, principal);
 
-        verify(objectFacory).createPaymentEntity(amount, paymentTimeStamp, note, category, type, user);
+        verify(objectFactory).createPaymentEntity(amount, paymentTimeStamp, note, category, type, user);
         verify(paymentDao).save(payment);
     }
 }
