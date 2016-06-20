@@ -12,20 +12,21 @@ import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.List;
 
-@ParametersSuppliedBy(TestOnInts.TestOnSupplier.class)
+@ParametersSuppliedBy(TestOnLongs.TestOnSupplier.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.PARAMETER})
-public @interface TestOnInts {
-    int[] value();
+public @interface TestOnLongs {
+
+    long[] value();
 
     class TestOnSupplier extends ParameterSupplier {
         @Override
-        public List<PotentialAssignment> getValueSources(ParameterSignature sig) {
-            List<PotentialAssignment> result = new ArrayList<>();
+        public List<PotentialAssignment> getValueSources(final ParameterSignature parameterSignature) throws Throwable {
+            final List<PotentialAssignment> result = new ArrayList<>();
 
-            TestOnInts TestOnInts = sig.getAnnotation(TestOnInts.class);
-            if (TestOnInts != null) {
-                for (int value : TestOnInts.value()) {
+            final TestOnLongs testOnLongs = parameterSignature.getAnnotation(TestOnLongs.class);
+            if (testOnLongs != null) {
+                for (long value : testOnLongs.value()) {
                     result.add(PotentialAssignment.forValue("" + value, value));
                 }
             }
