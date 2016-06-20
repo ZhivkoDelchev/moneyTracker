@@ -8,4 +8,8 @@ homeController = new function HomeController() {
             balanceView.showBalance(balance)
         })
     }
+
+    this.logout = function() {
+        document.getElementById('logoutForm').submit();
+    }
 }
