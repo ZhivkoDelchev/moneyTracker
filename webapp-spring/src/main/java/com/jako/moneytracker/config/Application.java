@@ -1,4 +1,4 @@
-package com.jako.moneytracker;
+package com.jako.moneytracker.config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
