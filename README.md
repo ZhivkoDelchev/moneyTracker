@@ -6,23 +6,38 @@ The main use of the software is to deliver and satisfy its creators personal nee
 
 ### How do I get set up? ###
 
-* Download and install _wildfly 9_
-* Configure data source _java:jboss/datasources/trackerDS_
-* Configure security-domain _trackerRealm_ that uses just created datasource as follows:
+* Download and install _tomcat 8 & mysql_
+* Configure data source _jdbc/trackerDB_ in server.xml
+<br /> For example:
+
 ```
-<security-domain name="trackerRealm" cache-type="default">
-  <authentication>
-    <login-module code="Database" flag="sufficient">
-      <module-option name="dsJndiName" value="java:jboss/datasources/trackerDS"/>
-      <module-option name="principalsQuery" value="select password from principles where principal_id=?"/>
-      <module-option name="rolesQuery" value="select r.user_role, 'Roles' from roles r inner join principles p on r.principal_id = p.principal_id where p.principal_id=?"/>
-      <module-option name="hashAlgorithm" value="MD5"/>
-      <module-option name="hashEncoding" value="hex"/>
-    </login-module>
-  </authentication>
-</security-domain>
+<Resource
+    name="jdbc/trackerDB"
+    auth="Container"
+    type="javax.sql.DataSource"
+    factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+    timeBetweenEvictionRunsMillis="34000"
+    validationQuery="SELECT 1"
+    testOnBorrow="true"
+    username="youusername"
+    password="yourpassword"
+    driverClassName="com.mysql.jdbc.Driver"
+    url="jdbc:mysql://localhost:3306/money_tracker"
+ />
 ```
+* Add resource link in _context.xml_ of the tomcat server
+<br />For example:
+
+```
+<ResourceLink name="jdbc/tracker"
+    global="jdbc/trackerDB"
+    auth="Container"
+    type="javax.sql.DataSource"
+/>
+```
+
 * Use maven for building the project
-* Deploy the EAR file generated in sourceRoot/ear/target
+* Deploy the WAR file generated in sourceRoot/webapp-spring/target
 * Deployment instructions
-* Any other java application servers would be working but some configuration may require changes. In order to change data source change the value of jta-data-source in _sourceRoot/webapp/src/main/resources/META-INF/persistence.xml_. In order to change security domain you may need to add new configuration instead of _sourceRoot/webapp/src/main/webapp/WEB-INF/jboss-web.xml_.
+* Any other java application servers would be working but some configuration may require changes.
+In order to change data source change the value of data source name  in the DataSource bean in Application class.
