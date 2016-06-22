@@ -30,7 +30,14 @@
         <nav id="navigation">
             <button onClick="createHomeBody()">Home</button>
             <button onClick="paymentController.openPayments()">Transactions</button>
-            <button onClick="categoryController.openCategories()">Categories</button>
+            <div class="dropdown">
+                <button class="moreNavigation"></button>
+                <div class="dropdown-content">
+                    <a onClick="categoryController.openCategories()">Categories</a>
+                    <a>Settings</a>
+                    <form id="logoutForm" name="logout" action="logout" method="post"><a onClick="homeController.logout()">Logout</a></form>
+                </div>
+            </div>
         </nav>
         <div id="body">
         </div>

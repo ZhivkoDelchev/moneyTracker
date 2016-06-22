@@ -3,6 +3,8 @@ package com.jako.moneytracker.rest.valdator;
 import com.jako.moneytracker.persistence.entity.PaymentCategoryEntity;
 import com.jako.moneytracker.persistence.entity.PaymentType;
 import com.jako.moneytracker.exception.InvalidPaymentInputException;
+import com.jako.moneytracker.utils.test.TestOnInts;
+import com.jako.moneytracker.utils.test.TestOnLongs;
 import com.jako.moneytracker.utils.test.TestOnStrings;
 import org.junit.Before;
 import org.junit.Rule;
@@ -28,22 +30,23 @@ public class PaymentValidatorTest {
         sut = new PaymentValidator();
     }
 
-    @Test
-    public void shouldThrowExceptionIfTimestampIsNegativeNumber() throws Exception {
+    @Theory
+    public void shouldThrowExceptionIfTimestampIsNegativeNumber(@TestOnLongs({-1L, -5L, -1000L, -500000L}) final long paymentTimestamp) throws Exception {
         final PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
         expectedException.expect(InvalidPaymentInputException.class);
         expectedException.expectMessage("Cannot add payment. Date is invalid.");
 
-        sut.validate(category, "note", new BigDecimal(1), PaymentType.DEPOSIT, -1L);
+        sut.validate(category, "note", new BigDecimal(1), PaymentType.DEPOSIT, paymentTimestamp);
     }
 
-    @Test
-    public void shouldThrowExceptionIfAmountIsNegativeNumber() throws Exception {
+    @Theory
+    public void shouldThrowExceptionIfAmountIsNegativeNumber(@TestOnInts({-1, -2, -3, -100, -1000}) final int amountValue) throws Exception {
         final PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
+
         expectedException.expect(InvalidPaymentInputException.class);
         expectedException.expectMessage("Cannot add payment. Negative amount is invalid.");
 
-        sut.validate(category, "note", new BigDecimal(-1), PaymentType.INCOME, 1L);
+        sut.validate(category, "note", new BigDecimal(amountValue), PaymentType.INCOME, 1L);
     }
 
     @Test
@@ -75,9 +78,9 @@ public class PaymentValidatorTest {
     }
 
     @Theory
-    public void shouldPass() throws Exception {
+    public void shouldPass(@TestOnInts({0, 1, 100, 5000}) final int amountValue, @TestOnLongs({0L, 1L, 5L, 1000L, 5000L}) final long timestamp) throws Exception {
         final PaymentCategoryEntity category = mock(PaymentCategoryEntity.class);
 
-        sut.validate(category, "nosach dvigatel", new BigDecimal(1), PaymentType.EXPENSE, 1L);
+        sut.validate(category, "nosach dvigatel", new BigDecimal(amountValue), PaymentType.EXPENSE, timestamp);
     }
 }
